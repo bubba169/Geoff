@@ -1,0 +1,4 @@
+-cp src
+-java bin
+-main Main
+-java-lib lib/android.jar

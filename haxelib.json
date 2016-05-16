@@ -1,0 +1,14 @@
+{
+  "name": "geoff",
+  "url" : "https://github.com/bubba169/geoff/",
+  "license": "Apache v2.0",
+  "tags": ["cross platform", "geoff", "android", "opengl", "abstract"],
+  "description": "A cross platform base abstraction layer",
+  "version": "0.0.1",
+  "releasenote": "Nothing to see here",
+  "contributors": ["bubba169"],
+  "dependencies": {
+    "hxjava": "",
+    "hxcpp": ""
+  }
+}
