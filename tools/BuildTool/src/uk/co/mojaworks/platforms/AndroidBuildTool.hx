@@ -1,7 +1,6 @@
 package uk.co.mojaworks.platforms;
 import sys.FileSystem;
 import sys.io.File;
-import sys.io.Process;
 import uk.co.mojaworks.helpers.DirectoryHelper;
 
 /**
@@ -50,6 +49,8 @@ class AndroidBuildTool
 			"AndroidSDKPath" => StringTools.replace(config.global.android.sdkpath, "\\", "\\\\" ),
 			"AndroidSDKVersion" => config.project.android.version
 		];	
+		
+		if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
 		
 		// clean any old builds
 		if ( FileSystem.exists( binDirectory ) ) 
@@ -124,6 +125,7 @@ class AndroidBuildTool
 		}
 		buildHXML += "-java bin/android/build\n";
 		buildHXML += "-java-lib " + config.global.android.sdkpath + "platforms/android-" + config.project.android.version + "/android.jar\n";
+		buildHXML += "-D java-android\n";
 		buildHXML += "-main geoff.Boot\n";
 		
 		if ( isDebugBuild() ) {

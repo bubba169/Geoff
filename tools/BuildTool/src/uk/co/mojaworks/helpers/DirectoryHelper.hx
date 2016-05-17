@@ -29,20 +29,22 @@ class DirectoryHelper
 	
 	public static function removeDirectory( dir : String ) 
 	{
-		var fileList = FileSystem.readDirectory( dir );
-		for ( file in fileList ) 
-		{
-			if ( FileSystem.isDirectory( dir + file ) )
+		if ( FileSystem.exists( dir ) ) {
+			var fileList = FileSystem.readDirectory( dir );
+			for ( file in fileList ) 
 			{
-				removeDirectory( dir + file + "/" );
+				if ( FileSystem.isDirectory( dir + file ) )
+				{
+					removeDirectory( dir + file + "/" );
+				}
+				else
+				{
+					FileSystem.deleteFile( dir + file );
+				}
 			}
-			else
-			{
-				FileSystem.deleteFile( dir + file );
-			}
+			
+			FileSystem.deleteDirectory( dir );
 		}
-		
-		FileSystem.deleteDirectory( dir );
 	}
 	
 }
