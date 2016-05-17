@@ -2,4 +2,3 @@
 -java bin
 -main Main
 -java-lib lib/android.jar
--D java-ver 7
