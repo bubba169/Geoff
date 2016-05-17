@@ -9,10 +9,9 @@ import android.webkit.WebView;
 class Main
 {
 	
-	public static function main()
+	public function new()
 	{
 		trace("Hello World");
-		
 	}
 	
 }

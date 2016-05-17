@@ -1,6 +1,7 @@
 -cp src
+-cp bin/android/haxe
 -lib geoff
 -java bin/android/build
 -java-lib C:\Development\AndroidSDK\platforms/android-21/android.jar
--main pkg.Main
+-main geoff.Boot
 -debug

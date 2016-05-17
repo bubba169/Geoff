@@ -43,6 +43,7 @@ class AndroidBuildTool
 		var templateConstants = 
 		[
 			"Package" => config.project.project.packagename,
+			"Main" => config.project.project.main,
 			"VersionCode" => versionCode,
 			"Version" => config.project.project.version,
 			"ProjectName" => config.project.project.name,
@@ -62,11 +63,13 @@ class AndroidBuildTool
 		
 		//Copy template files
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/android/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/base/", binDirectory + "haxe/" );
 		
 		trace("Processing templates");
 		
 		//Fill in values
 		processTemplates( binDirectory + "project/", templateConstants );
+		processTemplates( binDirectory + "haxe/", templateConstants );
 		
 		//Compile project to java
 		compileHaxe( binDirectory + "build/" );
@@ -86,7 +89,7 @@ class AndroidBuildTool
 		{
 			if ( !FileSystem.isDirectory( dir + file ) )
 			{
-				if ( file.indexOf(".txt") > -1 || file.indexOf(".xml") > -1 || file.indexOf(".properties") > -1 || file.indexOf(".java") > -1 )
+				if ( file.indexOf(".txt") > -1 || file.indexOf(".xml") > -1 || file.indexOf(".properties") > -1 || file.indexOf(".java") > -1 || file.indexOf(".hx") > -1 )
 				{
 					var regex = new EReg( "\\{\\{([^\\}]+)\\}\\}", "g" );
 					var raw = File.getContent( dir + file );
@@ -114,13 +117,14 @@ class AndroidBuildTool
 		for ( dir in srcArray ) {
 			buildHXML += "-cp " + dir + "\n";
 		}
+		buildHXML += "-cp bin/android/haxe\n";
 		var libArray : Array<String> = config.project.project.haxelib;
 		for ( lib in libArray ) {
 			buildHXML += "-lib " + lib + "\n";
 		}
 		buildHXML += "-java bin/android/build\n";
 		buildHXML += "-java-lib " + config.global.android.sdkpath + "platforms/android-" + config.project.android.version + "/android.jar\n";
-		buildHXML += "-main " + config.project.project.main + "\n";
+		buildHXML += "-main geoff.Boot\n";
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
@@ -136,11 +140,11 @@ class AndroidBuildTool
 	
 	function copyJar( binDirectory : String )
 	{
-		var jarName : String = config.project.project.main;
-		if ( jarName.indexOf(".") > -1 ) 
-		{
-			jarName = jarName.substr( jarName.lastIndexOf(".") + 1 );
-		}
+		var jarName : String = "Boot";
+		//if ( jarName.indexOf(".") > -1 ) 
+		//{
+		//	jarName = jarName.substr( jarName.lastIndexOf(".") + 1 );
+		//}
 		if ( isDebugBuild() ) jarName += "-Debug";
 		jarName += ".jar";
 		FileSystem.createDirectory( binDirectory + "project/libs" );
