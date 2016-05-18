@@ -1,6 +1,5 @@
 package pkg;
-
-import android.webkit.WebView;
+import geoff.App;
 
 /**
  * ...
@@ -9,7 +8,7 @@ import android.webkit.WebView;
 class Main
 {
 	
-	public function new()
+	public static function main()
 	{
 		trace("Hello World");
 	}

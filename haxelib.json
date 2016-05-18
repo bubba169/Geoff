@@ -9,6 +9,7 @@
   "contributors": ["bubba169"],
   "dependencies": {
     "hxjava": "",
-    "hxcpp": ""
+    "hxcpp": "",
+	"msignal": ""
   }
 }

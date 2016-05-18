@@ -1,8 +1,10 @@
-package uk.co.mojaworks.geoff;
+package geoff.androidnative;
 
 import android.app.Activity;
 import android.os.Bundle;
-import {{Package}}.R;
+import android.opengl.GLSurfaceView;
+
+import geoff.App;
 
 public class MainActivity extends Activity
 {
@@ -14,6 +16,12 @@ public class MainActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        activity = this;
+
+        App app = App.init();
+        GeoffGLView glView = new GeoffGLView(this);
+        glView.init( app );
+
+        setContentView( glView );
+
     }
 }

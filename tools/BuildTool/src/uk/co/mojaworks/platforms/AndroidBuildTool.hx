@@ -41,11 +41,11 @@ class AndroidBuildTool
 		var versionCode = incrementVersionCode();
 		var templateConstants = 
 		[
-			"Package" => config.project.project.packagename,
-			"Main" => config.project.project.main,
+			"Package" => config.project.packagename,
+			"Main" => config.project.main,
 			"VersionCode" => versionCode,
-			"Version" => config.project.project.version,
-			"ProjectName" => config.project.project.name,
+			"Version" => config.project.version,
+			"ProjectName" => config.project.name,
 			"AndroidSDKPath" => StringTools.replace(config.global.android.sdkpath, "\\", "\\\\" ),
 			"AndroidSDKVersion" => config.project.android.version
 		];	
@@ -64,13 +64,13 @@ class AndroidBuildTool
 		
 		//Copy template files
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/android/", binDirectory + "project/" );
-		DirectoryHelper.copyDirectory( config.geoffpath + "template/base/", binDirectory + "haxe/" );
+		//DirectoryHelper.copyDirectory( config.geoffpath + "template/base/", binDirectory + "haxe/" );
 		
 		trace("Processing templates");
 		
 		//Fill in values
 		processTemplates( binDirectory + "project/", templateConstants );
-		processTemplates( binDirectory + "haxe/", templateConstants );
+		//processTemplates( binDirectory + "haxe/", templateConstants );
 		
 		//Compile project to java
 		compileHaxe( binDirectory + "build/" );
@@ -114,23 +114,25 @@ class AndroidBuildTool
 	{
 		
 		var buildHXML = "";
-		var srcArray : Array<String> = config.project.project.src;
+		var srcArray : Array<String> = config.project.src;
 		for ( dir in srcArray ) {
 			buildHXML += "-cp " + dir + "\n";
 		}
-		buildHXML += "-cp bin/android/haxe\n";
-		var libArray : Array<String> = config.project.project.haxelib;
+		buildHXML += "-cp " + config.geoffpath + "\n";
+		var libArray : Array<String> = config.project.haxelib;
 		for ( lib in libArray ) {
 			buildHXML += "-lib " + lib + "\n";
 		}
 		buildHXML += "-java bin/android/build\n";
 		buildHXML += "-java-lib " + config.global.android.sdkpath + "platforms/android-" + config.project.android.version + "/android.jar\n";
 		buildHXML += "-D java-android\n";
-		buildHXML += "-main geoff.Boot\n";
+		buildHXML += "-main geoff.App\n";
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
 		}
+		
+		buildHXML += "-D android\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
@@ -142,11 +144,11 @@ class AndroidBuildTool
 	
 	function copyJar( binDirectory : String )
 	{
-		var jarName : String = "Boot";
-		//if ( jarName.indexOf(".") > -1 ) 
-		//{
-		//	jarName = jarName.substr( jarName.lastIndexOf(".") + 1 );
-		//}
+		var jarName : String = "App";
+		if ( jarName.indexOf(".") > -1 ) 
+		{
+			jarName = jarName.substr( jarName.lastIndexOf(".") + 1 );
+		}
 		if ( isDebugBuild() ) jarName += "-Debug";
 		jarName += ".jar";
 		FileSystem.createDirectory( binDirectory + "project/libs" );
