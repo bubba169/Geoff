@@ -1,6 +1,7 @@
 package geoff;
 
 import geoff.platforms.AndroidBuildTool;
+import geoff.platforms.WindowsBuildTool;
 import haxe.Json;
 import sys.FileSystem;
 import sys.io.File;
@@ -56,8 +57,21 @@ class BuildTool
 	 * 
 	 */
 	
+	public function incrementVersionCode( projectDirectory : String ) : String
+	{
+		var versionFile = projectDirectory + ".buildversion";
+		var version = 0;
+		if ( FileSystem.exists( versionFile ) )
+			version = Std.parseInt( File.getContent( versionFile ) );
+			
+		version++;
+		File.saveContent( versionFile, Std.string(version) );
+		return Std.string(version);
+	}
+	 
 	public function build()
 	{		
+		
 		Sys.stdout().writeString("\n\nGeoff build tool. Version 0.0.1");
 		
 		var projectDirectory = Sys.args()[ Sys.args().length - 1 ];
@@ -78,10 +92,16 @@ class BuildTool
 		
 		var config = loadConfig( projectDirectory );
 		
+		var buildNumber = incrementVersionCode( projectDirectory );
+		
 		switch( targetPlatform.toLowerCase() )
 		{
 			case "android":
-				var builder = new AndroidBuildTool( projectDirectory, flags, config );
+				var builder = new AndroidBuildTool( projectDirectory, flags, config, buildNumber );
+				builder.build();
+				
+			case "windows":
+				var builder = new WindowsBuildTool( projectDirectory, flags, config );
 				builder.build();
 				
 		}

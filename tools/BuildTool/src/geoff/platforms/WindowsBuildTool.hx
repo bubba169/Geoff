@@ -8,14 +8,13 @@ import geoff.helpers.DirectoryHelper;
  * ...
  * @author Simon
  */
-class AndroidBuildTool
+class WindowsBuildTool
 {
-	
 	var projectDirectory : String;
 	var flags : Array<String>;
 	var config : Dynamic;
 
-	public function new( dir : String, flags : Array<String>, config : Dynamic, versionCode : Int )
+	public function new( dir : String, flags : Array<String>, config : Dynamic )
 	{
 		this.projectDirectory = dir;
 		this.flags = flags;
@@ -23,32 +22,14 @@ class AndroidBuildTool
 	}
 	
 	
-	public function incrementVersionCode() : String
-	{
-		var versionFile = projectDirectory + ".buildversion";
-		var version = 0;
-		if ( FileSystem.exists( versionFile ) )
-			version = Std.parseInt( File.getContent( versionFile ) );
-			
-		version++;
-		File.saveContent( versionFile, Std.string(version) );
-		return Std.string(version);
-	}
-	
-	
 	public function build( ) : Void
 	{
-		var binDirectory = projectDirectory + "bin/android/";
-		var versionCode = incrementVersionCode();
+		var binDirectory = projectDirectory + "bin/windows/";
 		var templateConstants = 
 		[
-			"Package" => config.project.packagename,
 			"Main" => config.project.main,
-			"VersionCode" => versionCode,
 			"Version" => config.project.version,
-			"ProjectName" => config.project.name,
-			"AndroidSDKPath" => StringTools.replace(config.global.android.sdkpath, "\\", "\\\\" ),
-			"AndroidSDKVersion" => config.project.android.version
+			"ProjectName" => config.project.name
 		];	
 		
 		if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
@@ -64,26 +45,18 @@ class AndroidBuildTool
 		FileSystem.createDirectory( binDirectory + "project" );
 		
 		//Copy template files
-		DirectoryHelper.copyDirectory( config.geoffpath + "template/android/", binDirectory + "project/" );
-		//DirectoryHelper.copyDirectory( config.geoffpath + "template/base/", binDirectory + "haxe/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/windows/", binDirectory + "project/" );
 		
 		trace("Processing templates");
 		
 		//Fill in values
 		TemplateHelper.processTemplates( binDirectory + "project/", templateConstants );
-		//processTemplates( binDirectory + "haxe/", templateConstants );
 		
 		//Compile project to java
 		compileHaxe( binDirectory + "build/" );
 		
-		//Copy lib to android template
-		copyJar( binDirectory );
-		
-		//Compile with ant
-		compileAndroid();
-		
 	}
-		
+	
 	
 	function compileHaxe( to : String )
 	{
@@ -98,7 +71,7 @@ class AndroidBuildTool
 		for ( lib in libArray ) {
 			buildHXML += "-lib " + lib + "\n";
 		}
-		buildHXML += "-java bin/android/build\n";
+		buildHXML += "-cpp bin/windows/build\n";
 		buildHXML += "-java-lib " + config.global.android.sdkpath + "platforms/android-" + config.project.android.version + "/android.jar\n";
 		buildHXML += "-D java-android\n";
 		buildHXML += "-main geoff.App\n";
