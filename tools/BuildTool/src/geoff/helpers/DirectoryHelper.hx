@@ -1,4 +1,4 @@
-package uk.co.mojaworks.helpers;
+package geoff.helpers;
 import sys.FileSystem;
 import sys.io.File;
 

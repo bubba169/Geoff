@@ -1,7 +1,7 @@
-package uk.co.mojaworks.platforms;
+package geoff.platforms;
 import sys.FileSystem;
 import sys.io.File;
-import uk.co.mojaworks.helpers.DirectoryHelper;
+import geoff.helpers.DirectoryHelper;
 
 /**
  * ...

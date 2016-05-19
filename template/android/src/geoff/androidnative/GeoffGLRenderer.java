@@ -26,10 +26,11 @@ public class GeoffGLRenderer implements GLSurfaceView.Renderer
 	public void onSurfaceChanged( GL10 glUnused, int width, int height )
 	{
 		GLES20.glViewport(0, 0, width, height);
+		app.platform.eventManager.sendEventInt( "Resize", new int[]{ width, height} );
 	}
 
 	public void onSurfaceCreated( GL10 glUnused, EGLConfig config )
 	{
-		app.initRenderer( );
+		app.init( );
 	}
 }

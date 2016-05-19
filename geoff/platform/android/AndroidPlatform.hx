@@ -8,10 +8,13 @@ import geoff.platform.android.AndroidGLContext;
 class AndroidPlatform
 {
 	public var name : String = "Android";
+	
 	public var gl : AndroidGLContext;
+	public var eventManager : AndroidEventManager;
 	
 	public function new()
 	{
 		gl = new AndroidGLContext();
+		eventManager = new AndroidEventManager();
 	}
 }

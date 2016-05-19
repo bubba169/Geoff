@@ -1,11 +1,10 @@
-package uk.co.mojaworks;
+package geoff;
 
+import geoff.platforms.AndroidBuildTool;
 import haxe.Json;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
-import uk.co.mojaworks.helpers.DirectoryHelper;
-import uk.co.mojaworks.platforms.AndroidBuildTool;
 
 /**
  * ...

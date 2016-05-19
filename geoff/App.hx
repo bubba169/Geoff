@@ -14,15 +14,12 @@ class App
 	
 	public var platform : Platform;
 	
-	public var rendererReady : Signal1<IGLContext>;
-	public var render : Signal1<IGLContext>;
-	
 	public static function main()
 	{
 		trace("Main");
 	}
 	
-	public static function init( ) : App
+	public static function create( ) : App
 	{
 		var app : App = new App( );
 		app.platform = new Platform();
@@ -38,16 +35,16 @@ class App
 		current = this;
 	}
 	
-	public function initRenderer()
+	public function init()
 	{
+		platform.gl.clearColor( 1, 1, 1, 1 );
 		// Nothing to do here
-		rendererReady.dispatch( platform.gl );
 	}
 	
 	public function render()
 	{
 		// Nothing to do here
-		render.dispatch( platform.gl );
+		platform.gl.clear( platform.gl.COLOR_BUFFER_BIT );
 	}
 	
 }

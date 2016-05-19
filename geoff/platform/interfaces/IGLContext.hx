@@ -5,5 +5,6 @@ package geoff.platform.interfaces;
  */
 interface IGLContext 
 {
-	function color( r : Float, g : Float, b : Float, a : Float ) : Void;
+	function clear( mask : Int ) : Void;
+	function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;
 }

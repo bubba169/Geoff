@@ -2,6 +2,7 @@ package geoff.androidnative;
 
 import android.opengl.GLSurfaceView;
 import android.content.Context;
+
 import geoff.App;
 
 public class GeoffGLView extends GLSurfaceView
@@ -22,5 +23,6 @@ public class GeoffGLView extends GLSurfaceView
 		
 		renderer = new GeoffGLRenderer( app );
 		setRenderer( renderer );
+		
 	}
 }
