@@ -8,6 +8,10 @@ import geoff.platform.interfaces.IGLContext;
 class WindowsGLContext implements IGLContext
 {
 
+	public var COLOR_BUFFER_BIT : Int;
+	public var DEPTH_BUFFER_BIT : Int;
+	public var STENCIL_BUFFER_BIT : Int;
+	
 	public function new() 
 	{
 		

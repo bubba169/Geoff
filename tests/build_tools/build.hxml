@@ -1,9 +1,7 @@
 -cp src
 -cp C:\Users\smorris\Documents\MyProjects\Geoff\
 -lib geoff
--java bin/android/build
--java-lib C:\Development\AndroidSDK\platforms/android-21/android.jar
--D java-android
+-cpp bin/windows/build
 -main geoff.App
 -debug
--D android
+-D windows

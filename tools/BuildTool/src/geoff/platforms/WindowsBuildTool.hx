@@ -72,15 +72,13 @@ class WindowsBuildTool
 			buildHXML += "-lib " + lib + "\n";
 		}
 		buildHXML += "-cpp bin/windows/build\n";
-		buildHXML += "-java-lib " + config.global.android.sdkpath + "platforms/android-" + config.project.android.version + "/android.jar\n";
-		buildHXML += "-D java-android\n";
 		buildHXML += "-main geoff.App\n";
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
 		}
 		
-		buildHXML += "-D android\n";
+		buildHXML += "-D windows\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
@@ -90,36 +88,6 @@ class WindowsBuildTool
 	}
 	
 	
-	function copyJar( binDirectory : String )
-	{
-		var jarName : String = "App";
-		if ( jarName.indexOf(".") > -1 ) 
-		{
-			jarName = jarName.substr( jarName.lastIndexOf(".") + 1 );
-		}
-		if ( isDebugBuild() ) jarName += "-Debug";
-		jarName += ".jar";
-		FileSystem.createDirectory( binDirectory + "project/libs" );
-		File.copy( binDirectory + "build/" + jarName, binDirectory + "/project/libs/" + jarName );
-	}
-	
-	
-	function compileAndroid( )
-	{
-		var antDirectory = projectDirectory + "bin/android/project";
-		trace("Running ant in " + antDirectory );
-		
-		Sys.setCwd( antDirectory );
-		if ( isDebugBuild() )
-		{
-			Sys.command( config.global.android.antpath + "/bin/ant", [ "debug", "install" ] );
-		}
-		else
-		{
-			Sys.command( config.global.android.antpath + "/bin/ant", [ "release", "install" ] );
-		}
-		
-	}
 	
 	function isDebugBuild() : Bool
 	{

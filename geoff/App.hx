@@ -1,7 +1,4 @@
 package geoff;
-import geoff.platform.android.AndroidPlatform;
-import geoff.platform.interfaces.IGLContext;
-import msignal.Signal.Signal1;
 
 /**
  * ...

@@ -7,9 +7,15 @@ package geoff.platform.windows;
 class WindowsPlatform
 {
 
-	public function new() 
+	public var name : String = "Windows";
+	
+	public var gl : WindowsGLContext;
+	public var eventManager : WindowsEventManager;
+	
+	public function new()
 	{
-		
+		gl = new WindowsGLContext();
+		eventManager = new WindowsEventManager();
 	}
 	
 }

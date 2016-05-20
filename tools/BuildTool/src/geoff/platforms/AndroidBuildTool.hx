@@ -14,32 +14,20 @@ class AndroidBuildTool
 	var projectDirectory : String;
 	var flags : Array<String>;
 	var config : Dynamic;
+	var versionCode : String;
 
-	public function new( dir : String, flags : Array<String>, config : Dynamic, versionCode : Int )
+	public function new( dir : String, flags : Array<String>, config : Dynamic, versionCode : String )
 	{
 		this.projectDirectory = dir;
 		this.flags = flags;
 		this.config = config;
+		this.versionCode = versionCode;
 	}
-	
-	
-	public function incrementVersionCode() : String
-	{
-		var versionFile = projectDirectory + ".buildversion";
-		var version = 0;
-		if ( FileSystem.exists( versionFile ) )
-			version = Std.parseInt( File.getContent( versionFile ) );
-			
-		version++;
-		File.saveContent( versionFile, Std.string(version) );
-		return Std.string(version);
-	}
-	
+		
 	
 	public function build( ) : Void
 	{
 		var binDirectory = projectDirectory + "bin/android/";
-		var versionCode = incrementVersionCode();
 		var templateConstants = 
 		[
 			"Package" => config.project.packagename,
