@@ -16,11 +16,11 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="C:\Users\smorris\Documents\MyProjects\Geoff" />
+    <class path="D:\Projects\Haxe\Geoff" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="windows" />
+    <option directives="windows&#xA;static_link" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="geoff.App" />

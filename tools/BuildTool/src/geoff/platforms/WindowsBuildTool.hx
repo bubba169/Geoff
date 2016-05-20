@@ -79,6 +79,7 @@ class WindowsBuildTool
 		}
 		
 		buildHXML += "-D windows\n";
+		buildHXML += "-D static_link\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
