@@ -32,13 +32,17 @@ class WindowsBuildTool
 			"ProjectName" => config.project.name
 		];	
 		
-		if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
+		if ( flags.indexOf( "clean" ) > -1 ) {
 		
-		// clean any old builds
-		if ( FileSystem.exists( binDirectory ) ) 
-		{
-			trace("Cleaning " + binDirectory );
-			DirectoryHelper.removeDirectory( binDirectory );
+			if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
+			
+			// clean any old builds
+			if ( FileSystem.exists( binDirectory ) ) 
+			{
+				trace("Cleaning " + binDirectory );
+				DirectoryHelper.removeDirectory( binDirectory );
+			}
+			
 		}
 		
 		// Make the directory
@@ -80,6 +84,8 @@ class WindowsBuildTool
 		
 		buildHXML += "-D windows\n";
 		buildHXML += "-D static_link\n";
+		buildHXML += "-D HX_WINDOWS\n";
+		buildHXML += "-D C_ABI=MD\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		

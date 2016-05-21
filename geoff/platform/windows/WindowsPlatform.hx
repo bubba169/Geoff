@@ -1,5 +1,7 @@
 package geoff.platform.windows;
 
+import hxcpp.StaticStd;
+
 /**
  * ...
  * @author Simon

@@ -20,7 +20,7 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="windows&#xA;static_link" />
+    <option directives="windows&#xA;static_link&#xA;HX_WINDOWS&#xA;C_ABI=MD" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="geoff.App" />

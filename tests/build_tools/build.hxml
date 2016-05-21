@@ -6,3 +6,5 @@
 -debug
 -D windows
 -D static_link
+-D HX_WINDOWS
+-D C_ABI=MD
