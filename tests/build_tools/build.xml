@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+
+	<set name="PLATFORM" value="windows"/>
+	<echo value="Hello"/>
+	
+	<target id="windows" output="bin/windows">
+		<lib name="opengl32.lib"/>
+	</target>
+	
+</data>

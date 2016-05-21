@@ -8,7 +8,6 @@ class App
 {
 
 	public static var current : App;
-	
 	public var platform : Platform;
 	
 	public static function main()

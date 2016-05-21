@@ -7,8 +7,6 @@ import geoff.utils.GL;
  * @author Simon
  */
 
- @:include("GL/gl.h")
- 
 class WindowsGLContext implements IGLContext
 {
 
@@ -23,12 +21,12 @@ class WindowsGLContext implements IGLContext
 	
 	public function clear(mask:Int):Void 
 	{
-		GL.glClear( mask );
+		GL.clear( mask );
 	}
 	
 	public function clearColor(r:Float, g:Float, b:Float, a:Float):Void 
 	{
-		GL.glClearColor( r, g, b, a );
+		//GL.clearColor( r, g, b, a );
 	}
 	
 }
