@@ -20,6 +20,9 @@ class App
 	{
 		var app : App = new App( );
 		app.platform = new Platform();
+		
+		trace("Returning app");
+		
 		return app;
 	}
 		

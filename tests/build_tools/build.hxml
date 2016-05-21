@@ -7,4 +7,5 @@
 -D windows
 -D static_link
 -D HX_WINDOWS
--D C_ABI=MD
+-D ABI=-MD
+-dce no

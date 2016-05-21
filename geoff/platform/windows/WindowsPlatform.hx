@@ -1,6 +1,6 @@
 package geoff.platform.windows;
 
-import hxcpp.StaticStd;
+import geoff.utils.AppUtils;
 
 /**
  * ...
