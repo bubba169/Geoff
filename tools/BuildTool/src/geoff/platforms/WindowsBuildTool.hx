@@ -59,6 +59,10 @@ class WindowsBuildTool
 		//Compile project to java
 		compileHaxe( binDirectory + "build/" );
 		
+		writeBuildXml( binDirectory );
+		
+		compileCPP( binDirectory );
+		
 	}
 	
 	
@@ -77,13 +81,14 @@ class WindowsBuildTool
 		}
 		buildHXML += "-cpp bin/windows/build\n";
 		buildHXML += "-main geoff.App\n";
+		buildHXML += "-D no-compilation\n";
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
 		}
 		
 		buildHXML += "-D windows\n";
-		buildHXML += "-D static_link\n";
+		//buildHXML += "-D static_link\n";
 		buildHXML += "-D HX_WINDOWS\n";
 		buildHXML += "-D ABI=-MD\n";
 		buildHXML += "-dce no\n";
@@ -95,6 +100,23 @@ class WindowsBuildTool
 		
 	}
 	
+	
+	function writeBuildXml( dir : String ) : Void 
+	{
+		var buildXml : String = "";
+		buildXml += "<xml>\n";
+		buildXml += "	<include name='Build.xml'/>\n";
+		buildXml += "	<flag value='-I../project/GeoffApp/include'/>\n";
+		buildXml += "</xml>";
+		
+		File.saveContent( dir + "build/build_master.xml", buildXml );
+	}
+	
+	function compileCPP( dir : String ) : Void 
+	{
+		Sys.setCwd( dir + "build" );
+		Sys.command( "haxelib", ["run", "hxcpp", "build_master.xml", "haxe"] );
+	}
 	
 	
 	function isDebugBuild() : Bool

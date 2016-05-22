@@ -3,9 +3,9 @@
 -lib geoff
 -cpp bin/windows/build
 -main geoff.App
+-D no-compilation
 -debug
 -D windows
--D static_link
 -D HX_WINDOWS
 -D ABI=-MD
 -dce no

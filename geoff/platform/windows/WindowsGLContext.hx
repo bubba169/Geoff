@@ -1,6 +1,5 @@
 package geoff.platform.windows;
 import geoff.platform.interfaces.IGLContext;
-import geoff.utils.GL;
 
 /**
  * ...
@@ -21,7 +20,7 @@ class WindowsGLContext implements IGLContext
 	
 	public function clear(mask:Int):Void 
 	{
-		GL.clear( mask );
+		//GL.clear( mask );
 	}
 	
 	public function clearColor(r:Float, g:Float, b:Float, a:Float):Void 
