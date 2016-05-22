@@ -1,4 +1,9 @@
 #include <glfw/glfw3.h>
+#include <geoff/App.h>
+#include <geoff/utils/AppUtils.h>
+
+extern "C" const char *hxRunLibrary();
+extern "C" void hxcpp_set_top_of_stack();
 
 int main( void )
 {
@@ -15,9 +20,15 @@ int main( void )
 
 	glfwMakeContextCurrent(window);
 
+	hxcpp_set_top_of_stack();
+	hxRunLibrary();
+
+	geoff::App app = geoff::App_obj::create();
+	app->init();
+
 	while (!glfwWindowShouldClose(window))
 	{
-		
+		app->render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

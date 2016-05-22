@@ -1,0 +1,34 @@
+<xml>
+
+	<set name="ABI" value="-MD"/>
+
+	<files id="common">
+		<compilerflag value="-Iinclude" />
+		<file name="Main.cpp"/>
+	</files>
+
+	<target id="default" output="hello" tool="linker" toolid="exe">
+		<lib name="glfw3.lib"/>
+		<lib name="gdi32.lib" />
+		<lib name="opengl32.lib" />
+		<lib name="user32.lib" />
+		<lib name="kernel32.lib" />
+		<lib name="advapi32.lib" />
+		<lib name="winmm.lib" />
+		<lib name="imm32.lib"  />
+		<lib name="ole32.lib" />
+		<lib name="oleaut32.lib" />
+		<lib name="version.lib" />
+		<lib name="ws2_32.lib"  />
+		<lib name="wldap32.lib" />
+		<lib name="shell32.lib" />
+		<lib name="comdlg32.lib" />
+		<lib name="libApp-debug.lib"/>
+		<lib name="libstd-19.lib"/>
+		<lib name="libzlib-19.lib"/>
+		<lib name="libsqlite-19.lib"/>
+		<lib name="libregexp-19.lib"/>
+		<lib name="libmysql5-19.lib"/>
+		<files id="common"/>
+	</target>
+</xml>

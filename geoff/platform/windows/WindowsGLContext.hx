@@ -20,11 +20,13 @@ class WindowsGLContext implements IGLContext
 	
 	public function clear(mask:Int):Void 
 	{
+		trace("Clear");
 		//GL.clear( mask );
 	}
 	
 	public function clearColor(r:Float, g:Float, b:Float, a:Float):Void 
 	{
+		trace("Render");
 		//GL.clearColor( r, g, b, a );
 	}
 	

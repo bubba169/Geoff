@@ -59,9 +59,9 @@ class WindowsBuildTool
 		//Compile project to java
 		compileHaxe( binDirectory + "build/" );
 		
-		writeBuildXml( binDirectory );
+		//writeBuildXml( binDirectory );
 		
-		compileCPP( binDirectory );
+		//compileCPP( binDirectory );
 		
 	}
 	
@@ -81,17 +81,16 @@ class WindowsBuildTool
 		}
 		buildHXML += "-cpp bin/windows/build\n";
 		buildHXML += "-main geoff.App\n";
-		buildHXML += "-D no-compilation\n";
+		//buildHXML += "-D no-compilation\n";
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
 		}
 		
 		buildHXML += "-D windows\n";
-		//buildHXML += "-D static_link\n";
+		buildHXML += "-D static_link\n";
 		buildHXML += "-D HX_WINDOWS\n";
 		buildHXML += "-D ABI=-MD\n";
-		buildHXML += "-dce no\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
