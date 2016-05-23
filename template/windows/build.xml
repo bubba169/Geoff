@@ -23,7 +23,7 @@
 		<lib name="wldap32.lib" />
 		<lib name="shell32.lib" />
 		<lib name="comdlg32.lib" />
-		<lib name="libApp-debug.lib"/>
+		<lib name="libApp.lib"/>
 		<lib name="libstd-19.lib"/>
 		<lib name="libzlib-19.lib"/>
 		<lib name="libsqlite-19.lib"/>

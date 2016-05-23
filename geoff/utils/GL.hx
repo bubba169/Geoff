@@ -6,7 +6,7 @@ package geoff.utils;
  * @author Simon
  */
 
-@:include("./../../template/windows/GeoffApp/include/glfw/glfw3.h")
+@:include("./../../template/windows/include/glfw/glfw3.h")
  
 extern class GL
 {
@@ -14,5 +14,5 @@ extern class GL
 	public static function clear( mask : Int ) : Void;	
 	
 	@:native("glClearColor")
-	public static function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;	
+	public static function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;
 }

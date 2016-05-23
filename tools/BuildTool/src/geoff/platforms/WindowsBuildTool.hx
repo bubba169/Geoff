@@ -3,6 +3,7 @@ import geoff.helpers.TemplateHelper;
 import sys.FileSystem;
 import sys.io.File;
 import geoff.helpers.DirectoryHelper;
+import sys.io.Process;
 
 /**
  * ...
@@ -32,7 +33,7 @@ class WindowsBuildTool
 			"ProjectName" => config.project.name
 		];	
 		
-		if ( flags.indexOf( "clean" ) > -1 ) {
+		//if ( flags.indexOf( "clean" ) > -1 ) {
 		
 			if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
 			
@@ -43,7 +44,7 @@ class WindowsBuildTool
 				DirectoryHelper.removeDirectory( binDirectory );
 			}
 			
-		}
+		//}
 		
 		// Make the directory
 		FileSystem.createDirectory( binDirectory + "project" );
@@ -59,9 +60,9 @@ class WindowsBuildTool
 		//Compile project to java
 		compileHaxe( binDirectory + "build/" );
 		
-		//writeBuildXml( binDirectory );
+		copyLibs( binDirectory );
 		
-		//compileCPP( binDirectory );
+		compileCPP( binDirectory );
 		
 	}
 	
@@ -99,22 +100,28 @@ class WindowsBuildTool
 		
 	}
 	
-	
-	function writeBuildXml( dir : String ) : Void 
+	function copyLibs( dir : String ) : Void
 	{
-		var buildXml : String = "";
-		buildXml += "<xml>\n";
-		buildXml += "	<include name='Build.xml'/>\n";
-		buildXml += "	<flag value='-I../project/GeoffApp/include'/>\n";
-		buildXml += "</xml>";
+		var filename = "libApp";
+		if ( isDebugBuild() ) filename += "-debug";
+		filename += ".lib";
 		
-		File.saveContent( dir + "build/build_master.xml", buildXml );
+		File.copy( dir + "build/" + filename, dir + "/project/lib/libApp.lib" );
+		
+		var hxcppDir : String = new Process( "haxelib", ["path", "hxcpp"] ).stdout.readLine().toString();
+		File.copy( hxcppDir + "lib/Windows/libstd-19.lib", dir + "project/lib/libstd-19.lib" );
+		File.copy( hxcppDir + "lib/Windows/libmysql5-19.lib", dir + "project/lib/libmysql5-19.lib" );
+		File.copy( hxcppDir + "lib/Windows/libregexp-19.lib", dir + "project/lib/libregexp-19.lib" );
+		File.copy( hxcppDir + "lib/Windows/libsqlite-19.lib", dir + "project/lib/libsqlite-19.lib" );
+		File.copy( hxcppDir + "lib/Windows/libzlib-19.lib", dir + "project/lib/libzlib-19.lib" );
+		
+		DirectoryHelper.copyDirectory( dir + "build/include/", dir + "project/include/" );
 	}
 	
 	function compileCPP( dir : String ) : Void 
 	{
-		Sys.setCwd( dir + "build" );
-		Sys.command( "haxelib", ["run", "hxcpp", "build_master.xml", "haxe"] );
+		Sys.setCwd( dir + "project" );
+		Sys.command( "haxelib", ["run", "hxcpp", "build.xml"] );
 	}
 	
 	
