@@ -1,5 +1,5 @@
 -cp src
--cp D:\Projects\Haxe\Geoff\
+-cp C:\Users\smorris\Documents\MyProjects\Geoff\
 -lib geoff
 -cpp bin/windows/build
 -main geoff.App

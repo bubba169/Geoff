@@ -18,6 +18,7 @@ class AndroidGLContext implements IGLContext
 		
 	}
 	
+	
 	public function clear( mask : Int ) : Void 
 	{
 		GLES20.glClear( mask );

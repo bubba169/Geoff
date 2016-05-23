@@ -1,7 +1,5 @@
 package geoff.platform.windows;
 
-import geoff.utils.AppUtils;
-
 /**
  * ...
  * @author Simon

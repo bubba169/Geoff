@@ -6,14 +6,13 @@ package geoff.utils;
  * @author Simon
  */
 
-@:buildXml("<target id='haxe'><lib name='opengl32.lib'/></target>")
-@include("gl/GL.h")
+@:include("./../../template/windows/GeoffApp/include/glfw/glfw3.h")
  
 extern class GL
 {
 	@:native("glClear")
-	static function clear( mask : Int ) : Void;	
+	public static function clear( mask : Int ) : Void;	
 	
 	@:native("glClearColor")
-	static function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;	
+	public static function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;	
 }
