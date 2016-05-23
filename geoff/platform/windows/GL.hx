@@ -1,4 +1,4 @@
-package geoff.utils;
+package geoff.platform.windows;
 
 /**
  * Native haxe bindings for cpp on Windows
@@ -6,7 +6,7 @@ package geoff.utils;
  * @author Simon
  */
 
-@:include("./../../template/windows/include/glfw/glfw3.h")
+@:include("./../../../template/windows/include/glfw/glfw3.h")
  
 extern class GL
 {

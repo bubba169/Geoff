@@ -33,7 +33,7 @@ class WindowsBuildTool
 			"ProjectName" => config.project.name
 		];	
 		
-		//if ( flags.indexOf( "clean" ) > -1 ) {
+		if ( flags.indexOf( "clean" ) > -1 ) {
 		
 			if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
 			
@@ -44,7 +44,7 @@ class WindowsBuildTool
 				DirectoryHelper.removeDirectory( binDirectory );
 			}
 			
-		//}
+		}
 		
 		// Make the directory
 		FileSystem.createDirectory( binDirectory + "project" );
