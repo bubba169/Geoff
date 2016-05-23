@@ -1,6 +1,5 @@
 #include <glfw/glfw3.h>
 #include <geoff/App.h>
-#include <geoff/utils/AppUtils.h>
 
 extern "C" const char *hxRunLibrary();
 extern "C" void hxcpp_set_top_of_stack();
