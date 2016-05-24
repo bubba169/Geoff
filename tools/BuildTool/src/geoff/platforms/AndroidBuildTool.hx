@@ -89,7 +89,7 @@ class AndroidBuildTool
 		buildHXML += "-java bin/android/build\n";
 		buildHXML += "-java-lib " + config.global.android.sdkpath + "platforms/android-" + config.project.android.version + "/android.jar\n";
 		buildHXML += "-D java-android\n";
-		buildHXML += "-main geoff.App\n";
+		buildHXML += "-main " + config.project.main + "\n";
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
@@ -107,7 +107,7 @@ class AndroidBuildTool
 	
 	function copyJar( binDirectory : String )
 	{
-		var jarName : String = "App";
+		var jarName : String = config.project.main;
 		if ( jarName.indexOf(".") > -1 ) 
 		{
 			jarName = jarName.substr( jarName.lastIndexOf(".") + 1 );

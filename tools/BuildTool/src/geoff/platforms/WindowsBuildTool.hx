@@ -81,7 +81,7 @@ class WindowsBuildTool
 			buildHXML += "-lib " + lib + "\n";
 		}
 		buildHXML += "-cpp bin/windows/build\n";
-		buildHXML += "-main geoff.App\n";
+		buildHXML += "-main " + config.project.main + "\n";// geoff.App\n";
 		//buildHXML += "-D no-compilation\n";
 		
 		if ( isDebugBuild() ) {
@@ -102,7 +102,13 @@ class WindowsBuildTool
 	
 	function copyLibs( dir : String ) : Void
 	{
-		var filename = "libApp";
+		var filename : String = "lib";
+		var libName : String = config.project.main;
+		if ( libName.indexOf(".") > -1 ) 
+		{
+			libName = libName.substr( libName.lastIndexOf(".") + 1 );
+		}
+		filename += libName;
 		if ( isDebugBuild() ) filename += "-debug";
 		filename += ".lib";
 		

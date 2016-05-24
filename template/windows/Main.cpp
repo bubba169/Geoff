@@ -22,7 +22,7 @@ int main( void )
 	hxcpp_set_top_of_stack();
 	hxRunLibrary();
 
-	geoff::App app = geoff::App_obj::create();
+	geoff::App& app = geoff::App_obj::current;
 	app->init();
 
 	while (!glfwWindowShouldClose(window))

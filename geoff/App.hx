@@ -8,20 +8,20 @@ class App
 {
 
 	public static var current : App;
+	
 	public var platform : Platform;
+	public var delegate : AppDelegate;
 	
 	public static function main()
 	{
 		trace("Main");
 	}
 	
-	public static function create( ) : App
+	public static function create( delegate : AppDelegate ) : App
 	{
 		var app : App = new App( );
 		app.platform = new Platform();
-		
-		trace("Returning app");
-		
+		app.delegate = delegate;
 		return app;
 	}
 		
@@ -36,14 +36,12 @@ class App
 	
 	public function init()
 	{
-		platform.gl.clearColor( 1, 1, 1, 1 );
-		// Nothing to do here
+		delegate.init( platform.gl );
 	}
 	
 	public function render()
 	{
-		// Nothing to do here
-		platform.gl.clear( platform.gl.COLOR_BUFFER_BIT );
+		delegate.render( platform.gl );
 	}
 	
 }
