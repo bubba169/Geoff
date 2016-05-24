@@ -1,8 +1,29 @@
 #include <glfw/glfw3.h>
 #include <geoff/App.h>
+#include <geoff/platform/windows/WindowsPlatform.h>
+#include <geoff/platform/windows/WindowsEventManager.h>
 
 extern "C" const char *hxRunLibrary();
 extern "C" void hxcpp_set_top_of_stack();
+
+geoff::App geoff_app;
+
+/**
+ * Callbacks
+ */
+
+void geoff_callback_framebuffer_size( GLFWwindow* window, int width, int height )
+{
+	Array< int > array = Array_obj< int >::__new();
+	array->push(width);
+	array->push(height);
+	geoff_app->platform->eventManager->sendEventInt( ::String("Resize"), array );
+
+}
+
+/**
+ * Main
+ */
 
 int main( void )
 {
@@ -17,17 +38,18 @@ int main( void )
 		return -1;
 	}
 
+	glfwSetFramebufferSizeCallback( window, geoff_callback_framebuffer_size );	
 	glfwMakeContextCurrent(window);
-
+	
 	hxcpp_set_top_of_stack();
 	hxRunLibrary();
 
-	geoff::App& app = geoff::App_obj::current;
-	app->init();
+	geoff_app = geoff::App_obj::current;
+	geoff_app->init();
 
 	while (!glfwWindowShouldClose(window))
 	{
-		app->render();
+		geoff_app->render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -37,3 +59,5 @@ int main( void )
 
 	return 0;
 }
+
+

@@ -7,6 +7,7 @@ import geoff.platform.interfaces.IEventManager;
  * ...
  * @author Simon
  */
+ 
 class WindowsEventManager implements IEventManager
 {
 
