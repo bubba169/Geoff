@@ -5,16 +5,20 @@ package geoff.platform.windows.externs;
  * ...
  * @author Simon
  */
-@:include("./../../../../template/windows/include/GLBindings.h")
+@:buildXml("<files id='haxe'><compilerflag value='-I${haxelib:geoff}/template/windows/include'/></files>")
+@:include("GLBindings.h")
 
 extern class GL
 {
-	@:native("geoff::GLBindings::clear") 
+	@:native("::glClear") 
 	public static function clear( mask : Int ) : Void;	
 	
-	@:native("geoff::GLBindings::clearColor") 
+	@:native("::glClearColor") 
 	public static function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;
 	
-	@:native("geoff::GLBindings::createBuffer") 
-	public static function createBuffer( ) : Int;
+	@:native("::glGenBuffers") 
+	public static function genBuffers( n : Int, result : cpp.RawPointer<cpp.UInt32> ) : Int;
+	
+	@:native("::glCreateShader")
+	static public function createShader( type : Int ) : Int;
 }

@@ -1,3 +1,4 @@
+#include <glew/glew.h>
 #include <glfw/glfw3.h>
 #include <geoff/App.h>
 #include <geoff/platform/windows/WindowsPlatform.h>
@@ -40,6 +41,8 @@ int main( void )
 
 	glfwSetFramebufferSizeCallback( window, geoff_callback_framebuffer_size );	
 	glfwMakeContextCurrent(window);
+	
+	glewInit();
 	
 	hxcpp_set_top_of_stack();
 	hxRunLibrary();

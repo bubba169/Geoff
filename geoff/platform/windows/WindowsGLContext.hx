@@ -1,7 +1,10 @@
 package geoff.platform.windows;
 import geoff.gl.GLBuffer;
+import geoff.gl.GLShader;
 import geoff.platform.interfaces.IGLContext;
 import geoff.platform.windows.externs.GL;
+
+import cpp.Pointer;
 
 /**
  * ...
@@ -32,7 +35,16 @@ class WindowsGLContext implements IGLContext
 	
 	public function createBuffer() : GLBuffer
 	{
-		return new GLBuffer( 0 );
+		var bufferId : cpp.UInt32 = 0;
+		GL.genBuffers( 1, cpp.Pointer.addressOf( bufferId ).get_raw() );
+		return new GLBuffer( bufferId );
+		
+		//return new GLBuffer( GL.createBuffer() );
+	}
+	
+	public function createShader( type : Int ) : GLShader
+	{
+		return new GLShader( GL.createShader( type ) );
 	}
 	
 }

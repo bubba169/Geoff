@@ -1,5 +1,6 @@
 package geoff.platform.interfaces;
 import geoff.gl.GLBuffer;
+import geoff.gl.GLShader;
 
 /**
  * @author Simon
@@ -13,4 +14,5 @@ interface IGLContext
 	function clear( mask : Int ) : Void;
 	function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;
 	function createBuffer() : GLBuffer;
+	function createShader( type : Int ) : GLShader;
 }

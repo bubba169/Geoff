@@ -6,13 +6,13 @@
 	<files id="common">
 		<compilerflag value="-Iinclude" />
 		<file name="src/Main.cpp"/>
-		<file name="src/GLBindings.cpp"/>
 	</files>
 
 	<target id="default" output="hello" tool="linker" toolid="exe">
 		
 		<flag value="/NODEFAULTLIB:LIBCMT" />
 		<lib name="glfw3.lib"/>
+		<lib name="glew32s.lib"/>
 		<lib name="gdi32.lib" />
 		<lib name="opengl32.lib" />
 		<lib name="user32.lib" />

@@ -1,6 +1,7 @@
 package pkg;
 
 import geoff.AppDelegate;
+import geoff.gl.GLBuffer;
 import geoff.platform.interfaces.IGLContext;
 
 /**
@@ -10,6 +11,9 @@ import geoff.platform.interfaces.IGLContext;
 class AppEngine extends AppDelegate
 {
 
+	var vertexBuffer : GLBuffer;
+	var indexBuffer : GLBuffer;
+	
 	public function new() 
 	{
 		super();
@@ -18,6 +22,8 @@ class AppEngine extends AppDelegate
 	override public function init(gl:IGLContext) 
 	{
 		gl.clearColor( 1, 1, 0, 1 );
+		vertexBuffer = gl.createBuffer();
+		indexBuffer = gl.createBuffer();
 	}
 	
 	override public function render(gl:IGLContext) 
@@ -25,7 +31,7 @@ class AppEngine extends AppDelegate
 		
 		gl.clear( gl.COLOR_BUFFER_BIT );
 		
-		/*var vertexData : Array<Float> = [
+		var vertexData : Array<Float> = [
 			100, 0,
 			0, 100,
 			200, 100
@@ -34,10 +40,6 @@ class AppEngine extends AppDelegate
 		var indexData : Array<Int> = [
 			0, 1, 2
 		];
-		
-		trace( gl.createBuffer() );
-		
-		*/
 		
 	}
 	
