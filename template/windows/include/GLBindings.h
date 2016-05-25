@@ -1,3 +1,5 @@
+#define GLFW_INCLUDE_ES2 
+
 #include "glfw/glfw3.h"
 
 namespace geoff {
@@ -7,8 +9,8 @@ namespace geoff {
 		public:
 			static void clear( int mask );
 			static void clearColor( float r, float g, float b, float a );
-			
-			int hello();
+			static int createBuffer( );
+
 	};
 	
 };

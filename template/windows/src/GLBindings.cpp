@@ -13,9 +13,11 @@ namespace geoff {
 		glClearColor( r, g, b, a );
 	}
 	
-	int GLBindings::hello()
+	int GLBindings::createBuffer()
 	{
-		return 2;
+		GLuint buffer;
+		glGenBuffers(1, &buffer);
+		return buffer;
 	}
 
 }

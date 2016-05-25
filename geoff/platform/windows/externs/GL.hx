@@ -14,4 +14,7 @@ extern class GL
 	
 	@:native("geoff::GLBindings::clearColor") 
 	public static function clearColor( r : Float, g : Float, b : Float, a : Float ) : Void;
+	
+	@:native("geoff::GLBindings::createBuffer") 
+	public static function createBuffer( ) : Int;
 }
