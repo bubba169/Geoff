@@ -1,6 +1,7 @@
 package geoff.platform.windows;
+import geoff.gl.GLBuffer;
 import geoff.platform.interfaces.IGLContext;
-import geoff.platform.windows.GL;
+import geoff.platform.windows.externs.GL;
 
 /**
  * ...
@@ -27,6 +28,11 @@ class WindowsGLContext implements IGLContext
 	public function clearColor(r:Float, g:Float, b:Float, a:Float) : Void
 	{
 		GL.clearColor( r, g, b, a );
+	}
+	
+	public function createBuffer() : GLBuffer
+	{
+		return new GLBuffer( 0 );
 	}
 	
 }

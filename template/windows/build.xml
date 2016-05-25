@@ -5,7 +5,8 @@
 
 	<files id="common">
 		<compilerflag value="-Iinclude" />
-		<file name="Main.cpp"/>
+		<file name="src/Main.cpp"/>
+		<file name="src/GLBindings.cpp"/>
 	</files>
 
 	<target id="default" output="hello" tool="linker" toolid="exe">
