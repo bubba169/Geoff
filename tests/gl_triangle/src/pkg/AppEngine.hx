@@ -2,7 +2,10 @@ package pkg;
 
 import geoff.AppDelegate;
 import geoff.gl.GLBuffer;
+import geoff.gl.GLProgram;
+import geoff.gl.GLShader;
 import geoff.platform.interfaces.IGLContext;
+import geoff.utils.BytesHelper;
 
 /**
  * ...
@@ -13,6 +16,10 @@ class AppEngine extends AppDelegate
 
 	var vertexBuffer : GLBuffer;
 	var indexBuffer : GLBuffer;
+	
+	var vertexShader : GLShader;
+	var fragmentShader : GLShader;
+	var program : GLProgram;
 	
 	public function new() 
 	{
@@ -25,13 +32,35 @@ class AppEngine extends AppDelegate
 		vertexBuffer = gl.createBuffer();
 		indexBuffer = gl.createBuffer();
 		
+		var vsSource : String = "";
+		vsSource += "attribute vec3 aVertexPosition;";
+		vsSource += "uniform mat4 uMVMatrix;";
+		vsSource += "uniform mat4 uPMatrix;";
 		
-	}
-	
-	override public function render(gl:IGLContext) 
-	{
+		vsSource += "void main(void) {";
+		vsSource += "    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);";
+		vsSource += "}";
 		
-		gl.clear( gl.COLOR_BUFFER_BIT );
+		var fsSource : String = "";
+		fsSource += "void main(void) {";
+		fsSource += "	gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);";
+		fsSource += "}";		
+		
+		vertexShader = gl.createShader( GLShaderType.VertexShader );
+		gl.shaderSource( vertexShader, vsSource );
+		gl.compileShader( vertexShader );
+		
+		fragmentShader = gl.createShader( GLShaderType.FragmentShader );
+		gl.shaderSource( fragmentShader, fsSource );
+		gl.compileShader( fragmentShader );
+		
+		program = gl.createProgram();
+		gl.attachShader( program, vertexShader );
+		gl.attachShader( program, fragmentShader );
+		gl.linkProgram( program );
+		
+		trace( gl.getProgramParameter( program, GLProgramParameter.InfoLogLength ) );
+		trace( gl.getProgramInfoLog( program ) );
 		
 		var vertexData : Array<Float> = [
 			100, 0,
@@ -42,6 +71,18 @@ class AppEngine extends AppDelegate
 		var indexData : Array<Int> = [
 			0, 1, 2
 		];
+		
+		gl.bindBuffer( GLBufferTarget.ArrayBuffer, vertexBuffer );
+		gl.bufferData( GLBufferTarget.ArrayBuffer, BytesHelper.toFloatBytes( vertexData ), GLBufferUsage.StreamDraw );
+		
+	}
+	
+	override public function render(gl:IGLContext) 
+	{
+		
+		gl.clear( gl.COLOR_BUFFER_BIT );
+		
+		
 		
 	}
 	

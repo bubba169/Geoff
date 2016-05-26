@@ -1,8 +1,9 @@
 -cp src
--cp D:\Projects\Haxe\Geoff\
+-cp C:\Users\smorris\Documents\MyProjects\Geoff\
 -lib geoff
--cpp bin/windows/build
+-cpp bin\windows\build
 -main pkg.Main
+-debug
 -D windows
 -D static_link
 -D HX_WINDOWS

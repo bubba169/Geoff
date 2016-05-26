@@ -80,7 +80,7 @@ class WindowsBuildTool
 		for ( lib in libArray ) {
 			buildHXML += "-lib " + lib + "\n";
 		}
-		buildHXML += "-cpp bin/windows/build\n";
+		buildHXML += "-cpp bin\\windows\\build\n";
 		buildHXML += "-main " + config.project.main + "\n";// geoff.App\n";
 		//buildHXML += "-D no-compilation\n";
 		
