@@ -5,6 +5,7 @@ import geoff.platform.interfaces.IGLContext;
 import geoff.platform.windows.externs.GL;
 
 import cpp.Pointer;
+import cpp.ConstCharStar;
 
 /**
  * ...
@@ -36,15 +37,27 @@ class WindowsGLContext implements IGLContext
 	public function createBuffer() : GLBuffer
 	{
 		var bufferId : cpp.UInt32 = 0;
-		GL.genBuffers( 1, cpp.Pointer.addressOf( bufferId ).get_raw() );
-		return new GLBuffer( bufferId );
+		GL.genBuffers( 1, Pointer.addressOf( bufferId ).get_raw() );
+		return new GLBuffer( bufferId, this );
 		
 		//return new GLBuffer( GL.createBuffer() );
 	}
 	
 	public function createShader( type : Int ) : GLShader
 	{
-		return new GLShader( GL.createShader( type ) );
+		return new GLShader( GL.createShader( type ), this );
+	}
+	
+	public function shaderSource( shader : GLShader, source : String ) : Void
+	{
+		var cstr : ConstCharStar = ConstCharStar.fromString( source );
+		var length : Int = source.length;
+		GL.shaderSource( shader.value, 1, Pointer.addressOf( cstr ).get_raw(), Pointer.addressOf( length ).get_raw() );
+	}
+	
+	public function compileShader( shader : GLShader ) : Void
+	{
+		GL.compileShader( shader.value );
 	}
 	
 }

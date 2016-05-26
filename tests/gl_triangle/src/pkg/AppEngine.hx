@@ -24,6 +24,8 @@ class AppEngine extends AppDelegate
 		gl.clearColor( 1, 1, 0, 1 );
 		vertexBuffer = gl.createBuffer();
 		indexBuffer = gl.createBuffer();
+		
+		
 	}
 	
 	override public function render(gl:IGLContext) 

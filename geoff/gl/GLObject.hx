@@ -1,4 +1,5 @@
 package geoff.gl;
+import geoff.platform.interfaces.IGLContext;
 
 /**
  * ...
@@ -9,8 +10,9 @@ class GLObject
 
 	public var value : Dynamic;
 	public var type : String = "GLObject";
+	public var context : IGLContext;
 	
-	public function new( value : Dynamic, type : String ) 
+	public function new( value : Dynamic, type : String, context : IGLContext ) 
 	{
 		this.value = value;
 		this.type = type;

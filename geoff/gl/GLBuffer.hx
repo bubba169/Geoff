@@ -1,4 +1,5 @@
 package geoff.gl;
+import geoff.platform.interfaces.IGLContext;
 
 /**
  * ...
@@ -7,9 +8,9 @@ package geoff.gl;
 class GLBuffer extends GLObject
 {
 
-	public function new( value : UInt ) 
+	public function new( value : UInt, context : IGLContext ) 
 	{
-		super( value, "Buffer" );
+		super( value, "Buffer", context );
 	}
 	
 }

@@ -1,4 +1,5 @@
 package geoff.gl;
+import geoff.platform.interfaces.IGLContext;
 
 /**
  * ...
@@ -7,9 +8,9 @@ package geoff.gl;
 class GLShader extends GLObject
 {
 
-	public function new( value:Dynamic ) 
+	public function new( value:Dynamic, context : IGLContext ) 
 	{
-		super(value, "Shader");
+		super(value, "Shader", context );
 	}
 	
 }
