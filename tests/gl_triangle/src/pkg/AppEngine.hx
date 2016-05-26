@@ -59,8 +59,7 @@ class AppEngine extends AppDelegate
 		gl.attachShader( program, fragmentShader );
 		gl.linkProgram( program );
 		
-		trace( gl.getProgramParameter( program, GLProgramParameter.InfoLogLength ) );
-		trace( gl.getProgramInfoLog( program ) );
+		gl.useProgram( program );
 		
 		var vertexData : Array<Float> = [
 			100, 0,
@@ -74,6 +73,11 @@ class AppEngine extends AppDelegate
 		
 		gl.bindBuffer( GLBufferTarget.ArrayBuffer, vertexBuffer );
 		gl.bufferData( GLBufferTarget.ArrayBuffer, BytesHelper.toFloatBytes( vertexData ), GLBufferUsage.StreamDraw );
+		gl.bindBuffer( GLBufferTarget.ArrayBuffer, null );
+		
+		gl.bindBuffer( GLBufferTarget.ElementArrayBuffer, indexBuffer );
+		gl.bufferData( GLBufferTarget.ElementArrayBuffer, BytesHelper.toIntBytes( indexData ), GLBufferUsage.StreamDraw );
+		gl.bindBuffer( GLBufferTarget.ElementArrayBuffer, null );
 		
 	}
 	

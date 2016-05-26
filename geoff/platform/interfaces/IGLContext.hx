@@ -39,4 +39,5 @@ interface IGLContext
 	function linkProgram( program : GLProgram ) : Void;
 	function getProgramParameter( program : GLProgram, parameter : GLProgramParameter ) : Int;
 	function getProgramInfoLog( program : GLProgram ) : String;
+	function useProgram( program : GLProgram ) : Void;
 }

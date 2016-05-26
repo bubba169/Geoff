@@ -68,7 +68,9 @@ extern class GL
 	static public function getProgramiv( program : Int, param : Int, result : RawPointer<Int> ) : Int;
 	
 	@:native("::glGetProgramInfoLog")
-	static public function getProgramInfoLog( shader : Int, max : Int, sizeResult : RawPointer<Int>, result : RawPointer<Char> ) : Void;
+	static public function getProgramInfoLog( program : Int, max : Int, sizeResult : RawPointer<Int>, result : RawPointer<Char> ) : Void;
 	
+	@:native("::glUseProgram")
+	static public function useProgram( program : Int ) : Void;
 	
 }

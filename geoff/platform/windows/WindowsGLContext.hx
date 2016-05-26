@@ -51,7 +51,11 @@ class WindowsGLContext implements IGLContext
 	
 	public function bindBuffer( target : GLBufferTarget, buffer : GLBuffer ) : Void
 	{
-		GL.bindBuffer( target, buffer.value );
+		if ( buffer != null ) {
+			GL.bindBuffer( target, buffer.value );
+		}else{
+			GL.bindBuffer( target, 0 );
+		}
 	}
 	
 	public function bufferData( target : GLBufferTarget, data : Bytes, usage : GLBufferUsage ) : Void
@@ -144,5 +148,10 @@ class WindowsGLContext implements IGLContext
 		}
 		
 		return result;
+	}
+	
+	public function useProgram( program : GLProgram ) : Void 
+	{
+		GL.useProgram( program.value );
 	}
 }

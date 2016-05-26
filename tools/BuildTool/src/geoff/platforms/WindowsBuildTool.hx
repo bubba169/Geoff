@@ -75,7 +75,7 @@ class WindowsBuildTool
 		for ( dir in srcArray ) {
 			buildHXML += "-cp " + dir + "\n";
 		}
-		buildHXML += "-cp " + config.geoffpath + "\n";
+		//buildHXML += "-cp " + config.geoffpath + "\n";
 		var libArray : Array<String> = config.project.haxelib;
 		for ( lib in libArray ) {
 			buildHXML += "-lib " + lib + "\n";
@@ -92,7 +92,7 @@ class WindowsBuildTool
 		buildHXML += "-D static_link\n";
 		buildHXML += "-D HX_WINDOWS\n";
 		buildHXML += "-D ABI=-MD\n";
-		buildHXML += "-dce no\n";
+		//buildHXML += "-dce no\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
