@@ -1,4 +1,4 @@
-package geoff.platform.event;
+package geoff.event;
 
 /**
  * ...

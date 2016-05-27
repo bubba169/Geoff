@@ -1,8 +1,10 @@
+#define GLEW_STATIC
+
 #include <glew/glew.h>
 #include <glfw/glfw3.h>
 #include <geoff/App.h>
 #include <geoff/platform/windows/WindowsPlatform.h>
-#include <geoff/platform/windows/WindowsEventManager.h>
+#include <geoff/event/EventManager.h>
 
 extern "C" const char *hxRunLibrary();
 extern "C" void hxcpp_set_top_of_stack();
@@ -52,7 +54,7 @@ int main( void )
 
 	while (!glfwWindowShouldClose(window))
 	{
-		geoff_app->render();
+		geoff_app->update();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

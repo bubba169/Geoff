@@ -36,12 +36,12 @@ class App
 	
 	public function init()
 	{
-		delegate.init( platform.gl );
+		delegate.init( platform.renderer );
 	}
 	
-	public function render()
+	public function update()
 	{
-		delegate.render( platform.gl );
+		delegate.update( platform.renderer );
 	}
 	
 }

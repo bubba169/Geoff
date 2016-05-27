@@ -1,16 +1,15 @@
-package geoff.platform.android;
-
-import geoff.platform.event.Event;
-import geoff.platform.event.ResizeEvent;
-import geoff.platform.interfaces.IEventManager;
-import java.NativeArray;
+package geoff.event;
+import geoff.event.Event;
+import geoff.event.ResizeEvent;
 
 /**
  * ...
  * @author Simon
  */
-class AndroidEventManager implements IEventManager
+ 
+class EventManager
 {
+
 	private var _eventsQueue : Array<Event>;
 	
 	public function new() 
@@ -18,7 +17,7 @@ class AndroidEventManager implements IEventManager
 		_eventsQueue = new Array<Event>();
 	}
 	
-	public function sendEventInt( event : String, data : NativeArray<Int> )
+	public function sendEventInt( event : String, data : Array<Int> )
 	{
 		switch( event )
 		{

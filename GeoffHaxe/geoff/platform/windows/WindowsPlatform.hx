@@ -1,4 +1,5 @@
 package geoff.platform.windows;
+import geoff.event.EventManager;
 
 /**
  * ...
@@ -12,13 +13,13 @@ class WindowsPlatform
 
 	public var name : String = "Windows";
 	
-	public var gl : WindowsGLContext;
-	public var eventManager : WindowsEventManager;
+	public var renderer : WindowsRenderer;
+	public var eventManager : EventManager;
 	
 	public function new()
 	{
-		gl = new WindowsGLContext();
-		eventManager = new WindowsEventManager();
+		renderer = new WindowsRenderer();
+		eventManager = new EventManager();
 	}
 	
 }

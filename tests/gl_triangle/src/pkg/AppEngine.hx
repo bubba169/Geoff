@@ -1,10 +1,7 @@
 package pkg;
 
 import geoff.AppDelegate;
-import geoff.gl.GLBuffer;
-import geoff.gl.GLProgram;
-import geoff.gl.GLShader;
-import geoff.platform.interfaces.IGLContext;
+import geoff.renderer.IRenderContext;
 import geoff.utils.BytesHelper;
 
 /**
@@ -14,21 +11,14 @@ import geoff.utils.BytesHelper;
 class AppEngine extends AppDelegate
 {
 
-	var vertexBuffer : GLBuffer;
-	var indexBuffer : GLBuffer;
-	
-	var vertexShader : GLShader;
-	var fragmentShader : GLShader;
-	var program : GLProgram;
-	
 	public function new() 
 	{
 		super();
 	}
 	
-	override public function init(gl:IGLContext) 
+	override public function init( renderer : IRenderContext ) 
 	{
-		gl.clearColor( 1, 1, 0, 1 );
+		/*gl.clearColor( 1, 1, 0, 1 );
 		vertexBuffer = gl.createBuffer();
 		indexBuffer = gl.createBuffer();
 		
@@ -77,17 +67,13 @@ class AppEngine extends AppDelegate
 		
 		gl.bindBuffer( GLBufferTarget.ElementArrayBuffer, indexBuffer );
 		gl.bufferData( GLBufferTarget.ElementArrayBuffer, BytesHelper.toIntBytes( indexData ), GLBufferUsage.StreamDraw );
-		gl.bindBuffer( GLBufferTarget.ElementArrayBuffer, null );
+		gl.bindBuffer( GLBufferTarget.ElementArrayBuffer, null );*/
 		
 	}
 	
-	override public function render(gl:IGLContext) 
+	override public function update( renderer : IRenderContext ) 
 	{
-		
-		gl.clear( gl.COLOR_BUFFER_BIT );
-		
-		
-		
+		renderer.clear();
 	}
 	
 }

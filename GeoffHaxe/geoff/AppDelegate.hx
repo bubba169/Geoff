@@ -1,6 +1,6 @@
 package geoff;
 
-import geoff.platform.interfaces.IGLContext;
+import geoff.renderer.IRenderContext;
 
 /**
  * ...
@@ -14,13 +14,13 @@ class AppDelegate
 		
 	}
 	
-	public function init( gl : IGLContext )
+	public function init( renderer : IRenderContext )
 	{
-		gl.clearColor( 1, 1, 1, 1 );
+		
 	}
 	
-	public function render( gl : IGLContext )
+	public function update( renderer : IRenderContext )
 	{
-		gl.clear( gl.COLOR_BUFFER_BIT );
+		
 	}
 }
