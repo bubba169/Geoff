@@ -31,7 +31,7 @@ class WindowsRenderer implements IRenderContext
 	
 	public function compileShader( vs : String, fs : String ) : Int
 	{
-		return 0;// GeoffRenderer.compileShader( vs, fs );
+		return GeoffRenderer.compileShader( vs, fs );
 	}	
 	
 	

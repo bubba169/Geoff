@@ -10,7 +10,7 @@ import cpp.ConstCharStar;
  * @author Simon
  */
 @:include("GeoffRenderer.h")
- 
+@:native("geoff::GeoffRenderer")
 extern class GeoffRenderer
 {
 

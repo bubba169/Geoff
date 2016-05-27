@@ -12,7 +12,7 @@
 
 namespace geoff
 {
-	class GeoffRenderer
+	class GeoffRenderer_obj
 	{
 		public:
 			static void clear( float r, float g, float b, float a );
