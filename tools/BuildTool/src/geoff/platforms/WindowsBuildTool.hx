@@ -75,7 +75,7 @@ class WindowsBuildTool
 		for ( dir in srcArray ) {
 			buildHXML += "-cp " + dir + "\n";
 		}
-		//buildHXML += "-cp " + config.geoffpath + "\n";
+		buildHXML += "-cp " + config.geoffpath + "GeoffHaxe\n";
 		var libArray : Array<String> = config.project.haxelib;
 		for ( lib in libArray ) {
 			buildHXML += "-lib " + lib + "\n";

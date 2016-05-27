@@ -1,4 +1,5 @@
 -cp src
+-cp C:\Users\smorris\Documents\MyProjects\Geoff\GeoffHaxe
 -lib geoff
 -cpp bin\windows\build
 -main pkg.Main

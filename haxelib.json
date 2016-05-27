@@ -10,6 +10,7 @@
   "dependencies": {
     "hxjava": "",
     "hxcpp": "",
-	"msignal": ""
+	"msignal": "",
+	"hxmath": ""
   }
 }
