@@ -14,6 +14,7 @@ class WindowsRenderer implements IRenderContext
 {
 
 	public var clearColor : Color = Color.GREEN;
+	public var _internalRenderer : GeoffRenderer;
 	
 	public function new() 
 	{
@@ -21,7 +22,7 @@ class WindowsRenderer implements IRenderContext
 	
 	public function clear() : Void
 	{
-		GeoffRenderer.clear( clearColor.r / 255, clearColor.g / 255, clearColor.b / 255, clearColor.a );
+		_internalRenderer.clear( clearColor.r / 255, clearColor.g / 255, clearColor.b / 255, clearColor.a );
 	}
 	
 	
@@ -31,7 +32,7 @@ class WindowsRenderer implements IRenderContext
 	
 	public function compileShader( vs : String, fs : String ) : Int
 	{
-		return GeoffRenderer.compileShader( vs, fs );
+		return _internalRenderer.compileShader( vs, fs );
 	}	
 	
 	

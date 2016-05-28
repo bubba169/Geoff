@@ -9,20 +9,21 @@ import cpp.ConstCharStar;
  * ...
  * @author Simon
  */
+@:structAccess
+@:unreflective
 @:include("GeoffRenderer.h")
 @:native("geoff::GeoffRenderer")
 extern class GeoffRenderer
 {
-
-	public static function clear( r : Float, g : Float, b : Float, a : Float ) : Void;
+	public function clear( r : Float, g : Float, b : Float, a : Float ) : Void;
 	
-	public static function compileShader( vs : String, fs : String ) : Int;
+	public function compileShader( vs : String, fs : String ) : Int;
 	
-	public static function beginRender( width : Float, height : Float ) : Void;
-	public static function renderBatch( batch : RenderBatch ) : Void;
-	public static function endRender( ) : Void;
+	public function beginRender( width : Float, height : Float ) : Void;
+	public function renderBatch( batch : RenderBatch ) : Void;
+	public function endRender( ) : Void;
 	
-	public static function pushRenderTarget( target : Texture ) : Void;
-	public static function popRenderTarget( ) : Void;
+	public function pushRenderTarget( target : Texture ) : Void;
+	public function popRenderTarget( ) : Void;
 	
 }

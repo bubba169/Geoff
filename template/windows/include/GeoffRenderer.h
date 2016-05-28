@@ -12,21 +12,28 @@
 
 namespace geoff
 {
-	class GeoffRenderer_obj
+	
+	class GeoffRenderer
 	{
 		public:
-			static void clear( float r, float g, float b, float a );
 			
-			static int compileShader( ::String vsSource, ::String fsSource );
+			GeoffRenderer();
+			~GeoffRenderer();
 			
-			static void beginRender( float w, float h );
-			static void renderBatch( geoff::renderer::RenderBatch batch );
-			static void endRender();
+			void clear( float r, float g, float b, float a );
+			int compileShader( ::String vsSource, ::String fsSource );
 			
-			static void pushRenderTarget( geoff::renderer::Texture texture );
-			static void popRenderTarget( );
+			void beginRender( float w, float h );
+			void renderBatch( geoff::renderer::RenderBatch batch );
+			void endRender();
 			
-		
+			void pushRenderTarget( geoff::renderer::Texture texture );
+			void popRenderTarget( );
+			
+		private:
+			
+			GLuint _vertexBuffer;
+			GLuint _indexBuffer;
 		
 	};
 };
