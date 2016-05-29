@@ -13,7 +13,7 @@ import geoff.utils.Color;
 class WindowsRenderer implements IRenderContext
 {
 
-	public var clearColor : Color = Color.GREEN;
+	public var clearColor : Color = Color.BLACK;
 	public var _internalRenderer : GeoffRenderer;
 	
 	public function new() 
@@ -32,7 +32,7 @@ class WindowsRenderer implements IRenderContext
 	
 	public function compileShader( vs : String, fs : String ) : Int
 	{
-		return _internalRenderer.compileShader( vs, fs );
+		return _internalRenderer.compileShader( cpp.Pointer.addressOf( vs ), cpp.Pointer.addressOf( fs ) );
 	}	
 	
 	
@@ -42,14 +42,21 @@ class WindowsRenderer implements IRenderContext
 	
 	public function beginRender( width : Int, height : Int ) : Void
 	{
+		_internalRenderer.beginRender( width, height );
 	}
 	
 	public function renderBatch( batch : RenderBatch ) : Void
 	{
+		_internalRenderer.renderBatch( batch );
 	}
 	
 	public function endRender( ) : Void
 	{
+	}
+	
+	public function getError() : Int
+	{
+		return _internalRenderer.getError();
 	}
 	
 	

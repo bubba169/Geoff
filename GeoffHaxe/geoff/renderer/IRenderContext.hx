@@ -17,4 +17,6 @@ interface IRenderContext
 	public function pushRenderTarget( target : Texture ) : Void;
 	public function popRenderTarget( ) : Void;
 	
+	public function getError() : Int;
+	
 }

@@ -8,6 +8,7 @@
 
 #include <hxcpp.h>
 #include <geoff/renderer/RenderBatch.h>
+#include <geoff/renderer/Shader.h>
 #include <geoff/renderer/Texture.h>
 
 namespace geoff
@@ -21,7 +22,7 @@ namespace geoff
 			~GeoffRenderer();
 			
 			void clear( float r, float g, float b, float a );
-			int compileShader( ::String vsSource, ::String fsSource );
+			int compileShader( ::String* vsSource, ::String* fsSource );
 			
 			void beginRender( int w, int h );
 			void renderBatch( geoff::renderer::RenderBatch batch );
@@ -29,6 +30,8 @@ namespace geoff
 			
 			void pushRenderTarget( geoff::renderer::Texture texture );
 			void popRenderTarget( );
+			
+			int getError();
 			
 		private:
 			

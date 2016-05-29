@@ -96,6 +96,7 @@ class AndroidBuildTool
 		}
 		
 		buildHXML += "-D android\n";
+		buildHXML += "-D java\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		

@@ -28,13 +28,13 @@ namespace geoff
 		glClear( GL_COLOR_BUFFER_BIT );
 	}
 	
-	int GeoffRenderer::compileShader( ::String vsSource, ::String fsSource )
+	int GeoffRenderer::compileShader( ::String* vsSource, ::String* fsSource )
 	{
 		GLint status = 0;
 		
 		GLuint vs = glCreateShader( GL_VERTEX_SHADER );
-		const char* vsSourceCStr = vsSource.__CStr();
-		glShaderSource( vs, 1, &vsSourceCStr, &vsSource.length );
+		const char* vsSourceCStr = vsSource->__CStr();
+		glShaderSource( vs, 1, &vsSourceCStr, &(vsSource->length) );
 		glCompileShader( vs );
 		glGetShaderiv( vs, GL_COMPILE_STATUS, &status );
 		
@@ -46,8 +46,8 @@ namespace geoff
 		}
 		
 		GLuint fs = glCreateShader( GL_FRAGMENT_SHADER );
-		const char* fsSourceCStr = fsSource.__CStr();
-		glShaderSource( fs, 1, &fsSourceCStr, &fsSource.length );
+		const char* fsSourceCStr = fsSource->__CStr();
+		glShaderSource( fs, 1, &fsSourceCStr, &(fsSource->length) );
 		glCompileShader( fs );
 		glGetShaderiv( vs, GL_COMPILE_STATUS, &status );
 		
@@ -56,7 +56,7 @@ namespace geoff
 			// There was a problem compiling the fragment shader
 			glDeleteShader( vs );
 			glDeleteShader( fs );
-			return 2;
+			return -2;
 		}
 		
 		GLuint program = glCreateProgram();
@@ -72,7 +72,7 @@ namespace geoff
 		{
 			// There was a problem linking the shader
 			glDeleteProgram( program );
-			return -3;
+			return -5;
 		}		
 		
 		return program;
@@ -87,6 +87,41 @@ namespace geoff
 		_setupViewport( w, h, false );
 		glEnable( GL_BLEND );
 		glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+	}
+	
+	
+	void GeoffRenderer::renderBatch( geoff::renderer::RenderBatch batch )
+	{
+		//void* vertices = batch->getRawVertices();
+		glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
+		glBufferData( GL_ARRAY_BUFFER, batch->vertices->length * 4, &(batch->vertices[0]), GL_STREAM_DRAW );
+		
+		//void* indexes = batch->getRawIndexes();
+		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
+		glBufferData( GL_ELEMENT_ARRAY_BUFFER, batch->indexes->length * 4, &(batch->indexes[0]), GL_STREAM_DRAW );
+		
+		glUseProgram( batch->shader->program );
+		
+		int projectionUniform = glGetUniformLocation( batch->shader->program, "uProjectionMatrix" );
+		glUniformMatrix4fv( projectionUniform, 1, GL_FALSE, _projection );
+				
+		int vertexAttribute = glGetAttribLocation( batch->shader->program, "aVertexPosition" );
+		glEnableVertexAttribArray( vertexAttribute );
+		glVertexAttribPointer( vertexAttribute, 2, GL_FLOAT, GL_FALSE, 0, 0 );
+				
+		glDrawElements( GL_TRIANGLES, batch->indexes->length, GL_UNSIGNED_INT, 0 );
+		
+		glDisableVertexAttribArray( vertexAttribute );
+		glUseProgram( 0 );
+		glBindBuffer( GL_ARRAY_BUFFER, 0 );
+		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+		
+	}
+	
+	
+	int GeoffRenderer::getError()
+	{
+		return glGetError();
 	}
 	
 	/**

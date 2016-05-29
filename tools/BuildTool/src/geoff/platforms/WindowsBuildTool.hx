@@ -92,6 +92,7 @@ class WindowsBuildTool
 		buildHXML += "-D static_link\n";
 		buildHXML += "-D HX_WINDOWS\n";
 		buildHXML += "-D ABI=-MD\n";
+		buildHXML += "-D cplusplus\n";
 		//buildHXML += "-dce no\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );

@@ -27,7 +27,7 @@ class Shader
 	public var attributes : Array<ShaderAttribute>;
 	public var fragmentSource : String;
 	public var vertexSource : String;
-	public var glProgram : Int;
+	public var program : Int;
 	public var vertexSize : Int;
 	
 	

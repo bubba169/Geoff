@@ -1,4 +1,6 @@
 package geoff.renderer;
+import geoff.utils.BytesHelper;
+import haxe.io.BytesData;
 
 /**
  * ...
@@ -8,7 +10,7 @@ class RenderBatch
 {
 
 	public var vertices : Array<Float>;
-	public var indices : Array<Int>;
+	public var indexes : Array<Int>;
 	public var shader : Shader;
 	public var textures : Array<Texture>;
 	public var started : Bool = false;
@@ -21,7 +23,7 @@ class RenderBatch
 	public function reset() : Void 
 	{
 		vertices = [];
-		indices = [];
+		indexes = [];
 		textures = null;
 		shader = null;
 	}
@@ -42,5 +44,18 @@ class RenderBatch
 		
 		return true;
 	}
+	
+	
+	#if cplusplus
+	public function getRawVertices( ) : BytesData
+	{
+		return BytesHelper.toFloatBytes( vertices ).getData();
+	}
+	
+	public function getRawIndexes( ) : BytesData
+	{
+		return BytesHelper.toIntBytes( indexes ).getData();
+	}
+	#end
 	
 }
