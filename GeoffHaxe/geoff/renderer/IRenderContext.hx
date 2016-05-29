@@ -10,7 +10,7 @@ interface IRenderContext
 	
 	public function compileShader( vs : String, fs : String ) : Int;
 	
-	public function beginRender( width : Float, height : Float ) : Void;
+	public function beginRender( width : Int, height : Int ) : Void;
 	public function renderBatch( batch : RenderBatch ) : Void;
 	public function endRender( ) : Void;
 	

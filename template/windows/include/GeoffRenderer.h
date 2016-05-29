@@ -23,7 +23,7 @@ namespace geoff
 			void clear( float r, float g, float b, float a );
 			int compileShader( ::String vsSource, ::String fsSource );
 			
-			void beginRender( float w, float h );
+			void beginRender( int w, int h );
 			void renderBatch( geoff::renderer::RenderBatch batch );
 			void endRender();
 			
@@ -34,6 +34,12 @@ namespace geoff
 			
 			GLuint _vertexBuffer;
 			GLuint _indexBuffer;
+			
+			int _w;
+			int _h;
+			
+			void _setupViewport( int w, int h, bool flipY );
+			float _projection[16];
 		
 	};
 };

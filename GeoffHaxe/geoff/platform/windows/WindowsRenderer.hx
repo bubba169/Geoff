@@ -40,7 +40,7 @@ class WindowsRenderer implements IRenderContext
 	 * Render
 	 */
 	
-	public function beginRender( width : Float, height : Float ) : Void
+	public function beginRender( width : Int, height : Int ) : Void
 	{
 	}
 	

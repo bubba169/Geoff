@@ -7,6 +7,13 @@ namespace geoff
 	{
 		glGenBuffers( 1, &_vertexBuffer );
 		glGenBuffers( 1, &_indexBuffer );
+		
+		// Setup projection matrix
+		for ( int i = 0; i < 16; i++ )
+		{
+			_projection[i] = 0;
+		}
+		_projection[15] = 1;
 	}
 	
 	GeoffRenderer::~GeoffRenderer()
@@ -70,4 +77,35 @@ namespace geoff
 		
 		return program;
 	}
+	
+	
+	void GeoffRenderer::beginRender( int w, int h )
+	{
+		_w = w;
+		_h = h;		
+		
+		_setupViewport( w, h, false );
+		glEnable( GL_BLEND );
+		glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+	}
+	
+	/**
+	 * Privates
+	 */
+	
+	void GeoffRenderer::_setupViewport( int w, int h, bool flipY )
+	{
+		glViewport( 0, 0, w, h );
+		
+		float sx = 1.0 / w;
+		float sy = (1.0 / h) * ((flipY)?-1:1);
+		
+		_projection[0] = 2.0 * sx;
+		_projection[5] = 2.0 * sy;
+		_projection[10] = -2.0 * 0.5;
+		_projection[12] = -w * sx;
+		_projection[13] = -h * sy;
+		
+	}
+	
 }
