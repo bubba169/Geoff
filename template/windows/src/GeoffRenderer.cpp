@@ -35,7 +35,7 @@ namespace geoff
 		{
 			// There was a problem compiling the vertex shader
 			glDeleteShader( vs );
-			return 0;
+			return -1;
 		}
 		
 		GLuint fs = glCreateShader( GL_FRAGMENT_SHADER );
@@ -49,7 +49,7 @@ namespace geoff
 			// There was a problem compiling the fragment shader
 			glDeleteShader( vs );
 			glDeleteShader( fs );
-			return 0;
+			return 2;
 		}
 		
 		GLuint program = glCreateProgram();
@@ -65,7 +65,7 @@ namespace geoff
 		{
 			// There was a problem linking the shader
 			glDeleteProgram( program );
-			return 0;
+			return -3;
 		}		
 		
 		return program;
