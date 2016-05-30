@@ -14,6 +14,9 @@ class AppEngine extends AppDelegate
 {
 	var shader : Int;
 	var batch:RenderBatch;
+	
+	var _width : Int = 640;
+	var _height : Int = 480;
 
 	public function new() 
 	{
@@ -22,9 +25,6 @@ class AppEngine extends AppDelegate
 	
 	override public function init( renderer : IRenderContext ) 
 	{
-		/*gl.clearColor( 1, 1, 0, 1 );
-		vertexBuffer = gl.createBuffer();
-		indexBuffer = gl.createBuffer();*/
 		
 		var vsSource : String = "";
 		vsSource += "attribute vec2 aVertexPosition;";
@@ -39,7 +39,6 @@ class AppEngine extends AppDelegate
 		fsSource += "	gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);";
 		fsSource += "}";	
 		
-		//trace( renderer.compileShader( vsSource, fsSource ) );
 		var shader : Shader = new Shader( vsSource, fsSource, [] );
 		shader.program = renderer.compileShader( vsSource, fsSource );
 		
@@ -48,55 +47,25 @@ class AppEngine extends AppDelegate
 		batch = new RenderBatch();
 		batch.shader = shader;
 		batch.vertices = [
-			100, 0,
-			0, 100,
-			200, 100
+			200, 0,
+			100, 100,
+			300, 100
 		];
 		batch.indexes = [ 0, 1, 2 ];
-			
-		
-		/*
-		vertexShader = gl.createShader( GLShaderType.VertexShader );
-		gl.shaderSource( vertexShader, vsSource );
-		gl.compileShader( vertexShader );
-		
-		fragmentShader = gl.createShader( GLShaderType.FragmentShader );
-		gl.shaderSource( fragmentShader, fsSource );
-		gl.compileShader( fragmentShader );
-		
-		program = gl.createProgram();
-		gl.attachShader( program, vertexShader );
-		gl.attachShader( program, fragmentShader );
-		gl.linkProgram( program );
-		
-		gl.useProgram( program );
-		
-		var vertexData : Array<Float> = [
-			100, 0,
-			0, 100,
-			200, 100
-		];
-		
-		var indexData : Array<Int> = [
-			0, 1, 2
-		];
-		
-		gl.bindBuffer( GLBufferTarget.ArrayBuffer, vertexBuffer );
-		gl.bufferData( GLBufferTarget.ArrayBuffer, BytesHelper.toFloatBytes( vertexData ), GLBufferUsage.StreamDraw );
-		gl.bindBuffer( GLBufferTarget.ArrayBuffer, null );
-		
-		gl.bindBuffer( GLBufferTarget.ElementArrayBuffer, indexBuffer );
-		gl.bufferData( GLBufferTarget.ElementArrayBuffer, BytesHelper.toIntBytes( indexData ), GLBufferUsage.StreamDraw );
-		gl.bindBuffer( GLBufferTarget.ElementArrayBuffer, null );*/
 		
 	}
 	
 	override public function update( renderer : IRenderContext ) 
 	{
 		renderer.clear();
+		renderer.beginRender( _width, _height );
 		renderer.renderBatch( batch );
-		
-		trace( renderer.getError() );
+	}
+	
+	override public function resize(width:Int, height:Int) 
+	{
+		_width = width;
+		_height = height;
 	}
 	
 }

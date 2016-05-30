@@ -41,7 +41,15 @@ class App
 	
 	public function update()
 	{
+		platform.eventManager.handleEvents( delegate );		
 		delegate.update( platform.renderer );
 	}
+	
+	public function destroy()
+	{
+		delegate.destroy( );
+		platform.renderer.destroy();
+	}
+	
 	
 }

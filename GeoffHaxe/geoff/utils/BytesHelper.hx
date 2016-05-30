@@ -21,10 +21,10 @@ class BytesHelper
 	
 	public static function toIntBytes( array : Array<Int> ) : Bytes
 	{
-		var bytes : Bytes = Bytes.alloc( array.length * 4 );
+		var bytes : Bytes = Bytes.alloc( array.length * 2 );
 		for ( i in 0...array.length ) 
 		{
-			bytes.setFloat( i * 4, array[i] );
+			bytes.setUInt16( i * 2, array[i] );
 		}
 		
 		return bytes;

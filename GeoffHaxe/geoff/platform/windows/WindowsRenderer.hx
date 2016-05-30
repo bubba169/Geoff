@@ -14,15 +14,21 @@ class WindowsRenderer implements IRenderContext
 {
 
 	public var clearColor : Color = Color.BLACK;
-	public var _internalRenderer : GeoffRenderer;
+	public var _internalRenderer : cpp.Pointer<GeoffRenderer>;
 	
 	public function new() 
 	{
+		untyped __cpp__("_internalRenderer = new GeoffRenderer()");
+	}
+	
+	public function destroy() 
+	{
+		untyped __cpp__("delete _internalRenderer");
 	}
 	
 	public function clear() : Void
 	{
-		_internalRenderer.clear( clearColor.r / 255, clearColor.g / 255, clearColor.b / 255, clearColor.a );
+		_internalRenderer.get_ref().clear( clearColor.r / 255, clearColor.g / 255, clearColor.b / 255, clearColor.a );
 	}
 	
 	
@@ -32,7 +38,7 @@ class WindowsRenderer implements IRenderContext
 	
 	public function compileShader( vs : String, fs : String ) : Int
 	{
-		return _internalRenderer.compileShader( cpp.Pointer.addressOf( vs ), cpp.Pointer.addressOf( fs ) );
+		return _internalRenderer.get_ref().compileShader( cpp.Pointer.addressOf( vs ), cpp.Pointer.addressOf( fs ) );
 	}	
 	
 	
@@ -42,12 +48,12 @@ class WindowsRenderer implements IRenderContext
 	
 	public function beginRender( width : Int, height : Int ) : Void
 	{
-		_internalRenderer.beginRender( width, height );
+		_internalRenderer.get_ref().beginRender( width, height );
 	}
 	
 	public function renderBatch( batch : RenderBatch ) : Void
 	{
-		_internalRenderer.renderBatch( batch );
+		_internalRenderer.get_ref().renderBatch( batch );
 	}
 	
 	public function endRender( ) : Void
@@ -56,7 +62,7 @@ class WindowsRenderer implements IRenderContext
 	
 	public function getError() : Int
 	{
-		return _internalRenderer.getError();
+		return _internalRenderer.get_ref().getError();
 	}
 	
 	

@@ -11,10 +11,10 @@ import geoff.renderer.Texture;
 @:unreflective
 @:include("GeoffRenderer.h")
 @:native("geoff::GeoffRenderer")
+
 extern class GeoffRenderer
 {
 	public function clear( r : Float, g : Float, b : Float, a : Float ) : Void;
-	
 	public function compileShader( vs : cpp.Pointer<String>, fs : cpp.Pointer<String> ) : Int;
 	
 	public function beginRender( width : Int, height : Int ) : Void;

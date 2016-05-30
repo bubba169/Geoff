@@ -43,6 +43,8 @@ namespace geoff
 			
 			void _setupViewport( int w, int h, bool flipY );
 			float _projection[16];
+			
+			int _id;
 		
 	};
 };

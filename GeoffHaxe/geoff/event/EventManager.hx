@@ -1,4 +1,5 @@
 package geoff.event;
+import geoff.AppDelegate;
 import geoff.event.Event;
 import geoff.event.ResizeEvent;
 
@@ -25,6 +26,19 @@ class EventManager
 				trace( "Resize", data[0], data[1] );
 				_eventsQueue.push( new ResizeEvent( ResizeEvent.RESIZE, data[0], data[1] ) );
 				
+		}
+	}
+	
+	public function handleEvents( delegate : AppDelegate ) : Void
+	{
+		for ( event in _eventsQueue )
+		{
+			switch( event.type )
+			{
+				case ResizeEvent.RESIZE:
+					var resizeEvent : ResizeEvent = cast event;
+					delegate.resize( resizeEvent.width, resizeEvent.height );
+			}
 		}
 	}
 	

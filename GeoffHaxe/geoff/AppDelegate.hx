@@ -23,4 +23,14 @@ class AppDelegate
 	{
 		
 	}
+	
+	public function destroy()
+	{
+		
+	}
+	
+	public function resize( width : Int, height : Int )
+	{
+		
+	}
 }

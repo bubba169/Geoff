@@ -60,6 +60,7 @@ int main( void )
 		glfwPollEvents();
 	}
 
+	geoff_app->destroy();
 	glfwTerminate();
 
 	return 0;

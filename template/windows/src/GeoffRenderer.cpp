@@ -14,6 +14,8 @@ namespace geoff
 			_projection[i] = 0;
 		}
 		_projection[15] = 1;
+		
+		_id = rand() % 1000;
 	}
 	
 	GeoffRenderer::~GeoffRenderer()
@@ -84,7 +86,7 @@ namespace geoff
 		_w = w;
 		_h = h;		
 		
-		_setupViewport( w, h, false );
+		_setupViewport( w, h, true );
 		glEnable( GL_BLEND );
 		glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
 	}
@@ -92,24 +94,24 @@ namespace geoff
 	
 	void GeoffRenderer::renderBatch( geoff::renderer::RenderBatch batch )
 	{
-		//void* vertices = batch->getRawVertices();
+		float* vertices = (float*)&(batch->getRawVertices()[0]);
 		glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
-		glBufferData( GL_ARRAY_BUFFER, batch->vertices->length * 4, &(batch->vertices[0]), GL_STREAM_DRAW );
+		glBufferData( GL_ARRAY_BUFFER, batch->vertices->length * 4, vertices, GL_STREAM_DRAW );
 		
-		//void* indexes = batch->getRawIndexes();
+		unsigned short* indexes = (unsigned short*)&(batch->getRawIndexes()[0]);
 		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
-		glBufferData( GL_ELEMENT_ARRAY_BUFFER, batch->indexes->length * 4, &(batch->indexes[0]), GL_STREAM_DRAW );
+		glBufferData( GL_ELEMENT_ARRAY_BUFFER, batch->indexes->length * 2, indexes, GL_STREAM_DRAW );
 		
-		glUseProgram( batch->shader->program );
+		glUseProgram( batch->shader->program );		
 		
 		int projectionUniform = glGetUniformLocation( batch->shader->program, "uProjectionMatrix" );
 		glUniformMatrix4fv( projectionUniform, 1, GL_FALSE, _projection );
 				
 		int vertexAttribute = glGetAttribLocation( batch->shader->program, "aVertexPosition" );
 		glEnableVertexAttribArray( vertexAttribute );
-		glVertexAttribPointer( vertexAttribute, 2, GL_FLOAT, GL_FALSE, 0, 0 );
+		glVertexAttribPointer( vertexAttribute, 2, GL_FLOAT, GL_FALSE, 8, 0 );
 				
-		glDrawElements( GL_TRIANGLES, batch->indexes->length, GL_UNSIGNED_INT, 0 );
+		glDrawElements( GL_TRIANGLES, batch->indexes->length, GL_UNSIGNED_SHORT, 0 );
 		
 		glDisableVertexAttribArray( vertexAttribute );
 		glUseProgram( 0 );
@@ -130,17 +132,18 @@ namespace geoff
 	
 	void GeoffRenderer::_setupViewport( int w, int h, bool flipY )
 	{
+		
 		glViewport( 0, 0, w, h );
 		
-		float sx = 1.0 / w;
-		float sy = (1.0 / h) * ((flipY)?-1:1);
+		float sx = 1.0f / w;
+		float sy = (1.0f / h) * ((flipY)?-1:1);
 		
-		_projection[0] = 2.0 * sx;
-		_projection[5] = 2.0 * sy;
-		_projection[10] = -2.0 * 0.5;
+		_projection[0] = 2.0f * sx;
+		_projection[5] = 2.0f * sy;
+		_projection[10] = -2.0f * 0.5f;
 		_projection[12] = -w * sx;
 		_projection[13] = -h * sy;
-		
+				
 	}
 	
 }
