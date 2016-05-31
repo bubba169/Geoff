@@ -28,18 +28,24 @@ class AppEngine extends AppDelegate
 		
 		var vsSource : String = "";
 		vsSource += "attribute vec2 aVertexPosition;";
+		vsSource += "attribute vec4 aVertexColor;";
 		vsSource += "uniform mat4 uProjectionMatrix;";
-		
+		vsSource += "varying vec4 vVertexColor;";
 		vsSource += "void main(void) {";
 		vsSource += "    gl_Position = uProjectionMatrix * vec4(aVertexPosition, 1.0, 1.0);";
+		vsSource += "    vVertexColor = aVertexColor;";
 		vsSource += "}";
 		
 		var fsSource : String = "";
+		fsSource += "varying vec4 vVertexColor;";
 		fsSource += "void main(void) {";
-		fsSource += "	gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);";
+		fsSource += "	gl_FragColor = vVertexColor;";
 		fsSource += "}";	
 		
-		var shader : Shader = new Shader( vsSource, fsSource, [] );
+		var shader : Shader = new Shader( vsSource, fsSource, [
+			new ShaderAttribute( "aVertexPosition", 0, 2 ),
+			new ShaderAttribute( "aVertexColor", 2, 4 )
+		]);
 		shader.program = renderer.compileShader( vsSource, fsSource );
 		
 		trace( shader.program );
@@ -47,9 +53,9 @@ class AppEngine extends AppDelegate
 		batch = new RenderBatch();
 		batch.shader = shader;
 		batch.vertices = [
-			200, 0,
-			100, 100,
-			300, 100
+			200, 0, 1, 1, 1, 1,
+			100, 100, 0, 1, 1, 1,
+			300, 100, 1, 0, 0, 1
 		];
 		batch.indexes = [ 0, 1, 2 ];
 		

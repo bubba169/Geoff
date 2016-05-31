@@ -106,18 +106,34 @@ namespace geoff
 		
 		int projectionUniform = glGetUniformLocation( batch->shader->program, "uProjectionMatrix" );
 		glUniformMatrix4fv( projectionUniform, 1, GL_FALSE, _projection );
-				
-		int vertexAttribute = glGetAttribLocation( batch->shader->program, "aVertexPosition" );
-		glEnableVertexAttribArray( vertexAttribute );
-		glVertexAttribPointer( vertexAttribute, 2, GL_FLOAT, GL_FALSE, 8, 0 );
+		
+		int* attribs = new int[ batch->shader->attributes->length ];
+		for ( int i = 0; i < batch->shader->attributes->length; ++i )
+		{
+			geoff::renderer::ShaderAttribute attribute = batch->shader->attributes[i];
+			int vertexAttribute = glGetAttribLocation( batch->shader->program, attribute->name.__CStr() );
+			int offset = (attribute->start) * 4;
+			glEnableVertexAttribArray( vertexAttribute );
+			glVertexAttribPointer( vertexAttribute, attribute->size, GL_FLOAT, GL_FALSE, batch->shader->vertexSize * 4, (void*)offset );
+			attribs[i] = vertexAttribute;
+		}
 				
 		glDrawElements( GL_TRIANGLES, batch->indexes->length, GL_UNSIGNED_SHORT, 0 );
 		
-		glDisableVertexAttribArray( vertexAttribute );
+		for ( int i = 0; i < batch->shader->attributes->length; ++i )
+		{
+			glDisableVertexAttribArray( attribs[i] );
+		}
+		
 		glUseProgram( 0 );
 		glBindBuffer( GL_ARRAY_BUFFER, 0 );
 		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+		delete[] attribs;
 		
+	}
+	
+	void GeoffRenderer::endRender()
+	{
 	}
 	
 	

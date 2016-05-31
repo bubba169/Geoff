@@ -9,6 +9,7 @@
 #include <hxcpp.h>
 #include <geoff/renderer/RenderBatch.h>
 #include <geoff/renderer/Shader.h>
+#include <geoff/renderer/ShaderAttribute.h>
 #include <geoff/renderer/Texture.h>
 
 namespace geoff
