@@ -12,6 +12,7 @@
 	<target id="default" output="hello" tool="linker" toolid="exe">
 		
 		<flag value="/NODEFAULTLIB:LIBCMT" />
+		<lib name="DevIL.lib"/>
 		<lib name="glfw3.lib"/>
 		<lib name="glew32s.lib"/>
 		<lib name="gdi32.lib" />
