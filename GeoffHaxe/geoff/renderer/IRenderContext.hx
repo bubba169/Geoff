@@ -19,4 +19,6 @@ interface IRenderContext
 	
 	public function getError() : Int;
 	
+	public function createTexture( path : String ) : Texture;
+	
 }

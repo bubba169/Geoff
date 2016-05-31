@@ -79,5 +79,17 @@ class WindowsRenderer implements IRenderContext
 	}
 	
 	
+	/**
+	 * Texture
+	 */
+	
+	public function createTexture( path : String ) : Texture 
+	{
+		var texture : Texture = new Texture( path );
+		_internalRenderer.get_ref().createTexture( cpp.Pointer.addressOf(path), texture );
+		return texture;
+	}
+	
+	
 	
 }

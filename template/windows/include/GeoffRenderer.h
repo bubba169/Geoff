@@ -6,6 +6,8 @@
 #include <glew/glew.h>
 #include <glfw/glfw3.h>
 
+#include <IL/il.h>
+
 #include <hxcpp.h>
 #include <geoff/renderer/RenderBatch.h>
 #include <geoff/renderer/Shader.h>
@@ -31,6 +33,8 @@ namespace geoff
 			
 			void pushRenderTarget( geoff::renderer::Texture texture );
 			void popRenderTarget( );
+			
+			void createTexture( ::String* path, geoff::renderer::Texture );
 			
 			int getError();
 			

@@ -142,6 +142,35 @@ namespace geoff
 		return glGetError();
 	}
 	
+	
+	void GeoffRenderer::createTexture( ::String* filepath, geoff::renderer::Texture texture )
+	{
+		unsigned int imageName;
+		ilGenImages( 1, &imageName );
+		ilBindImage( imageName );		
+		ilLoadImage( filepath->__CStr() );
+		
+		texture->width = ilGetInteger( IL_IMAGE_WIDTH );
+		texture->height = ilGetInteger( IL_IMAGE_HEIGHT );
+		
+		glGenTextures( 1, (GLuint*)&(texture->id) );
+		glBindTexture( GL_TEXTURE_2D, texture->id );
+		
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+		
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, ilGetData() );
+		
+		/*glBindTexture( GL_TEXTURE_2D, 0 );*/
+		
+		ilBindImage(0);
+		ilDeleteImages( 1, &imageName );
+		
+	}
+	
+	
 	/**
 	 * Privates
 	 */

@@ -26,4 +26,6 @@ extern class GeoffRenderer
 	
 	public function getError() : Int;
 	
+	public function createTexture( path : cpp.Pointer<String>, texture : Texture ) : Void;
+	
 }

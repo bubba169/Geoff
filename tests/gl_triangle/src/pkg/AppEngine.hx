@@ -4,6 +4,7 @@ import geoff.AppDelegate;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.renderer.Shader;
+import geoff.renderer.Texture;
 import geoff.utils.BytesHelper;
 
 /**
@@ -58,6 +59,10 @@ class AppEngine extends AppDelegate
 			300, 100, 1, 0, 0, 1
 		];
 		batch.indexes = [ 0, 1, 2 ];
+		
+		
+		var texture : Texture = renderer.createTexture( "D:/category.png" );
+		trace( texture.width, texture.height );
 		
 	}
 	

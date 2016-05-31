@@ -46,7 +46,6 @@ int main( void )
 	glfwMakeContextCurrent(window);
 	
 	glewInit();
-	
 	ilInit();
 	
 	hxcpp_set_top_of_stack();
