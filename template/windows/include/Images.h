@@ -8,7 +8,7 @@ namespace geoff
 	class Images
 	{
 		getImageBytes( ::String filepath, void* byteArray, int& size );
-	}
-}
+	};
+};
 
 #endif
