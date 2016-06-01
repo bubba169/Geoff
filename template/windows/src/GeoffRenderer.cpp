@@ -107,6 +107,21 @@ namespace geoff
 		int projectionUniform = glGetUniformLocation( batch->shader->program, "uProjectionMatrix" );
 		glUniformMatrix4fv( projectionUniform, 1, GL_FALSE, _projection );
 		
+
+		for ( int i = 0; i < batch->textures->length; ++i ) {
+
+			char texName[50];
+			snprintf( texName, 50, "uTexture%i", 1);
+			
+			int uTexture = glGetUniformLocation( batch->shader->program, texName );
+			glActiveTexture( GL_TEXTURE0 + i );
+						
+			glBindTexture( GL_TEXTURE_2D, ((geoff::renderer::Texture)(batch->textures[i]))->id );
+			glUniform1i( uTexture, i );
+			
+		}
+		
+		
 		int* attribs = new int[ batch->shader->attributes->length ];
 		for ( int i = 0; i < batch->shader->attributes->length; ++i )
 		{
@@ -123,6 +138,13 @@ namespace geoff
 		for ( int i = 0; i < batch->shader->attributes->length; ++i )
 		{
 			glDisableVertexAttribArray( attribs[i] );
+		}
+		
+		if ( batch->textures.mPtr ) {
+			for ( int i = 0; i < batch->textures->length; ++i ) {
+				glActiveTexture( GL_TEXTURE0 + i );
+				glBindTexture( GL_TEXTURE_2D, 0 );
+			}
 		}
 		
 		glUseProgram( 0 );
@@ -161,12 +183,15 @@ namespace geoff
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 		
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, ilGetData() );
+		char* buffer = new char[texture->width * texture->height * 4];	
+		ilCopyPixels( 0, 0, 0, texture->width, texture->height, 1, IL_RGBA, IL_UNSIGNED_BYTE, buffer );
 		
-		/*glBindTexture( GL_TEXTURE_2D, 0 );*/
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer );
 		
+		glBindTexture( GL_TEXTURE_2D, 0 );
 		ilBindImage(0);
 		ilDeleteImages( 1, &imageName );
+		delete[] buffer;
 		
 	}
 	

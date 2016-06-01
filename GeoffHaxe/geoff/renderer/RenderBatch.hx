@@ -24,7 +24,7 @@ class RenderBatch
 	{
 		vertices = [];
 		indexes = [];
-		textures = null;
+		textures = [];
 		shader = null;
 	}
 	

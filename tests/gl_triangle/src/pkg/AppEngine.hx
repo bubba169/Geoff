@@ -29,23 +29,26 @@ class AppEngine extends AppDelegate
 		
 		var vsSource : String = "";
 		vsSource += "attribute vec2 aVertexPosition;";
-		vsSource += "attribute vec4 aVertexColor;";
+		vsSource += "attribute vec2 aVertexUV;";
 		vsSource += "uniform mat4 uProjectionMatrix;";
-		vsSource += "varying vec4 vVertexColor;";
+		vsSource += "varying vec2 vVertexUV;";
 		vsSource += "void main(void) {";
 		vsSource += "    gl_Position = uProjectionMatrix * vec4(aVertexPosition, 1.0, 1.0);";
-		vsSource += "    vVertexColor = aVertexColor;";
+		vsSource += "    vVertexUV = aVertexUV;";
 		vsSource += "}";
 		
 		var fsSource : String = "";
-		fsSource += "varying vec4 vVertexColor;";
+		fsSource += "varying vec2 vVertexUV;";
+		fsSource += "uniform sampler2D uTexture0;";
 		fsSource += "void main(void) {";
-		fsSource += "	gl_FragColor = vVertexColor;";
+		fsSource += "	vec4 texColor = texture2D( uTexture0, vVertexUV );";
+		fsSource += "	texColor.rgb = texColor.rgb * texColor.a;";
+		fsSource += "	gl_FragColor = texColor;";
 		fsSource += "}";	
 		
 		var shader : Shader = new Shader( vsSource, fsSource, [
 			new ShaderAttribute( "aVertexPosition", 0, 2 ),
-			new ShaderAttribute( "aVertexColor", 2, 4 )
+			new ShaderAttribute( "aVertexUV", 2, 2 )
 		]);
 		shader.program = renderer.compileShader( vsSource, fsSource );
 		
@@ -54,15 +57,17 @@ class AppEngine extends AppDelegate
 		batch = new RenderBatch();
 		batch.shader = shader;
 		batch.vertices = [
-			200, 0, 1, 1, 1, 1,
-			100, 100, 0, 1, 1, 1,
-			300, 100, 1, 0, 0, 1
+			320, 0, 0.5, 0,
+			0, 480, 0, 1,
+			640, 480, 1, 1
 		];
 		batch.indexes = [ 0, 1, 2 ];
 		
 		
-		var texture : Texture = renderer.createTexture( "D:/category.png" );
+		var texture : Texture = renderer.createTexture( "C:/testtest/bug.png" );
 		trace( texture.width, texture.height );
+		
+		batch.textures.push( texture );
 		
 	}
 	

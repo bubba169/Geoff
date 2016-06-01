@@ -13,7 +13,7 @@ import geoff.utils.Color;
 class WindowsRenderer implements IRenderContext
 {
 
-	public var clearColor : Color = Color.BLACK;
+	public var clearColor : Color = Color.RED;
 	public var _internalRenderer : cpp.Pointer<GeoffRenderer>;
 	
 	public function new() 
@@ -74,7 +74,7 @@ class WindowsRenderer implements IRenderContext
 	{
 	}
 	
-	public function popRenderTarget( ) : Void 
+	public function popRenderTarget( ) : Void
 	{
 	}
 	
