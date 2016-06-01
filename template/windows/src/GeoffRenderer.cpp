@@ -14,6 +14,7 @@ namespace geoff
 			_projection[i] = 0;
 		}
 		_projection[15] = 1;
+		_projection[10] = -1;
 		
 		_id = rand() % 1000;
 	}
@@ -123,19 +124,24 @@ namespace geoff
 		
 		
 		int* attribs = new int[ batch->shader->attributes->length ];
+		int attribCounter = 0;
 		for ( int i = 0; i < batch->shader->attributes->length; ++i )
 		{
 			geoff::renderer::ShaderAttribute attribute = batch->shader->attributes[i];
 			int vertexAttribute = glGetAttribLocation( batch->shader->program, attribute->name.__CStr() );
-			int offset = (attribute->start) * 4;
-			glEnableVertexAttribArray( vertexAttribute );
-			glVertexAttribPointer( vertexAttribute, attribute->size, GL_FLOAT, GL_FALSE, batch->shader->vertexSize * 4, (void*)offset );
-			attribs[i] = vertexAttribute;
+			
+			if ( vertexAttribute != -1 ) {
+				int offset = (attribute->start) * 4;
+				glEnableVertexAttribArray( vertexAttribute );
+				glVertexAttribPointer( vertexAttribute, attribute->size, GL_FLOAT, GL_FALSE, batch->shader->vertexSize * 4, (void*)offset );
+				attribs[attribCounter] = vertexAttribute;
+				attribCounter++;
+			}
 		}
 				
 		glDrawElements( GL_TRIANGLES, batch->indexes->length, GL_UNSIGNED_SHORT, 0 );
 		
-		for ( int i = 0; i < batch->shader->attributes->length; ++i )
+		for ( int i = 0; i < attribCounter; ++i )
 		{
 			glDisableVertexAttribArray( attribs[i] );
 		}
@@ -210,7 +216,6 @@ namespace geoff
 		
 		_projection[0] = 2.0f * sx;
 		_projection[5] = 2.0f * sy;
-		_projection[10] = -2.0f * 0.5f;
 		_projection[12] = -w * sx;
 		_projection[13] = -h * sy;
 				

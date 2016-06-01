@@ -81,7 +81,7 @@ class AndroidBuildTool
 		for ( dir in srcArray ) {
 			buildHXML += "-cp " + dir + "\n";
 		}
-		buildHXML += "-cp " + config.geoffpath + "\n";
+		buildHXML += "-cp " + config.geoffpath + "GeoffHaxe\n";
 		var libArray : Array<String> = config.project.haxelib;
 		for ( lib in libArray ) {
 			buildHXML += "-lib " + lib + "\n";
@@ -96,7 +96,8 @@ class AndroidBuildTool
 		}
 		
 		buildHXML += "-D android\n";
-		buildHXML += "-D java\n";
+		buildHXML += "-D geoff_java\n";
+		buildHXML += "-D mobile\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		

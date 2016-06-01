@@ -1,4 +1,5 @@
 package geoff.platform.android;
+import geoff.event.EventManager;
 import geoff.platform.android.AndroidRenderer;
 
 /**
@@ -9,12 +10,12 @@ class AndroidPlatform
 {
 	public var name : String = "Android";
 	
-	public var gl : AndroidRenderer;
-	public var eventManager : AndroidEventManager;
+	public var renderer : AndroidRenderer;
+	public var eventManager : EventManager;
 	
 	public function new()
 	{
-		gl = new AndroidRenderer();
-		eventManager = new AndroidEventManager();
+		renderer = new AndroidRenderer();
+		eventManager = new EventManager();
 	}
 }

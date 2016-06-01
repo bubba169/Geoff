@@ -18,6 +18,11 @@ class WindowsRenderer implements IRenderContext
 	
 	public function new() 
 	{
+		
+	}
+	
+	public function init() : Void 
+	{
 		untyped __cpp__("_internalRenderer = new GeoffRenderer()");
 	}
 	
@@ -25,6 +30,7 @@ class WindowsRenderer implements IRenderContext
 	{
 		untyped __cpp__("delete _internalRenderer");
 	}
+
 	
 	public function clear() : Void
 	{

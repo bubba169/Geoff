@@ -1,13 +1,17 @@
 package geoff.renderer;
+import geoff.utils.Color;
 
 /**
  * @author Simon
  */
 interface IRenderContext 
 {
- 
-	public function clear() : Void;
+	public var clearColor : Color;
 	
+	public function init() : Void;
+	
+	public function clear() : Void;
+
 	public function compileShader( vs : String, fs : String ) : Int;
 	
 	public function beginRender( width : Int, height : Int ) : Void;
@@ -20,5 +24,7 @@ interface IRenderContext
 	public function getError() : Int;
 	
 	public function createTexture( path : String ) : Texture;
+	
+	public function destroy() : Void;
 	
 }

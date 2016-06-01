@@ -1,5 +1,5 @@
 package geoff.renderer;
-import geoff.utils.BytesHelper;
+import geoff.utils.NativeHelper;
 import haxe.io.BytesData;
 
 /**
@@ -46,16 +46,29 @@ class RenderBatch
 	}
 	
 	
-	#if cplusplus
-	public function getRawVertices( ) : BytesData
-	{
-		return BytesHelper.toFloatBytes( vertices ).getData();
-	}
+	#if geoff_cpp
+		public function getRawVertices( ) : BytesData
+		{
+			return NativeHelper.toFloatBytes( vertices ).getData();
+		}
+		
+		public function getRawIndexes( ) : BytesData
+		{
+			return NativeHelper.toIntBytes( indexes ).getData();
+		}
+	#end
 	
-	public function getRawIndexes( ) : BytesData
-	{
-		return BytesHelper.toIntBytes( indexes ).getData();
-	}
+	
+	#if geoff_java
+		public function getRawVertices( ) : java.nio.FloatBuffer
+		{
+			return NativeHelper.toFloatBuffer( vertices );
+		}
+		
+		public function getRawIndexes( ) : java.nio.ShortBuffer
+		{
+			return NativeHelper.toShortBuffer( indexes );
+		}
 	#end
 	
 }

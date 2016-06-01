@@ -8,6 +8,12 @@ import geoff.event.ResizeEvent;
  * @author Simon
  */
  
+#if geoff_java
+	typedef IntArray = java.NativeArray<Int>;
+#else
+	typedef IntArray = Array<Int>;
+#end
+ 
 class EventManager
 {
 
@@ -18,7 +24,7 @@ class EventManager
 		_eventsQueue = new Array<Event>();
 	}
 	
-	public function sendEventInt( event : String, data : Array<Int> )
+	public function sendEventInt( event : String, data : IntArray )
 	{
 		switch( event )
 		{

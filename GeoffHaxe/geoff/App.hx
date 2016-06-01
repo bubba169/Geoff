@@ -36,6 +36,7 @@ class App
 	
 	public function init()
 	{
+		platform.renderer.init();
 		delegate.init( platform.renderer );
 	}
 	
