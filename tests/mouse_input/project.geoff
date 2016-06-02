@@ -1,0 +1,21 @@
+{
+	
+	"name":			"Triangle",
+	"packagename":	"com.example.triangle",
+	"version":		"0.0.1",
+	"main":			"pkg.Main",
+	"src":
+	[
+		"src"
+	],
+	"haxelib":
+	[
+		"geoff"
+	],
+	
+	"android":
+	{
+		"version":	"21"
+	}
+
+}

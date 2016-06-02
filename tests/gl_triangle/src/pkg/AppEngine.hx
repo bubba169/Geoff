@@ -5,6 +5,7 @@ import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.renderer.Shader;
 import geoff.renderer.Texture;
+import geoff.utils.Assets;
 import geoff.utils.NativeHelper;
 
 /**
@@ -70,7 +71,7 @@ class AppEngine extends AppDelegate
 		batch.indexes = [ 0, 1, 2 ];
 		
 		
-		var texture : Texture = renderer.createTexture( "test/bug.png" );
+		var texture : Texture = renderer.createTexture( Assets.getPath( "test/bug.png" ) );
 		trace( texture.width, texture.height );
 		
 		batch.textures.push( texture );

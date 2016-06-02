@@ -25,6 +25,30 @@ void geoff_callback_framebuffer_size( GLFWwindow* window, int width, int height 
 
 }
 
+void geoff_mouse_button_callback( GLFWwindow* window, int button, int action, int mods )
+{
+	double x, y;
+	glfwGetCursorPos( window, &x, &y );
+	
+	Array< int > array = Array_obj< int >::__new();
+	array->push(0);
+	array->push(button);
+	array->push(x);
+	array->push(y);
+	
+	switch( action ) 
+	{
+		case GLFW_PRESS:
+			geoff_app->platform->eventManager->sendEventInt( ::String("PointerDown"), array );
+			break;
+			
+		case GLFW_RELEASE:
+			geoff_app->platform->eventManager->sendEventInt( ::String("PointerUp"), array );
+			break;
+	}
+
+}
+
 /**
  * Main
  */
@@ -43,6 +67,7 @@ int main( void )
 	}
 
 	glfwSetFramebufferSizeCallback( window, geoff_callback_framebuffer_size );	
+	glfwSetMouseButtonCallback( window, geoff_mouse_button_callback );	
 	glfwMakeContextCurrent(window);
 	
 	glewInit();

@@ -32,6 +32,14 @@ class EventManager
 				trace( "Resize", data[0], data[1] );
 				_eventsQueue.push( new ResizeEvent( ResizeEvent.RESIZE, data[0], data[1] ) );
 				
+			case PointerEvent.DOWN:
+				trace( "PointerDown", data[0], data[1], data[2], data[3] );
+				_eventsQueue.push( new PointerEvent( PointerEvent.DOWN, data[0], data[1], data[2], data[3] ) );
+				
+			case PointerEvent.UP:
+				trace( "PointerUp", data[0], data[1], data[2], data[3] );
+				_eventsQueue.push( new PointerEvent( PointerEvent.UP, data[0], data[1], data[2], data[3] ) );
+				
 		}
 	}
 	
@@ -44,6 +52,14 @@ class EventManager
 				case ResizeEvent.RESIZE:
 					var resizeEvent : ResizeEvent = cast event;
 					delegate.resize( resizeEvent.width, resizeEvent.height );
+					
+				case PointerEvent.DOWN:
+					var pointerEvent : PointerEvent = cast event;
+					delegate.onPointerDown( pointerEvent.pointerId, pointerEvent.button, pointerEvent.x, pointerEvent.y );
+					
+				case PointerEvent.UP:
+					var pointerEvent : PointerEvent = cast event;
+					delegate.onPointerUp( pointerEvent.pointerId, pointerEvent.button, pointerEvent.x, pointerEvent.y );
 			}
 		}
 	}

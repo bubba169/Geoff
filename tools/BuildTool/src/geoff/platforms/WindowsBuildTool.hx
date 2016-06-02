@@ -61,6 +61,7 @@ class WindowsBuildTool
 		compileHaxe( binDirectory + "build/" );
 		
 		copyLibs( binDirectory );
+		copyAssets( binDirectory );
 		
 		compileCPP( binDirectory );
 		
@@ -93,6 +94,8 @@ class WindowsBuildTool
 		buildHXML += "-D HX_WINDOWS\n";
 		buildHXML += "-D ABI=-MD\n";
 		buildHXML += "-D geoff_cpp\n";
+		
+		if ( !isDebugBuild() ) buildHXML += "-D no_console\n";
 		//buildHXML += "-dce no\n";
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
@@ -100,6 +103,14 @@ class WindowsBuildTool
 		Sys.setCwd( projectDirectory );
 		Sys.command( "haxe", [ "build.hxml"] );
 		
+	}
+	
+	function copyAssets( binDirectory : String )
+	{
+		if ( FileSystem.exists( projectDirectory + "assets" ) )
+		{
+			DirectoryHelper.copyDirectory( projectDirectory + "assets/", binDirectory + "/project/assets/" );
+		}
 	}
 	
 	function copyLibs( dir : String ) : Void

@@ -2,6 +2,8 @@ package geoff.androidnative;
 
 import android.opengl.GLSurfaceView;
 import android.content.Context;
+import android.view.MotionEvent;
+import android.util.Log;
 
 import geoff.App;
 
@@ -25,4 +27,17 @@ public class GeoffGLView extends GLSurfaceView
 		setRenderer( renderer );
 		
 	}
+	
+	public boolean onTouchEvent( MotionEvent event )
+	{
+		switch( event.getAction() )
+		{
+			case MotionEvent.ACTION_DOWN:
+			case MotionEvent.ACTION_POINTER_DOWN:
+				
+				break;
+		}
+	}
+	
+	
 }
