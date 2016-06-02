@@ -4,8 +4,16 @@ import geoff.utils.Color;
 
 import java.nio.IntBuffer;
 import java.nio.FloatBuffer;
+import java.io.InputStream;
+import java.NativeArray;
 
 import android.opengl.GLES20;
+import android.opengl.GLUtils;
+import android.app.Activity;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 
@@ -30,7 +38,7 @@ class AndroidRenderer implements IRenderContext
 	
 	public function init() : Void
 	{
-		var result : java.NativeArray<Int> = new java.NativeArray<Int>(2);
+		var result : NativeArray<Int> = new NativeArray<Int>(2);
 		GLES20.glGenBuffers( 2, result, 0 );
 		
 		_vertexBuffer = result[0];
@@ -133,6 +141,14 @@ class AndroidRenderer implements IRenderContext
 		var projectionUniform : Int = GLES20.glGetUniformLocation( batch.shader.program, "uProjectionMatrix" );
 		GLES20.glUniformMatrix4fv( projectionUniform, 1, false, _projection );
 				
+		for ( i in 0...batch.textures.length )
+		{
+			var uTexture : Int = GLES20.glGetUniformLocation( batch.shader.program, "uTexture" + i );
+			GLES20.glActiveTexture( GLES20.GL_TEXTURE0 + i );
+			GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, batch.textures[i].id );
+			GLES20.glUniform1i( uTexture, i );
+		}
+		
 		var attribs : Array<Int> = [];
 		for ( attribute in batch.shader.attributes )
 		{
@@ -145,6 +161,12 @@ class AndroidRenderer implements IRenderContext
 		}
 		
 		GLES20.glDrawElements( GLES20.GL_TRIANGLES, batch.indexes.length, GLES20.GL_UNSIGNED_SHORT, 0 );
+		
+		for (i in 0...batch.textures.length )
+		{
+			GLES20.glActiveTexture( GLES20.GL_TEXTURE0 + i );
+			GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, 0 );
+		}
 		
 		for ( attr in attribs )
 		{
@@ -178,9 +200,35 @@ class AndroidRenderer implements IRenderContext
 		
 	}
 	
-	public function createTexture(path:String):Texture 
+	public function createTexture( path : String ):Texture 
 	{
-		return new Texture( path );
+		var texture : Texture = new Texture( path );
+		
+		var assetManager : AssetManager = App.current.platform.nativeActivity.getAssets();
+		var is : InputStream = assetManager.open( path );
+		
+		var bitmap : Bitmap = BitmapFactory.decodeStream( is );
+		is.close();
+		
+		texture.width = bitmap.getWidth();
+		texture.height = bitmap.getHeight();
+		
+		var idBuffer : IntBuffer = IntBuffer.allocate(1);
+		GLES20.glGenTextures( 1, idBuffer );
+		texture.id = idBuffer.get(0);
+		
+		GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, texture.id );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR );
+		
+		GLUtils.texImage2D( GLES20.GL_TEXTURE_2D, 0, bitmap, 0 ); 
+		
+		bitmap.recycle();
+		
+		return texture;
+		
 	}
 	
 	

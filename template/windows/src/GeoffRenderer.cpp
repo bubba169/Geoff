@@ -146,11 +146,10 @@ namespace geoff
 			glDisableVertexAttribArray( attribs[i] );
 		}
 		
-		if ( batch->textures.mPtr ) {
-			for ( int i = 0; i < batch->textures->length; ++i ) {
-				glActiveTexture( GL_TEXTURE0 + i );
-				glBindTexture( GL_TEXTURE_2D, 0 );
-			}
+	
+		for ( int i = 0; i < batch->textures->length; ++i ) {
+			glActiveTexture( GL_TEXTURE0 + i );
+			glBindTexture( GL_TEXTURE_2D, 0 );
 		}
 		
 		glUseProgram( 0 );

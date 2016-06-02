@@ -39,13 +39,19 @@ class AndroidBuildTool
 			"AndroidSDKVersion" => config.project.android.version
 		];	
 		
+		if ( flags.indexOf( "clean" ) > -1 ) {
+			
+		
 		if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
 		
-		// clean any old builds
-		if ( FileSystem.exists( binDirectory ) ) 
-		{
-			trace("Cleaning " + binDirectory );
-			DirectoryHelper.removeDirectory( binDirectory );
+			// clean any old builds
+			if ( FileSystem.exists( binDirectory ) ) 
+			{
+				trace("Cleaning " + binDirectory );
+				DirectoryHelper.removeDirectory( binDirectory );
+			}
+			
+			
 		}
 		
 		// Make the directory
@@ -66,6 +72,7 @@ class AndroidBuildTool
 		
 		//Copy lib to android template
 		copyJar( binDirectory );
+		copyAssets( binDirectory );
 		
 		//Compile with ant
 		compileAndroid();
@@ -118,6 +125,14 @@ class AndroidBuildTool
 		jarName += ".jar";
 		FileSystem.createDirectory( binDirectory + "project/libs" );
 		File.copy( binDirectory + "build/" + jarName, binDirectory + "/project/libs/" + jarName );
+	}
+	
+	function copyAssets( binDirectory : String )
+	{
+		if ( FileSystem.exists( projectDirectory + "assets" ) )
+		{
+			DirectoryHelper.copyDirectory( projectDirectory + "assets/", binDirectory + "/project/assets/" );
+		}
 	}
 	
 	
