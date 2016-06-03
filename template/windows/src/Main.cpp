@@ -49,6 +49,16 @@ void geoff_mouse_button_callback( GLFWwindow* window, int button, int action, in
 
 }
 
+void geoff_mouse_move_callback( GLFWwindow* window, double x, double y )
+{
+	Array< int > array = Array_obj< int >::__new();
+	array->push(0);
+	array->push((int)x);
+	array->push((int)y);
+	
+	geoff_app->platform->eventManager->sendEventInt( ::String("PointerMove"), array );
+}
+
 /**
  * Main
  */
@@ -59,7 +69,7 @@ int main( void )
 
 	if (!glfwInit()) return -1;
 
-	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+	window = glfwCreateWindow({{WindowWidth}}, {{WindowHeight}}, "Hello World", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -68,6 +78,7 @@ int main( void )
 
 	glfwSetFramebufferSizeCallback( window, geoff_callback_framebuffer_size );	
 	glfwSetMouseButtonCallback( window, geoff_mouse_button_callback );	
+	glfwSetCursorPosCallback( window, geoff_mouse_move_callback );	
 	glfwMakeContextCurrent(window);
 	
 	glewInit();
@@ -78,6 +89,8 @@ int main( void )
 
 	geoff_app = geoff::App_obj::current;
 	geoff_app->init();
+	
+	geoff_callback_framebuffer_size( window, {{WindowWidth}}, {{WindowHeight}} );
 
 	while (!glfwWindowShouldClose(window))
 	{

@@ -12,7 +12,12 @@
 	[
 		"geoff"
 	],
-	
+	"window":
+	{
+		"width": "800",
+		"height": "480",
+		"orientation": "landscape"
+	},
 	"android":
 	{
 		"version":	"21"

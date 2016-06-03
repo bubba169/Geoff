@@ -30,7 +30,9 @@ class WindowsBuildTool
 		[
 			"Main" => config.project.main,
 			"Version" => config.project.version,
-			"ProjectName" => config.project.name
+			"ProjectName" => config.project.name,
+			"WindowWidth" => config.project.window.width,
+			"WindowHeight" => config.project.window.height
 		];	
 		
 		if ( flags.indexOf( "clean" ) > -1 ) {

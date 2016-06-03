@@ -16,7 +16,19 @@ class TemplateHelper
 		{
 			if ( !FileSystem.isDirectory( dir + file ) )
 			{
-				if ( file.indexOf(".txt") > -1 || file.indexOf(".xml") > -1 || file.indexOf(".properties") > -1 || file.indexOf(".java") > -1 || file.indexOf(".hx") > -1 )
+				var extensions : Array<String> = [ ".txt", ".xml", ".properties", ".java", ".cpp", ".h", ".hx" ];
+				
+				var shouldProcess = false;
+				for ( extension in extensions )
+				{
+					if ( file.indexOf( extension ) > -1 )
+					{
+						shouldProcess = true;
+						break;
+					}
+				}
+				
+				if ( shouldProcess )
 				{
 					var regex = new EReg( "\\{\\{([^\\}]+)\\}\\}", "g" );
 					var raw = File.getContent( dir + file );
