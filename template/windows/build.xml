@@ -2,6 +2,7 @@
 	
 	<set name="hxcpp_api_level" value="321" />
 	<set name="ABI" value="-MD"/>
+	{{ConsoleSetting}}
 
 	<files id="common">
 		<compilerflag value="-Iinclude" />

@@ -1,11 +1,11 @@
 -cp src
 -cp C:\Users\smorris\Documents\MyProjects\Geoff\GeoffHaxe
 -lib geoff
--cpp bin\windows\build
+-java bin/android/build
+-java-lib C:\Development\AndroidSDK\platforms/android-21/android.jar
+-D java-android
 -main pkg.Main
 -debug
--D windows
--D static_link
--D HX_WINDOWS
--D ABI=-MD
--D geoff_cpp
+-D android
+-D geoff_java
+-D mobile

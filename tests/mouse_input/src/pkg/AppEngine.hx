@@ -4,6 +4,7 @@ import geoff.AppDelegate;
 import geoff.event.PointerEvent.PointerButton;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
+import geoff.utils.Assets;
 
 /**
  * ...
@@ -24,7 +25,7 @@ class AppEngine extends AppDelegate
 	
 	override public function init( renderer : IRenderContext ) 
 	{
-				
+		trace( Assets.getText( "test/hello.txt" ) );
 	}
 	
 	override public function update( renderer : IRenderContext ) 

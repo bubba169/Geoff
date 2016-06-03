@@ -36,8 +36,18 @@ class AndroidBuildTool
 			"Version" => config.project.version,
 			"ProjectName" => config.project.name,
 			"AndroidSDKPath" => StringTools.replace(config.global.android.sdkpath, "\\", "\\\\" ),
-			"AndroidSDKVersion" => config.project.android.version
+			"AndroidSDKVersion" => config.project.android.version,
+			"Orientation" => "sensor"
 		];	
+		
+		if ( config.project.window.orientation == "landscape" )
+		{
+			templateConstants.set( "Orientation", "sensorLandscape" );
+		}
+		else if ( config.project.window.orientation == "portrait" )
+		{
+			templateConstants.set( "Orientation", "sensorPortrait" );
+		}
 		
 		if ( flags.indexOf( "clean" ) > -1 ) {
 			

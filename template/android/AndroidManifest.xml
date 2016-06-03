@@ -6,7 +6,7 @@
 	  <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application android:label="{{ProjectName}}" android:icon="@drawable/ic_launcher">
-        <activity android:name="geoff.androidnative.MainActivity" android:label="{{ProjectName}}">
+        <activity android:name="geoff.androidnative.MainActivity" android:label="{{ProjectName}}" android:screenOrientation="{{Orientation}}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

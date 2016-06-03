@@ -32,8 +32,14 @@ class WindowsBuildTool
 			"Version" => config.project.version,
 			"ProjectName" => config.project.name,
 			"WindowWidth" => config.project.window.width,
-			"WindowHeight" => config.project.window.height
+			"WindowHeight" => config.project.window.height,
+			"ConsoleSetting" => ""
 		];	
+		
+		if ( !isDebugBuild() )
+		{
+			templateConstants.set( "ConsoleSetting", "<set name='no_console' value='true'/>" );
+		}		
 		
 		if ( flags.indexOf( "clean" ) > -1 ) {
 		

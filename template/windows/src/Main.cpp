@@ -7,6 +7,10 @@
 #include <geoff/event/EventManager.h>
 #include <IL/il.h>
 
+#ifdef _WIN32
+	#include <Windows.h>
+#endif
+
 extern "C" const char *hxRunLibrary();
 extern "C" void hxcpp_set_top_of_stack();
 
@@ -62,9 +66,10 @@ void geoff_mouse_move_callback( GLFWwindow* window, double x, double y )
 /**
  * Main
  */
-
+  
 int main( void )
 {
+	
 	GLFWwindow* window;
 
 	if (!glfwInit()) return -1;
@@ -76,7 +81,7 @@ int main( void )
 		return -1;
 	}
 
-	glfwSetFramebufferSizeCallback( window, geoff_callback_framebuffer_size );	
+	glfwSetFramebufferSizeCallback( window, geoff_callback_framebuffer_size );
 	glfwSetMouseButtonCallback( window, geoff_mouse_button_callback );	
 	glfwSetCursorPosCallback( window, geoff_mouse_move_callback );	
 	glfwMakeContextCurrent(window);
@@ -105,5 +110,12 @@ int main( void )
 
 	return 0;
 }
+
+#ifdef _WIN32
+int CALLBACK WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow )
+{
+	return main();
+}
+#endif
 
 
