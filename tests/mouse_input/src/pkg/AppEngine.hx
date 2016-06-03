@@ -28,9 +28,10 @@ class AppEngine extends AppDelegate
 		trace( Assets.getText( "test/hello.txt" ) );
 	}
 	
-	override public function update( renderer : IRenderContext ) 
+	override public function update( renderer : IRenderContext, seconds : Float ) 
 	{
 		renderer.clear();
+		trace( seconds );
 	}
 	
 	override public function resize(width:Int, height:Int) 

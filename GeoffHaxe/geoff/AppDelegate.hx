@@ -16,7 +16,7 @@ class AppDelegate
 	}
 	
 	public function init( renderer : IRenderContext ) : Void {}
-	public function update( renderer : IRenderContext ) : Void {}
+	public function update( renderer : IRenderContext, seconds : Float ) : Void {}
 	public function destroy() : Void {}
 	public function resize( width : Int, height : Int ) : Void {}
 	

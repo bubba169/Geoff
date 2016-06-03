@@ -1,4 +1,5 @@
 package geoff;
+import haxe.Timer;
 
 /**
  * ...
@@ -11,6 +12,10 @@ class App
 	
 	public var platform : Platform;
 	public var delegate : AppDelegate;
+	public var fps : Int = 60;
+	
+	var _timeOfLastUpdate : Float = 0;
+	var _timeSinceLastTick : Float = 0;
 	
 	public static function main()
 	{
@@ -38,12 +43,23 @@ class App
 	{
 		platform.renderer.init();
 		delegate.init( platform.renderer );
+		
+		_timeOfLastUpdate = Timer.stamp();
+		_timeSinceLastTick = 0;
 	}
 	
 	public function update()
 	{
-		platform.eventManager.handleEvents( delegate );		
-		delegate.update( platform.renderer );
+		var updateTime : Float = Timer.stamp();
+		_timeSinceLastTick += updateTime - _timeOfLastUpdate;
+		_timeOfLastUpdate = updateTime;
+		
+		if ( _timeSinceLastTick > ( 1 / fps ) )
+		{
+			platform.eventManager.handleEvents( delegate );
+			delegate.update( platform.renderer, _timeSinceLastTick );
+			_timeSinceLastTick = 0;
+		}
 	}
 	
 	public function destroy()
