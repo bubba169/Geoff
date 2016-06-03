@@ -1,6 +1,7 @@
 package geoff.event;
 import geoff.AppDelegate;
 import geoff.event.Event;
+import geoff.event.PointerEvent.PointerButton;
 import geoff.event.ResizeEvent;
 
 /**
@@ -28,10 +29,17 @@ class EventManager
 	{
 		switch( event )
 		{
+			/**
+			 * Window events
+			 */
 			case ResizeEvent.RESIZE:
 				trace( "Resize", data[0], data[1] );
 				_eventsQueue.push( new ResizeEvent( ResizeEvent.RESIZE, data[0], data[1] ) );
 				
+				
+			/**
+			 * Pointer events
+			 */
 			case PointerEvent.DOWN:
 				trace( "PointerDown", data[0], data[1], data[2], data[3] );
 				_eventsQueue.push( new PointerEvent( PointerEvent.DOWN, data[0], data[1], data[2], data[3] ) );
@@ -39,6 +47,10 @@ class EventManager
 			case PointerEvent.UP:
 				trace( "PointerUp", data[0], data[1], data[2], data[3] );
 				_eventsQueue.push( new PointerEvent( PointerEvent.UP, data[0], data[1], data[2], data[3] ) );
+				
+			case PointerEvent.MOVE:
+				trace( "PointerMove", data[0], data[1], data[2] );
+				_eventsQueue.push( new PointerEvent( PointerEvent.MOVE, data[0], PointerButton.None, data[1], data[2] ) );
 				
 		}
 	}
@@ -60,6 +72,10 @@ class EventManager
 				case PointerEvent.UP:
 					var pointerEvent : PointerEvent = cast event;
 					delegate.onPointerUp( pointerEvent.pointerId, pointerEvent.button, pointerEvent.x, pointerEvent.y );
+					
+				case PointerEvent.MOVE:
+					var pointerEvent : PointerEvent = cast event;
+					delegate.onPointerMove( pointerEvent.pointerId, pointerEvent.x, pointerEvent.y );
 			}
 		}
 	}
