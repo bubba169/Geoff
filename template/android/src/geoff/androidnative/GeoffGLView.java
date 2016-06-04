@@ -3,7 +3,9 @@ package geoff.androidnative;
 import android.opengl.GLSurfaceView;
 import android.content.Context;
 import android.view.MotionEvent;
+import android.view.KeyEvent;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 
 import geoff.App;
 
@@ -15,6 +17,9 @@ public class GeoffGLView extends GLSurfaceView
 	public GeoffGLView( Context context )
 	{
 		super( context );
+
+		this.setFocusable(true);
+		this.setFocusableInTouchMode(true);
 	}
 
 	public void init( App app )
@@ -30,6 +35,8 @@ public class GeoffGLView extends GLSurfaceView
 	
 	public boolean onTouchEvent( MotionEvent event )
 	{
+		
+
 		int pointerId = event.getActionIndex();
 		int action = event.getActionMasked();
 		
@@ -53,6 +60,13 @@ public class GeoffGLView extends GLSurfaceView
 		}
 		
 		return true;
+	}
+
+	public boolean onKeyDown( int keyCode, KeyEvent event )
+	{
+		Log.v( "Hello", "" + keyCode );
+		Log.v( "Hello", "" + event );
+		return false;
 	}
 	
 	

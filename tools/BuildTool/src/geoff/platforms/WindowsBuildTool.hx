@@ -84,9 +84,11 @@ class WindowsBuildTool
 		for ( dir in srcArray ) {
 			buildHXML += "-cp " + dir + "\n";
 		}
-		buildHXML += "-cp " + config.geoffpath + "GeoffHaxe\n";
+		if ( isDevBuild() ) buildHXML += "-cp " + config.geoffpath + "Geoff\n";
 		var libArray : Array<String> = config.project.haxelib;
+		if ( isDevBuild() ) libArray.push( "hxcpp" );
 		for ( lib in libArray ) {
+			if ( isDevBuild() && lib.toLowerCase() == "geoff" ) continue;
 			buildHXML += "-lib " + lib + "\n";
 		}
 		buildHXML += "-cpp bin\\windows\\build\n";
@@ -155,5 +157,10 @@ class WindowsBuildTool
 	function isDebugBuild() : Bool
 	{
 		return flags.indexOf("debug") > -1;
+	}
+	
+	function isDevBuild() : Bool
+	{
+		return flags.indexOf("dev") > -1;
 	}
 }

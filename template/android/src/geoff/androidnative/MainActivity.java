@@ -2,10 +2,17 @@ package geoff.androidnative;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.opengl.GLSurfaceView;
+import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.ViewGroup;
+import android.content.Context;
+import android.util.Log;
+import android.widget.EditText;
 
 import geoff.App;
 
@@ -35,6 +42,15 @@ public class MainActivity extends Activity
         glView.init( App.current );
 		
         setContentView( glView );
+
+        EditText editBox = new EditText( getApplicationContext() );
+        editBox.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+		editBox.setText("Hello Matron");
+		addContentView(editBox, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+		editBox.setFocusableInTouchMode(true);
+		editBox.requestFocus();
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
     }
 }

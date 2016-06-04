@@ -6,7 +6,7 @@ import geoff.event.EventManager;
  * @author Simon
  */
 
-@:buildXml("<files id='haxe'><compilerflag value='-I${haxelib:geoff}/template/windows/include'/></files>")
+@:buildXml("<files id='haxe'><compilerflag value='-I${haxelib:geoff}/../template/windows/include'/></files>")
  
 class WindowsPlatform
 {

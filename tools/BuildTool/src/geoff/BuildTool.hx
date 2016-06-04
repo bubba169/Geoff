@@ -47,7 +47,7 @@ class BuildTool
 	function loadConfig( projectDirectory : String ) : Dynamic
 	{
 		var config = { geoffpath: "", global: null, project: null };
-		config.geoffpath = new Process( "haxelib", ["path", "geoff"] ).stdout.readLine().toString();
+		config.geoffpath = new Process( "haxelib", ["path", "geoff"] ).stdout.readLine().toString() + "../";
 		config.global = parseConfig( Sys.getEnv("APPDATA") + "/Geoff/geoff.cfg" );
 		config.project = parseConfig( projectDirectory + "project.geoff" );
 		return config;

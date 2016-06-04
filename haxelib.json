@@ -7,6 +7,7 @@
   "version": "0.0.1",
   "releasenote": "Nothing to see here",
   "contributors": ["bubba169"],
+  "classPath": "Geoff",
   "dependencies": {
     "hxjava": "",
     "hxcpp": "",

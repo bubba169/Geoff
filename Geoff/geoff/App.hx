@@ -16,6 +16,7 @@ class App
 	
 	var _timeOfLastUpdate : Float = 0;
 	var _timeSinceLastTick : Float = 0;
+	var _updateTime : Float = 0;
 	
 	public static function main()
 	{
@@ -50,16 +51,12 @@ class App
 	
 	public function update()
 	{
-		var updateTime : Float = Timer.stamp();
-		_timeSinceLastTick += updateTime - _timeOfLastUpdate;
-		_timeOfLastUpdate = updateTime;
+		_updateTime = Timer.stamp();
+		_timeSinceLastTick = _updateTime - _timeOfLastUpdate;
+		_timeOfLastUpdate = _updateTime;
 		
-		if ( _timeSinceLastTick > ( 1 / fps ) )
-		{
-			platform.eventManager.handleEvents( delegate );
-			delegate.update( platform.renderer, _timeSinceLastTick );
-			_timeSinceLastTick = 0;
-		}
+		platform.eventManager.handleEvents( delegate );
+		delegate.update( platform.renderer, _timeSinceLastTick );
 	}
 	
 	public function destroy()

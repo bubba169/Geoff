@@ -16,16 +16,16 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="C:\Users\smorris\Documents\MyProjects\Geoff\GeoffHaxe" />
+    <class path="D:\Projects\Haxe\Geoff\Geoff\..\GeoffHaxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="windows&#xA;static_link&#xA;HX_WINDOWS&#xA;ABI=-MD&#xA;geoff_cpp" />
+    <option directives="java-android&#xA;android&#xA;geoff_java&#xA;mobile" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="pkg.Main" />
     <option enabledebug="False" />
-    <option additional="-debug" />
+    <option additional="-java-lib D:\Development\AndroidSDK\platforms/android-21/android.jar&#xA;-debug" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

@@ -1,7 +1,7 @@
 package pkg;
 
 import geoff.AppDelegate;
-import geoff.event.PointerEvent.PointerButton;
+import geoff.event.PointerButton.PointerButton;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.utils.Assets;
@@ -31,7 +31,6 @@ class AppEngine extends AppDelegate
 	override public function update( renderer : IRenderContext, seconds : Float ) 
 	{
 		renderer.clear();
-		trace( seconds );
 	}
 	
 	override public function resize(width:Int, height:Int) 

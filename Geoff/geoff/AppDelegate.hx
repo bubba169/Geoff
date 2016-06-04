@@ -1,6 +1,6 @@
 package geoff;
 
-import geoff.event.PointerEvent.PointerButton;
+import geoff.event.PointerButton;
 import geoff.renderer.IRenderContext;
 
 /**
