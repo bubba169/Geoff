@@ -98,9 +98,11 @@ class AndroidBuildTool
 		for ( dir in srcArray ) {
 			buildHXML += "-cp " + dir + "\n";
 		}
-		buildHXML += "-cp " + config.geoffpath + "GeoffHaxe\n";
+		if ( isDevBuild() ) buildHXML += "-cp " + config.geoffpath + "Geoff\n";
 		var libArray : Array<String> = config.project.haxelib;
+		if ( isDevBuild() ) libArray.push( "hxjava" );
 		for ( lib in libArray ) {
+			if ( isDevBuild() && lib.toLowerCase() == "geoff" ) continue;
 			buildHXML += "-lib " + lib + "\n";
 		}
 		buildHXML += "-java bin/android/build\n";
@@ -166,5 +168,10 @@ class AndroidBuildTool
 	function isDebugBuild() : Bool
 	{
 		return flags.indexOf("debug") > -1;
+	}
+	
+	function isDevBuild() : Bool
+	{
+		return flags.indexOf("dev") > -1;
 	}
 }

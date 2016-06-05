@@ -1,5 +1,4 @@
 -cp src
--cp D:\Projects\Haxe\Geoff\Geoff\../GeoffHaxe
 -lib geoff
 -java bin/android/build
 -java-lib D:\Development\AndroidSDK\platforms/android-21/android.jar
