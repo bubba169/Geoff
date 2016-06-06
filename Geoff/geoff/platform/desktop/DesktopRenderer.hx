@@ -1,5 +1,5 @@
-package geoff.platform.windows;
-import geoff.platform.windows.externs.GeoffRenderer;
+package geoff.platform.desktop;
+import geoff.platform.desktop.externs.GeoffRenderer;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.renderer.Texture;
@@ -10,7 +10,7 @@ import geoff.utils.Color;
  * @author Simon
  */
 
-class WindowsRenderer implements IRenderContext
+class DesktopRenderer implements IRenderContext
 {
 
 	public var clearColor : Color = Color.RED;

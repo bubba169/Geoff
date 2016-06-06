@@ -1,5 +1,6 @@
 package geoff.platform.windows;
 import geoff.event.EventManager;
+import geoff.platform.desktop.DesktopRenderer;
 
 /**
  * ...
@@ -13,12 +14,12 @@ class WindowsPlatform
 
 	public var name : String = "Windows";
 	
-	public var renderer : WindowsRenderer;
+	public var renderer : DesktopRenderer;
 	public var eventManager : EventManager;
 	
 	public function new()
 	{
-		renderer = new WindowsRenderer();
+		renderer = new DesktopRenderer();
 		eventManager = new EventManager();
 	}
 	

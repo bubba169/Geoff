@@ -2,6 +2,7 @@ package pkg;
 
 import geoff.AppDelegate;
 import geoff.event.PointerButton.PointerButton;
+import geoff.event.Key;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.utils.Assets;
@@ -26,6 +27,8 @@ class AppEngine extends AppDelegate
 	override public function init( renderer : IRenderContext ) 
 	{
 		trace( Assets.getText( "test/hello.txt" ) );
+		
+		trace( Key.SPACE );
 	}
 	
 	override public function update( renderer : IRenderContext, seconds : Float ) 

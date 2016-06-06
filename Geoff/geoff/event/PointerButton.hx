@@ -6,10 +6,10 @@ package geoff.event;
  */
 @:enum abstract PointerButton(Int) from Int to Int
 {
-	var None = 0;
-	var Left = 1;
+	var None = -1;
+	var Left = 0;
+	var Right = 1;
 	var Middle = 2;
-	var Right = 3;
-	var Button4 = 4;
-	var Button5 = 5;
+	var Button4 = 3;
+	var Button5 = 4;
 }

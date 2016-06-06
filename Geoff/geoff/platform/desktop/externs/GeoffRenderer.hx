@@ -1,4 +1,4 @@
-package geoff.platform.windows.externs;
+package geoff.platform.desktop.externs;
 import geoff.renderer.RenderBatch;
 import geoff.renderer.Texture;
 
