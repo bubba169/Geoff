@@ -6,7 +6,7 @@ package geoff.event;
  */
 
 #if windows
-	typedef Key = geoff.platform.desktop.DesktopKeyMap;
+	typedef Key = geoff.platform.desktop.externs.DesktopKeyMap;
 #elseif android
 	typedef Key = geoff.platform.android.AndroidKeyMap;
 #end
