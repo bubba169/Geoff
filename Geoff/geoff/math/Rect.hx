@@ -1,4 +1,4 @@
-package;
+package geoff.math;
 
 /**
  * ...
@@ -18,6 +18,14 @@ class Rect
 		this.y = y;
 		this.width = width;
 		this.height = height;
+	}
+	
+	public function setEmpty() 
+	{
+		this.x = 0;
+		this.y = 0;
+		this.width = 0;
+		this.height = 0;
 	}
 	
 }
