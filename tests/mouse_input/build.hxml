@@ -1,5 +1,5 @@
 -cp src
--lib geoff
+-lib norman
 -cpp bin\windows\build
 -main pkg.Main
 -debug

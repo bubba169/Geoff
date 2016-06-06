@@ -1,17 +1,17 @@
 package pkg;
 
-import geoff.AppDelegate;
-import geoff.event.PointerButton.PointerButton;
 import geoff.event.Key;
+import geoff.event.PointerButton.PointerButton;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.utils.Assets;
+import uk.co.mojaworks.norman.NormanApp;
 
 /**
  * ...
  * @author ...
  */
-class AppEngine extends AppDelegate
+class AppEngine extends NormanApp
 {
 	var shader : Int;
 	var batch:RenderBatch;

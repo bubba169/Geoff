@@ -10,7 +10,6 @@
   "classPath": "Geoff",
   "dependencies": {
     "hxjava": "",
-    "hxcpp": "",
-	"hxmath": ""
+    "hxcpp": ""
   }
 }
