@@ -21,4 +21,10 @@ class Vector2
 		return "($x,$y)";
 	}
 	
+	public function setTo(x:Float, y:Float) : Void
+	{
+		this.x = x;
+		this.y = y;
+	}
+	
 }

@@ -1,4 +1,5 @@
 package geoff.math;
+import geoff.math.Vector2;
 
 /**
  * ...
@@ -29,7 +30,7 @@ class Matrix3
 		return new Matrix3( a, b, c, d, tx, ty );
 	}
 	
-	public function concat( m : Matrix3 ) : Matrix3
+	public function concat( m : Matrix3 ) : Void
 	{
 		var a1 = a * m.a + b * m.c;
 		b = a * m.b + b * m.d;
@@ -87,6 +88,11 @@ class Matrix3
 		ty = tx * sin + ty * cos;
 		tx = tx1;
 		
+	}
+	
+	public function transformVector2( vector2 : Vector2 ) : Vector2
+	{
+		return vector2;
 	}
 	
 }

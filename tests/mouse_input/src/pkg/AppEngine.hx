@@ -5,7 +5,9 @@ import geoff.event.PointerButton.PointerButton;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.utils.Assets;
+import geoff.utils.Color;
 import uk.co.mojaworks.norman.NormanApp;
+import uk.co.mojaworks.norman.data.NormanConfigData;
 
 /**
  * ...
@@ -21,6 +23,10 @@ class AppEngine extends NormanApp
 
 	public function new() 
 	{
+		var config : NormanConfigData = new NormanConfigData();
+		config.targetScreenHeight = 720;
+		config.targetScreenWidth = 1280;
+		
 		super();
 	}
 	
@@ -33,7 +39,7 @@ class AppEngine extends NormanApp
 	
 	override public function update( renderer : IRenderContext, seconds : Float ) 
 	{
-		renderer.clear();
+		renderer.clear( Color.GREEN );
 	}
 	
 	override public function resize(width:Int, height:Int) 

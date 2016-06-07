@@ -1,4 +1,5 @@
 package geoff.renderer;
+import haxe.io.UInt8Array;
 
 /**
  * ...
@@ -7,17 +8,20 @@ package geoff.renderer;
 class Texture
 {
 	
-	public var id : UInt = 0;
+	public var id : String;
+	public var textureId : UInt = 0;
 	public var width : Int = 0;
 	public var height : Int = 0;
-	public var resource : String;
+	public var asset : String;
+	public var pixels : UInt8Array;
 	public var map : Dynamic;
 	public var useCount : Int = 0;
 	public var isValid : Bool = true;
+	public var smoothing : Bool = true;
 
-	public function new( resource : String ) 
+	public function new( id : String ) 
 	{
-		this.resource = resource;
+		this.id = id;
 	}
 	
 }

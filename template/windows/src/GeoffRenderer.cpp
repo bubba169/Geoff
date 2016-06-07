@@ -170,7 +170,7 @@ namespace geoff
 	}
 	
 	
-	void GeoffRenderer::createTexture( ::String* filepath, geoff::renderer::Texture texture )
+	void GeoffRenderer::createTextureFromAsset( ::String* filepath, geoff::renderer::Texture texture )
 	{
 		unsigned int imageName;
 		ilGenImages( 1, &imageName );
@@ -197,6 +197,31 @@ namespace geoff
 		ilBindImage(0);
 		ilDeleteImages( 1, &imageName );
 		delete[] buffer;
+		
+	}
+
+	void GeoffRenderer::createBlankTexture( geoff::renderer::Texture texture, char* bits )
+	{
+
+		char* buffer = malloc( 4 * texture->width * texture->height );
+		for ( int i = 0; i < texture->width * texture->height; i++ )
+		{
+			char[i] = r;
+			char[i+1] = g;
+			char[i+2] = b;
+			char[i+3] = a;
+		}
+		
+		glGenTextures( 1, (GLuint*)&(texture->id) );
+		glBindTexture( GL_TEXTURE_2D, texture->id );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer );
+		glBindTexture( GL_TEXTURE_2D, 0 );
+
+		free( buffer );
 		
 	}
 	

@@ -1,6 +1,6 @@
 package geoff.utils;
 import geoff.renderer.Texture;
-import hxmath.geom.Rect;
+import geoff.math.Rect;
 
 /**
  * ...
@@ -9,19 +9,19 @@ import hxmath.geom.Rect;
 class TextureUtils
 {
 
-	public function getRect( texture : Texture, subImageId : String ) : Rect {
+	public static function getRect( texture : Texture, subImageId : String ) : Rect {
 		
 		var result : Rect = null;
 		
-		if ( subImageId == null || subImageId == "" || map == null ) {
-			result = new Rect( 0, 0, sourceImage.width, sourceImage.height );
-		}else if ( map != null ) {
-			var img : Dynamic = Reflect.field( map.frames, subImageId );
+		if ( subImageId == null || subImageId == "" || texture.map == null ) {
+			result = new Rect( 0, 0, texture.width, texture.height );
+		}else if ( texture.map != null ) {
+			var img : Dynamic = Reflect.field( texture.map.frames, subImageId );
 			if ( img != null ) {
 				result = new Rect( img.spriteSourceSize.x, img.spriteSourceSize.y, img.sourceSize.w, img.sourceSize.h );
 			}else {
-				trace("No subimage " + subImageId + " in texture " + id );
-				result = new Rect( 0, 0, sourceImage.width, sourceImage.height );
+				trace("No subimage " + subImageId + " in texture " + texture.id );
+				result = new Rect( 0, 0, texture.width, texture.height );
 			}
 		}
 		
@@ -29,25 +29,25 @@ class TextureUtils
 		
 	}
 	
-	public function getUV( texture : Texture, subImageId : String ) : Rect {
+	public static function getUV( texture : Texture, subImageId : String ) : Rect {
 		
 		var result : Rect = null;
-		if ( subImageId == null || subImageId == "" || map == null ) {
+		if ( subImageId == null || subImageId == "" || texture.map == null ) {
 			
 			result = new Rect( 0, 0, 1, 1 );
 			
-		}else if ( map != null ) {
+		}else if ( texture.map != null ) {
 			
-			var img : Dynamic = Reflect.field( map.frames, subImageId );
+			var img : Dynamic = Reflect.field( texture.map.frames, subImageId );
 			if ( img != null ) {
 				result = new Rect( 
-					(img.frame.x / sourceImage.width),
-					(img.frame.y / sourceImage.height),
-					(img.frame.w / sourceImage.width),
-					(img.frame.h / sourceImage.height)
+					(img.frame.x / texture.width),
+					(img.frame.y / texture.height),
+					(img.frame.w / texture.width),
+					(img.frame.h / texture.height)
 				);
 			}else {
-				trace("No subimage " + subImageId + " in texture " + id );
+				trace("No subimage " + subImageId + " in texture " + texture.id );
 				result = new Rect( 0, 0, 1, 1 );
 			}
 		}

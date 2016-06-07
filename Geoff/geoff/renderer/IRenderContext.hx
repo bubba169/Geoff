@@ -1,17 +1,15 @@
 package geoff.renderer;
 import geoff.utils.Color;
+import haxe.io.UInt8Array;
 
 /**
  * @author Simon
  */
 interface IRenderContext 
 {
-	public var clearColor : Color;
-	
 	public function init() : Void;
 	public function clear( color : Color ) : Void;
 
-	public function createShader( vs : String, fs : String ) : Shader;
 	public function uploadShader( shader : Shader ) : Void;
 	public function destroyShader( shader : Shader ) : Void;
 	
@@ -24,7 +22,8 @@ interface IRenderContext
 	
 	public function getError() : Int;
 	
-	public function createTexture( path : String ) : Texture;
+	public function createTextureFromAsset( path : String ) : Texture;
+	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : UInt8Array ) : Texture;
 	public function uploadTexture( texture : Texture ) : Void;
 	public function destroyTexture( texture : Texture ) : Void;
 	

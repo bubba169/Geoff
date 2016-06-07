@@ -2,8 +2,10 @@ package geoff.platform.desktop;
 import geoff.platform.desktop.externs.GeoffRenderer;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
+import geoff.renderer.Shader;
 import geoff.renderer.Texture;
 import geoff.utils.Color;
+import haxe.io.UInt8Array;
 
 /**
  * ...
@@ -13,7 +15,6 @@ import geoff.utils.Color;
 class DesktopRenderer implements IRenderContext
 {
 
-	public var clearColor : Color = Color.RED;
 	public var _internalRenderer : cpp.Pointer<GeoffRenderer>;
 	
 	public function new() 
@@ -32,7 +33,7 @@ class DesktopRenderer implements IRenderContext
 	}
 
 	
-	public function clear() : Void
+	public function clear( clearColor : Color ) : Void
 	{
 		_internalRenderer.get_ref().clear( clearColor.r / 255, clearColor.g / 255, clearColor.b / 255, clearColor.a );
 	}
@@ -42,9 +43,9 @@ class DesktopRenderer implements IRenderContext
 	 * Shader
 	 */
 	
-	public function compileShader( vs : String, fs : String ) : Int
+	public function uploadShader( shader : Shader ) : Void
 	{
-		return _internalRenderer.get_ref().compileShader( cpp.Pointer.addressOf( vs ), cpp.Pointer.addressOf( fs ) );
+		shader.program = _internalRenderer.get_ref().compileShader( cpp.Pointer.addressOf( shader.vertexSource ), cpp.Pointer.addressOf( shader.fragmentSource ) );
 	}	
 	
 	
@@ -89,12 +90,20 @@ class DesktopRenderer implements IRenderContext
 	 * Texture
 	 */
 	
-	public function createTexture( path : String ) : Texture 
+	public function createTextureFromAsset( path : String ) : Texture 
 	{
 		var texture : Texture = new Texture( path );
 		_internalRenderer.get_ref().createTexture( cpp.Pointer.addressOf(path), texture );
 		return texture;
 	}
+	
+	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : UInt8Array ) : Texture
+	{
+		var texture : Texture = new Texture( id );
+		_internalRenderer.get_ref().createTexture( cpp.Pointer.addressOf(path), texture );
+		return texture;
+	}
+	
 	
 	
 	
