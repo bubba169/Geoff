@@ -93,15 +93,24 @@ class DesktopRenderer implements IRenderContext
 	public function createTextureFromAsset( path : String ) : Texture 
 	{
 		var texture : Texture = new Texture( path );
-		_internalRenderer.get_ref().createTexture( cpp.Pointer.addressOf(path), texture );
+		texture.asset = path;
+		_internalRenderer.get_ref().createTextureFromAsset( texture );
 		return texture;
 	}
 	
 	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : UInt8Array ) : Texture
 	{
 		var texture : Texture = new Texture( id );
-		_internalRenderer.get_ref().createTexture( cpp.Pointer.addressOf(path), texture );
+		texture.width = width;
+		texture.height = height;
+		texture.pixels = pixels;
+		_internalRenderer.get_ref().createTextureFromPixels( texture );
 		return texture;
+	}
+	
+	public function uploadTexture( texture : Texture ) : Void 
+	{
+		_internalRenderer.get_ref().uploadTexture( texture );
 	}
 	
 	

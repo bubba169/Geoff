@@ -34,7 +34,8 @@ namespace geoff
 			void pushRenderTarget( geoff::renderer::Texture texture );
 			void popRenderTarget( );
 			
-			void createTexture( ::String* path, geoff::renderer::Texture );
+			void createTextureFromImage( geoff::renderer::Texture );
+			void createTextureFromPixels( geoff::renderer::Texture );
 			
 			int getError();
 			
