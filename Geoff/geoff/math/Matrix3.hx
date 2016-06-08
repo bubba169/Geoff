@@ -1,4 +1,5 @@
 package geoff.math;
+import geoff.math.Matrix3;
 import geoff.math.Vector2;
 
 /**
@@ -30,7 +31,7 @@ class Matrix3
 		return new Matrix3( a, b, c, d, tx, ty );
 	}
 	
-	public function concat( m : Matrix3 ) : Void
+	public function concat( m : Matrix3 ) : Matrix3
 	{
 		var a1 = a * m.a + b * m.c;
 		b = a * m.b + b * m.d;
@@ -43,9 +44,11 @@ class Matrix3
 		var tx1 = tx * m.a + ty * m.c + m.tx;
 		ty = tx * m.b + ty * m.d + m.ty;
 		tx = tx1;
+		
+		return this;
 	}
 	
-	public function identity() : Void
+	public function identity() : Matrix3
 	{
 		a = 1;
 		b = 0;
@@ -53,15 +56,19 @@ class Matrix3
 		d = 1;
 		tx = 0;
 		ty = 0;
+		
+		return this;
 	}
 	
-	public function translate( dx : Float, dy : Float ) : Void
+	public function translate( dx : Float, dy : Float ) : Matrix3
 	{
 		tx += dx;
 		ty += dy;
+		
+		return this;
 	}
 	
-	public function scale( sx : Float, sy : Float ) : Void
+	public function scale( sx : Float, sy : Float ) : Matrix3
 	{
 		a *= sx;
 		b *= sy;
@@ -69,9 +76,11 @@ class Matrix3
 		d *= sy;
 		tx *= sx;
 		ty *= sy;
+		
+		return this;
 	}
 	
-	public function rotate ( theta : Float ) : Void {
+	public function rotate ( theta : Float ) : Matrix3 {
 				
 		var cos = Math.cos (theta);
 		var sin = Math.sin (theta);
@@ -88,11 +97,55 @@ class Matrix3
 		ty = tx * sin + ty * cos;
 		tx = tx1;
 		
+		return this;
+		
 	}
 	
-	public function transformVector2( vector2 : Vector2 ) : Vector2
+	public function transformVector2( pos : Vector2 ) : Vector2
 	{
-		return vector2;
+		return new Vector2( pos.x * a + pos.y * c + tx, pos.x * b + pos.y * d + ty );
+	}
+	
+	
+	public function copyFrom( other : Matrix3 ) : Matrix3 
+	{
+		this.a = other.a;
+		this.b = other.b;
+		this.c = other.c;
+		this.d = other.d;
+		this.tx = other.tx;
+		this.ty = other.ty;
+		
+		return this;
+	}
+	
+	
+	public function invert ():Matrix3 {
+		
+		var norm = a * d - b * c;
+		
+		if (norm == 0) {
+			
+			a = b = c = d = 0;
+			tx = -tx;
+			ty = -ty;
+			
+		} else {
+			
+			norm = 1.0 / norm;
+			var a1 = d * norm;
+			d = a * norm;
+			a = a1;
+			b *= -norm;
+			c *= -norm;
+			
+			var tx1 = - a * tx - c * ty;
+			ty = - b * tx - d * ty;
+			tx = tx1;
+			
+		}
+		
+		return this;
 	}
 	
 }

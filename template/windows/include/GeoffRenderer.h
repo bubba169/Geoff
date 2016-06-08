@@ -25,7 +25,8 @@ namespace geoff
 			~GeoffRenderer();
 			
 			void clear( float r, float g, float b, float a );
-			int compileShader( ::String* vsSource, ::String* fsSource );
+			int compileShader( geoff::renderer::Shader );
+			int destroyShader( geoff::renderer::Shader );
 			
 			void beginRender( int w, int h );
 			void renderBatch( geoff::renderer::RenderBatch batch );
@@ -36,6 +37,9 @@ namespace geoff
 			
 			void createTextureFromImage( geoff::renderer::Texture );
 			void createTextureFromPixels( geoff::renderer::Texture );
+			void uploadTexture( geoff::renderer::Texture );
+			void destroyTexture( geoff::renderer::Texture );
+			void reloadTexture( geoff::renderer::Texture );
 			
 			int getError();
 			

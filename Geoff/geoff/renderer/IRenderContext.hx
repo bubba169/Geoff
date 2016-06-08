@@ -23,7 +23,7 @@ interface IRenderContext
 	public function getError() : Int;
 	
 	public function createTextureFromAsset( path : String ) : Texture;
-	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : UInt8Array ) : Texture;
+	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Array<Int> ) : Texture;
 	public function uploadTexture( texture : Texture ) : Void;
 	public function destroyTexture( texture : Texture ) : Void;
 	

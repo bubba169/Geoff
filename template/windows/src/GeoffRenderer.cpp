@@ -30,13 +30,17 @@ namespace geoff
 		glClearColor( r, g, b, a );
 		glClear( GL_COLOR_BUFFER_BIT );
 	}
+
+	/**
+	 * Shaders
+	 */
 	
-	int GeoffRenderer::compileShader( ::String* vsSource, ::String* fsSource )
+	int GeoffRenderer::compileShader( geoff::renderer::Shader shader )
 	{
 		GLint status = 0;
 		
 		GLuint vs = glCreateShader( GL_VERTEX_SHADER );
-		const char* vsSourceCStr = vsSource->__CStr();
+		const char* vsSourceCStr = shader->vertexSource->__CStr();
 		glShaderSource( vs, 1, &vsSourceCStr, &(vsSource->length) );
 		glCompileShader( vs );
 		glGetShaderiv( vs, GL_COMPILE_STATUS, &status );
@@ -49,7 +53,7 @@ namespace geoff
 		}
 		
 		GLuint fs = glCreateShader( GL_FRAGMENT_SHADER );
-		const char* fsSourceCStr = fsSource->__CStr();
+		const char* fsSourceCStr = shader->fragmentSource->__CStr();
 		glShaderSource( fs, 1, &fsSourceCStr, &(fsSource->length) );
 		glCompileShader( fs );
 		glGetShaderiv( vs, GL_COMPILE_STATUS, &status );
@@ -76,12 +80,23 @@ namespace geoff
 			// There was a problem linking the shader
 			glDeleteProgram( program );
 			return -5;
-		}		
+		}	
+
+		shader->program = program;	
 		
-		return program;
+		return 0;
+	}
+
+	int GeoffRenderer::destroyShader( geoff::renderer::Shader shader )
+	{
+		glDeleteProgram( shader->program );
 	}
 	
 	
+	/**
+	 * Render
+	 */
+
 	void GeoffRenderer::beginRender( int w, int h )
 	{
 		_w = w;
@@ -169,60 +184,45 @@ namespace geoff
 		return glGetError();
 	}
 	
+
+	/**
+	 * Textures
+	 */
 	
-	void GeoffRenderer::createTextureFromAsset( ::String* filepath, geoff::renderer::Texture texture )
+	void GeoffRenderer::createTextureFromAsset( geoff::renderer::Texture texture )
 	{
 		unsigned int imageName;
 		ilGenImages( 1, &imageName );
 		ilBindImage( imageName );		
-		ilLoadImage( filepath->__CStr() );
+		ilLoadImage( texture->asset->__CStr() );
 		
 		texture->width = ilGetInteger( IL_IMAGE_WIDTH );
 		texture->height = ilGetInteger( IL_IMAGE_HEIGHT );
 		
-		glGenTextures( 1, (GLuint*)&(texture->id) );
-		glBindTexture( GL_TEXTURE_2D, texture->id );
+		ilCopyPixels( 0, 0, 0, texture->width, texture->height, 1, IL_RGBA, IL_UNSIGNED_BYTE, (unsigned char*)&(texture->getRawPixels()[0]) );
 		
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-		
-		char* buffer = new char[texture->width * texture->height * 4];	
-		ilCopyPixels( 0, 0, 0, texture->width, texture->height, 1, IL_RGBA, IL_UNSIGNED_BYTE, buffer );
-		
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer );
+		createTexture( texture );
 		
 		glBindTexture( GL_TEXTURE_2D, 0 );
 		ilBindImage(0);
 		ilDeleteImages( 1, &imageName );
-		delete[] buffer;
 		
 	}
 
-	void GeoffRenderer::createBlankTexture( geoff::renderer::Texture texture, char* bits )
+	void GeoffRenderer::createTexture( geoff::renderer::Texture texture, char* bits )
 	{
+		glGenTextures( 1, (GLuint*)&(texture->textureId) );
+	}
 
-		char* buffer = malloc( 4 * texture->width * texture->height );
-		for ( int i = 0; i < texture->width * texture->height; i++ )
-		{
-			char[i] = r;
-			char[i+1] = g;
-			char[i+2] = b;
-			char[i+3] = a;
-		}
-		
-		glGenTextures( 1, (GLuint*)&(texture->id) );
-		glBindTexture( GL_TEXTURE_2D, texture->id );
+	void GeoffRenderer::uploadTexture( geoff::renderer::Texture texture ) 
+	{
+		glBindTexture( GL_TEXTURE_2D, texture->textureId );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer );
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*)&(texture->getRawPixels()[0]) );
 		glBindTexture( GL_TEXTURE_2D, 0 );
-
-		free( buffer );
-		
 	}
 	
 	

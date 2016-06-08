@@ -54,7 +54,7 @@ class RenderBatch
 		
 		public function getRawIndexes( ) : BytesData
 		{
-			return NativeHelper.toIntBytes( indexes ).getData();
+			return NativeHelper.toUInt16Bytes( indexes ).getData();
 		}
 	#end
 	

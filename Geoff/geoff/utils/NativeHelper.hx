@@ -19,12 +19,23 @@ class NativeHelper
 		return bytes;
 	}
 	
-	public static function toIntBytes( array : Array<Int> ) : Bytes
+	public static function toUInt16Bytes( array : Array<Int> ) : Bytes
 	{
 		var bytes : Bytes = Bytes.alloc( array.length * 2 );
 		for ( i in 0...array.length ) 
 		{
 			bytes.setUInt16( i * 2, array[i] );
+		}
+		
+		return bytes;
+	}
+	
+	public static function toUInt8Bytes( array : Array<Int> ) : Bytes
+	{
+		var bytes : Bytes = Bytes.alloc( array.length );
+		for ( i in 0...array.length ) 
+		{
+			bytes.set( i, array[i] );
 		}
 		
 		return bytes;
@@ -45,6 +56,16 @@ class NativeHelper
 	static public function toShortBuffer( array : Array<Int> ) : java.nio.ShortBuffer
 	{
 		var buffer = java.nio.ShortBuffer.allocate( array.length );
+		for ( i in 0...array.length ) 
+		{
+			buffer.put( i, array[i] );
+		}
+		return buffer;
+	}
+	
+	static public function toByteBuffer( array : Array<Int> ) : java.nio.ByteBuffer
+	{
+		var buffer = java.nio.ByteBuffer.allocate( array.length );
 		for ( i in 0...array.length ) 
 		{
 			buffer.put( i, array[i] );

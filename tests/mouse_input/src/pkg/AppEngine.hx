@@ -27,7 +27,7 @@ class AppEngine extends NormanApp
 		config.targetScreenHeight = 720;
 		config.targetScreenWidth = 1280;
 		
-		super();
+		super( config );
 	}
 	
 	override public function init( renderer : IRenderContext ) 

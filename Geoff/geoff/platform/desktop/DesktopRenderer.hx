@@ -19,7 +19,6 @@ class DesktopRenderer implements IRenderContext
 	
 	public function new() 
 	{
-		
 	}
 	
 	public function init() : Void 
@@ -45,7 +44,12 @@ class DesktopRenderer implements IRenderContext
 	
 	public function uploadShader( shader : Shader ) : Void
 	{
-		shader.program = _internalRenderer.get_ref().compileShader( cpp.Pointer.addressOf( shader.vertexSource ), cpp.Pointer.addressOf( shader.fragmentSource ) );
+		shader.program = _internalRenderer.get_ref().compileShader( shader );
+	}	
+	
+	public function destroyShader( shader : Shader ) : Void
+	{
+		_internalRenderer.get_ref().destroyShader( shader );
 	}	
 	
 	
@@ -98,19 +102,24 @@ class DesktopRenderer implements IRenderContext
 		return texture;
 	}
 	
-	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : UInt8Array ) : Texture
+	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Array<Int> ) : Texture
 	{
 		var texture : Texture = new Texture( id );
 		texture.width = width;
 		texture.height = height;
 		texture.pixels = pixels;
-		_internalRenderer.get_ref().createTextureFromPixels( texture );
+		_internalRenderer.get_ref().createTexture( texture );
 		return texture;
 	}
 	
 	public function uploadTexture( texture : Texture ) : Void 
 	{
 		_internalRenderer.get_ref().uploadTexture( texture );
+	}
+	
+	public function destroyTexture( texture : Texture ) : Void 
+	{
+		_internalRenderer.get_ref().destroyTexture( texture );
 	}
 	
 	
