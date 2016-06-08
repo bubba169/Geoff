@@ -1,6 +1,6 @@
 package geoff.renderer;
 import geoff.utils.Color;
-import haxe.io.UInt8Array;
+import haxe.io.Bytes;
 
 /**
  * @author Simon
@@ -23,7 +23,7 @@ interface IRenderContext
 	public function getError() : Int;
 	
 	public function createTextureFromAsset( path : String ) : Texture;
-	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Array<Int> ) : Texture;
+	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Bytes ) : Texture;
 	public function uploadTexture( texture : Texture ) : Void;
 	public function destroyTexture( texture : Texture ) : Void;
 	

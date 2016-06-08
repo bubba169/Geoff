@@ -9,6 +9,8 @@
 #include <IL/il.h>
 
 #include <hxcpp.h>
+#include <haxe/io/Bytes.h>
+
 #include <geoff/renderer/RenderBatch.h>
 #include <geoff/renderer/Shader.h>
 #include <geoff/renderer/ShaderAttribute.h>
@@ -26,7 +28,7 @@ namespace geoff
 			
 			void clear( float r, float g, float b, float a );
 			int compileShader( geoff::renderer::Shader );
-			int destroyShader( geoff::renderer::Shader );
+			void destroyShader( geoff::renderer::Shader );
 			
 			void beginRender( int w, int h );
 			void renderBatch( geoff::renderer::RenderBatch batch );
@@ -35,11 +37,10 @@ namespace geoff
 			void pushRenderTarget( geoff::renderer::Texture texture );
 			void popRenderTarget( );
 			
-			void createTextureFromImage( geoff::renderer::Texture );
-			void createTextureFromPixels( geoff::renderer::Texture );
+			void createTextureFromAsset( geoff::renderer::Texture );
+			void createTexture( geoff::renderer::Texture );
 			void uploadTexture( geoff::renderer::Texture );
 			void destroyTexture( geoff::renderer::Texture );
-			void reloadTexture( geoff::renderer::Texture );
 			
 			int getError();
 			

@@ -5,6 +5,7 @@ import geoff.renderer.RenderBatch;
 import geoff.renderer.Shader;
 import geoff.renderer.Texture;
 import geoff.utils.Color;
+import haxe.io.Bytes;
 import haxe.io.UInt8Array;
 
 /**
@@ -44,7 +45,7 @@ class DesktopRenderer implements IRenderContext
 	
 	public function uploadShader( shader : Shader ) : Void
 	{
-		shader.program = _internalRenderer.get_ref().compileShader( shader );
+		_internalRenderer.get_ref().compileShader( shader );
 	}	
 	
 	public function destroyShader( shader : Shader ) : Void
@@ -102,7 +103,7 @@ class DesktopRenderer implements IRenderContext
 		return texture;
 	}
 	
-	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Array<Int> ) : Texture
+	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Bytes ) : Texture
 	{
 		var texture : Texture = new Texture( id );
 		texture.width = width;

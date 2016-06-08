@@ -8,6 +8,8 @@ import geoff.utils.Assets;
 import geoff.utils.Color;
 import uk.co.mojaworks.norman.NormanApp;
 import uk.co.mojaworks.norman.data.NormanConfigData;
+import uk.co.mojaworks.norman.factory.GameObject;
+import uk.co.mojaworks.norman.factory.SpriteFactory;
 
 /**
  * ...
@@ -30,27 +32,12 @@ class AppEngine extends NormanApp
 		super( config );
 	}
 	
-	override public function init( renderer : IRenderContext ) 
+	override function onStartupComplete() 
 	{
-		trace( Assets.getText( "test/hello.txt" ) );
+		super.onStartupComplete();
 		
-		trace( Key.SPACE );
-	}
-	
-	override public function update( renderer : IRenderContext, seconds : Float ) 
-	{
-		renderer.clear( Color.GREEN );
-	}
-	
-	override public function resize(width:Int, height:Int) 
-	{
-		_width = width;
-		_height = height;
-	}
-	
-	override public function onPointerDown(pointerId:Int, button : PointerButton, x:Int, y:Int):Void 
-	{
-		
+		var square : GameObject = SpriteFactory.createImageSpriteFromAsset( "test/bug.png", "image" );
+		core.view.root.transform.addChild( square.transform );
 	}
 	
 	
