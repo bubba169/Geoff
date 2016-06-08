@@ -209,7 +209,7 @@ namespace geoff
 		
 	}
 
-	void GeoffRenderer::createTexture( geoff::renderer::Texture texture, char* bits )
+	void GeoffRenderer::createTexture( geoff::renderer::Texture texture )
 	{
 		glGenTextures( 1, (GLuint*)&(texture->textureId) );
 	}
