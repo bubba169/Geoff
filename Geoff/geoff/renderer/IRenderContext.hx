@@ -17,8 +17,9 @@ interface IRenderContext
 	public function renderBatch( batch : RenderBatch ) : Void;
 	public function endRender( ) : Void;
 	
-	public function pushRenderTarget( target : Texture ) : Void;
-	public function popRenderTarget( ) : Void;
+	public function createFrameBuffer( texture : Texture ) : FrameBuffer;
+	public function bindFrameBuffer( buffer : FrameBuffer ) : Void;
+	public function destroyFrameBuffer( buffer : FrameBuffer ) : Void;
 	
 	public function getError() : Int;
 	

@@ -26,6 +26,7 @@ class RenderBatch
 		indexes = [];
 		textures = [];
 		shader = null;
+		started = false;
 	}
 	
 	public function isCompatible( shader : Shader, textures : Array<Texture> ) : Bool 

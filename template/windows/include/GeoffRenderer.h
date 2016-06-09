@@ -15,6 +15,7 @@
 #include <geoff/renderer/Shader.h>
 #include <geoff/renderer/ShaderAttribute.h>
 #include <geoff/renderer/Texture.h>
+#include <geoff/renderer/FrameBuffer.h>
 
 namespace geoff
 {
@@ -34,8 +35,9 @@ namespace geoff
 			void renderBatch( geoff::renderer::RenderBatch batch );
 			void endRender();
 			
-			void pushRenderTarget( geoff::renderer::Texture texture );
-			void popRenderTarget( );
+			void createFrameBuffer( geoff::renderer::FrameBuffer buffer );
+			void bindFrameBuffer( geoff::renderer::FrameBuffer buffer );
+			void destroyFrameBuffer( geoff::renderer::FrameBuffer buffer );
 			
 			void createTextureFromAsset( geoff::renderer::Texture );
 			void createTexture( geoff::renderer::Texture );

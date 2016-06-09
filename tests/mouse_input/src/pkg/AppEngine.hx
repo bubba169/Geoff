@@ -36,8 +36,14 @@ class AppEngine extends NormanApp
 	{
 		super.onStartupComplete();
 		
-		var square : GameObject = SpriteFactory.createImageSpriteFromAsset( "test/bug.png", "image" );
-		core.view.root.transform.addChild( square.transform );
+		var fb : GameObject = SpriteFactory.createRenderTexture( 200, 200, "render" );
+		fb.transform.x = 200;
+		//fb.transform.rotationDegrees = 45;
+		core.view.root.transform.addChild( fb.transform );
+		
+		var square : GameObject = SpriteFactory.createImageSpriteFromAsset( Assets.getPath("test/bug.png"), "image" );
+		square.transform.rotationDegrees = 45;
+		fb.transform.addChild( square.transform );
 	}
 	
 	

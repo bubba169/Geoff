@@ -204,7 +204,6 @@ namespace geoff
 		
 		createTexture( texture );
 		
-		glBindTexture( GL_TEXTURE_2D, 0 );
 		ilBindImage(0);
 		ilDeleteImages( 1, &imageName );
 		
@@ -231,6 +230,40 @@ namespace geoff
 		glDeleteTextures( 1, (GLuint*)&(texture->textureId) );
 	}
 	
+
+	/**
+	 * Framebuffers
+	 */
+
+	void GeoffRenderer::createFrameBuffer( geoff::renderer::FrameBuffer target )
+	{
+		glCreateFramebuffers( 1, (GLuint*)&(target->id));
+		glBindFramebuffer( GL_FRAMEBUFFER, target->id );
+		glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, target->texture->textureId, 0 );
+		glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+
+	}
+
+	void GeoffRenderer::bindFrameBuffer( geoff::renderer::FrameBuffer target )
+	{
+		if ( target != null() )
+		{
+			glBindFramebuffer( GL_FRAMEBUFFER, target->id );
+			_setupViewport( target->texture->width, target->texture->height, false );
+		}
+		else
+		{
+			glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+			_setupViewport( _w, _h, true );
+		}
+	}
+
+	void GeoffRenderer::destroyFrameBuffer( geoff::renderer::FrameBuffer target )
+	{
+		glDeleteFramebuffers( 1, (GLuint*)&(target->id) );
+	}
+
+
 	/**
 	 * Privates
 	 */

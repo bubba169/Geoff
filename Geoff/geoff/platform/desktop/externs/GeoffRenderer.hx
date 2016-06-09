@@ -1,4 +1,5 @@
 package geoff.platform.desktop.externs;
+import geoff.renderer.FrameBuffer;
 import geoff.renderer.RenderBatch;
 import geoff.renderer.Shader;
 import geoff.renderer.Texture;
@@ -24,8 +25,9 @@ extern class GeoffRenderer
 	public function renderBatch( batch : RenderBatch ) : Void;
 	public function endRender( ) : Void;
 	
-	public function pushRenderTarget( target : Texture ) : Void;
-	public function popRenderTarget( ) : Void;
+	public function createFrameBuffer( target : FrameBuffer ) : Void;
+	public function bindFrameBuffer( target : FrameBuffer ) : Void;
+	public function destroyFrameBuffer( target : FrameBuffer ) : Void;
 	
 	public function getError() : Int;
 	

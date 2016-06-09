@@ -1,5 +1,6 @@
 package geoff.platform.desktop;
 import geoff.platform.desktop.externs.GeoffRenderer;
+import geoff.renderer.FrameBuffer;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
 import geoff.renderer.Shader;
@@ -82,13 +83,24 @@ class DesktopRenderer implements IRenderContext
 	 * Framebuffer
 	 */
 	
-	public function pushRenderTarget( target : Texture ) : Void 
+	public function createFrameBuffer( texture : Texture ) : FrameBuffer 
 	{
+		var frameBuffer = new FrameBuffer( );
+		frameBuffer.texture = texture;
+		_internalRenderer.get_ref().createFrameBuffer( frameBuffer );
+		return frameBuffer;
 	}
 	
-	public function popRenderTarget( ) : Void
+	public function bindFrameBuffer( target : FrameBuffer ) : Void 
 	{
+		_internalRenderer.get_ref().bindFrameBuffer( target );
 	}
+	
+	public function destroyFrameBuffer( target : FrameBuffer ) : Void 
+	{
+		_internalRenderer.get_ref().destroyFrameBuffer( target );
+	}
+	
 	
 	
 	/**
