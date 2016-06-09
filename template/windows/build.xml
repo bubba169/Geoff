@@ -10,7 +10,7 @@
 		<file name="src/GeoffRenderer.cpp"/>
 	</files>
 
-	<target id="default" output="hello" tool="linker" toolid="exe">
+	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">
 		
 		<flag value="/NODEFAULTLIB:LIBCMT" />
 		<lib name="DevIL.lib"/>

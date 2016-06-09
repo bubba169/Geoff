@@ -15,20 +15,20 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="src" />
+    <class path="." />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="windows&#xA;static_link&#xA;HX_WINDOWS&#xA;ABI=-MD&#xA;geoff_cpp" />
+    <option directives="" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="pkg.Main" />
     <option enabledebug="False" />
-    <option additional="-debug" />
+    <option additional="" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="norman" />
+    <!-- example: <library name="..." /> -->
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
@@ -39,14 +39,14 @@
     <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand>haxelib run geoff $(TargetBuild) $(BuildConfig)</preBuildCommand>
+  <preBuildCommand>haxelib run geoff build $(TargetBuild) $(BuildConfig)</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="Unknown" />
-    <option testMovieCommand="" />
+    <option testMovie="Custom" />
+    <option testMovieCommand="haxelib run geoff run windows" />
   </options>
   <!-- Plugin storage -->
   <storage />

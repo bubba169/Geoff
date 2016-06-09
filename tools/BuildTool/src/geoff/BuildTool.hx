@@ -14,6 +14,19 @@ import sys.io.Process;
 class BuildTool 
 {
 	
+	public static var ACTION_CLEAN : Int = 1;
+	public static var ACTION_BUILD : Int = 2;
+	public static var ACTION_RUN : Int = 4;
+	public static var ACTION_UPDATE : Int = 8;
+	
+	public static var actions : Map<String,Int> = [
+		"clean" => ACTION_CLEAN,
+		"build" => ACTION_BUILD + ACTION_UPDATE,
+		"update" => ACTION_UPDATE,
+		"run" => ACTION_RUN,
+		"test" => ACTION_UPDATE + ACTION_BUILD + ACTION_RUN
+	];
+	
 	static function main() 
 	{
 		var tool = new BuildTool();
@@ -74,11 +87,18 @@ class BuildTool
 		
 		Sys.stdout().writeString("\n\nGeoff build tool. Version 0.0.1");
 		
+		if ( !actions.exists( Sys.args()[0] ) )
+		{
+			trace( "Please specify an action!");
+			return;
+		}
+		
 		var projectDirectory = Sys.args()[ Sys.args().length - 1 ];
-		var targetPlatform = Sys.args()[0];
+		var action = actions.get( Sys.args()[0] );
+		var targetPlatform = Sys.args()[1];
 		var flags = [];
 		
-		for ( i in 1...Sys.args().length - 1 )
+		for ( i in 2...Sys.args().length - 1 )
 		{
 			if ( i < Sys.args().length - 1 )
 			{
@@ -87,6 +107,7 @@ class BuildTool
 		}
 		
 		Sys.stdout().writeString("\n\nProject Directory: " + projectDirectory );
+		Sys.stdout().writeString("\nAction:            " + action );
 		Sys.stdout().writeString("\nTarget:            " + targetPlatform );
 		Sys.stdout().writeString("\nFlags:             " + flags + "\n\n" );
 		
@@ -102,8 +123,10 @@ class BuildTool
 				
 			case "windows":
 				var builder = new WindowsBuildTool( projectDirectory, flags, config );
-				builder.build();
-				
+					if ( (action & ACTION_CLEAN)> 0 ) builder.clean();
+					if ( (action & ACTION_UPDATE) > 0 ) builder.update();
+					if ( (action & ACTION_BUILD) > 0 ) builder.build();
+					if ( (action & ACTION_RUN) > 0 ) builder.run();				
 		}
 	}
 		

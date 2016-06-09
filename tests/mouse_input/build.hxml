@@ -1,6 +1,6 @@
 -cp src
 -lib norman
--cpp bin\windows\build
+-cpp bin/windows/build
 -main pkg.Main
 -debug
 -D windows
