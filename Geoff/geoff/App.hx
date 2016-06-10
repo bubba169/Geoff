@@ -13,6 +13,7 @@ class App
 	public var platform : Platform;
 	public var delegate : AppDelegate;
 	public var fps : Int = 60;
+	public var hasInit : Bool = false;
 	
 	var _timeOfLastUpdate : Float = 0;
 	var _timeSinceLastTick : Float = 0;
@@ -47,11 +48,13 @@ class App
 		
 		_timeOfLastUpdate = Timer.stamp();
 		_timeSinceLastTick = 0;
+		
+		hasInit = true;
 	}
 	
 	public function update()
 	{
-		_updateTime = Timer.stamp();
+		_updateTime = platform.getTime();
 		_timeSinceLastTick = _updateTime - _timeOfLastUpdate;
 		_timeOfLastUpdate = _updateTime;
 		

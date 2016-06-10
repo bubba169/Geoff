@@ -3,6 +3,7 @@ import geoff.event.EventManager;
 import geoff.platform.android.AndroidRenderer;
 
 import android.app.Activity;
+import java.lang.System;
 
 /**
  * This is a static class that will give access to all of the platform dependant features
@@ -25,5 +26,10 @@ class AndroidPlatform
 	public function setActivity( activity : Activity ) : Void
 	{
 		this.nativeActivity = activity;
+	}
+	
+	public function getTime() : Float
+	{
+		return cast( System.currentTimeMillis(), Float ) / 1000.0;
 	}
 }

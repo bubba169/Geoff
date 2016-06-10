@@ -1,6 +1,7 @@
 package geoff.platform.windows;
 import geoff.event.EventManager;
 import geoff.platform.desktop.DesktopRenderer;
+import haxe.Timer;
 
 /**
  * ...
@@ -21,6 +22,11 @@ class WindowsPlatform
 	{
 		renderer = new DesktopRenderer();
 		eventManager = new EventManager();
+	}
+	
+	public function getTime() : Float
+	{
+		return Timer.stamp();
 	}
 	
 }

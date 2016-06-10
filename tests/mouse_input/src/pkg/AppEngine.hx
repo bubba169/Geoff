@@ -38,7 +38,9 @@ class AppEngine extends NormanApp
 		super.onStartupComplete();
 		
 		var square : GameObject = SpriteFactory.createFilledSprite( Color.BLUE, 100, 100 );
-		square.transform.rotationDegrees = 45;
+		square.transform.x = 300;
+		square.transform.y = 300;
+		square.add( new SquareAnimation() );
 		core.view.root.transform.addChild( square.transform );
 		
 		var fps : GameObject = UIFactory.createFPS();

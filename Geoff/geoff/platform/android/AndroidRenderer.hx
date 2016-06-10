@@ -132,17 +132,9 @@ class AndroidRenderer implements IRenderContext
 	
 	public function renderBatch(batch:RenderBatch):Void 
 	{
-		
-		trace( "Vertices:");
-		for ( i in 0...6 )
-		{
-			trace ( batch.getRawVertices().get(i) );
-		}
-		
+				
 		GLES20.glBindBuffer( GLES20.GL_ARRAY_BUFFER, _vertexBuffer );
 		GLES20.glBufferData( GLES20.GL_ARRAY_BUFFER, batch.vertices.length * 4, batch.getRawVertices(), GLES20.GL_STREAM_DRAW );  
-		
-		trace( "Indexes:", batch.getRawIndexes().get(0), batch.getRawIndexes().get(1), batch.getRawIndexes().get(2) );
 		
 		GLES20.glBindBuffer( GLES20.GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
 		GLES20.glBufferData( GLES20.GL_ELEMENT_ARRAY_BUFFER, batch.indexes.length * 2, batch.getRawIndexes(), GLES20.GL_STREAM_DRAW );  
@@ -233,10 +225,14 @@ class AndroidRenderer implements IRenderContext
 		var pixels : ByteBuffer = ByteBuffer.allocate( texture.width * texture.height * 4 );
 		bitmap.setPremultiplied( false );
 		bitmap.copyPixelsToBuffer( pixels );
+		pixels.rewind();
 		
 		
-		texture.pixels = Bytes.alloc( texture.width * texture.height * 4 );
-		pixels.get( texture.pixels.getData() );
+		texture.pixels = Bytes.alloc( pixels.remaining() );
+		
+		trace("pixels remaining", pixels.remaining(), pixels.position() );
+		
+		pixels.get( texture.pixels.getData(), 0, pixels.remaining() );
 		
 		var idBuffer : IntBuffer = IntBuffer.allocate(1);
 		GLES20.glGenTextures( 1, idBuffer );

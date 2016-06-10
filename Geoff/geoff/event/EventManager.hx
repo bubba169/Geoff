@@ -24,6 +24,12 @@ class EventManager
 		_eventsQueue = new Array<Event>();
 	}
 	
+	public function sendEvent( event : String )
+	{
+		//trace( event, data );
+		_eventsQueue.push( new Event( event, null ) );
+	}
+	
 	public function sendEventInt( event : String, data : IntArray )
 	{
 		//trace( event, data );
@@ -55,6 +61,9 @@ class EventManager
 				case EventType.PointerScroll:
 					var data : IntArray = event.data;
 					delegate.onPointerScroll( data[0], data[1], data[2] );
+					
+				case EventType.ContextCreated:
+					delegate.onContextCreated( App.current.platform.renderer );
 			}
 		}
 		

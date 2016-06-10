@@ -1,6 +1,7 @@
 package geoff.helpers;
 import sys.FileSystem;
 import sys.io.File;
+import sys.io.Process;
 
 /**
  * ...
@@ -45,6 +46,22 @@ class DirectoryHelper
 			
 			FileSystem.deleteDirectory( dir );
 		}
+	}
+	
+	
+	public static function getHaxelibDir( lib : String ) 
+	{
+		var process : Process = new Process( "haxelib", ["path", lib] );
+		var line : String = process.stdout.readLine();
+		while ( line != null )
+		{
+			if ( !StringTools.startsWith( line, "-" ) )
+			{
+				return line;
+			}
+		}
+		
+		return "";
 	}
 	
 }

@@ -105,7 +105,11 @@ class WindowsBuildTool
 		TemplateHelper.processTemplates( binDirectory + "project/", templateConstants );
 		
 		//Compile project to java
-		compileHaxe( );
+		if ( compileHaxe( ) != 0 ) 
+		{
+			trace("Haxe Compilation could not be completed!");
+			return;
+		}
 		
 		copyLibs( );
 		copyAssets( );
@@ -115,10 +119,10 @@ class WindowsBuildTool
 	}
 	
 	
-	function compileHaxe( )
+	function compileHaxe( ) : Int
 	{
 		Sys.setCwd( projectDirectory );
-		Sys.command( "haxe", [ "build.hxml"] );
+		return Sys.command( "haxe", [ "build.hxml"] );
 	}
 	
 	function copyAssets( )
@@ -127,7 +131,7 @@ class WindowsBuildTool
 		
 		var libArray : Array<String> = config.project.haxelib;
 		for ( lib in libArray ) {
-			var libdir_assets = new Process( "haxelib", ["path", lib] ).stdout.readLine().toString() + "assets";
+			var libdir_assets = DirectoryHelper.getHaxelibDir(lib) + "assets";
 			
 			trace("Looking for assets in " + libdir_assets );
 			

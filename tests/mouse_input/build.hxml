@@ -1,7 +1,7 @@
 -cp src
 -lib norman
 -java bin/android/build
--java-lib C:\Development\AndroidSDK\platforms/android-21/android.jar
+-java-lib D:\Development\AndroidSDK\platforms/android-21/android.jar
 -D java-android
 -main pkg.Main
 -debug

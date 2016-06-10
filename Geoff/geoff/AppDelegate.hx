@@ -27,4 +27,6 @@ class AppDelegate
 	
 	public function onKeyDown( key : Int, modifiers : Int ) : Void {};
 	public function onKeyUp( key : Int, modifiers : Int ) : Void {};
+	
+	public function onContextCreated( context : IRenderContext ) : Void {};
 }

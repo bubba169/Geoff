@@ -7,6 +7,7 @@ import android.opengl.GLES20;
 
 import android.opengl.GLSurfaceView;
 import geoff.App;
+import android.util.Log;
 
 public class GeoffGLRenderer implements GLSurfaceView.Renderer
 {
@@ -31,6 +32,16 @@ public class GeoffGLRenderer implements GLSurfaceView.Renderer
 
 	public void onSurfaceCreated( GL10 glUnused, EGLConfig config )
 	{
-		app.init( );
+
+		Log.v("Renderer", "SurfaceCreated " + App.current.hasInit );
+
+		if ( !App.current.hasInit )
+		{
+			app.init( );
+		}
+		else
+		{
+			app.platform.eventManager.sendEvent( "ContextCreated" );
+		}
 	}
 }
