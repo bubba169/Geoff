@@ -51,8 +51,14 @@ class EventManager
 				case EventType.PointerMove:
 					var data : IntArray = event.data;
 					delegate.onPointerMove( data[0], data[1], data[2] );
+				
+				case EventType.PointerScroll:
+					var data : IntArray = event.data;
+					delegate.onPointerScroll( data[0], data[1], data[2] );
 			}
 		}
+		
+		_eventsQueue = [];
 	}
 	
 }

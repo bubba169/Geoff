@@ -63,6 +63,16 @@ void geoff_mouse_move_callback( GLFWwindow* window, double x, double y )
 	geoff_app->platform->eventManager->sendEventInt( ::String("PointerMove"), array );
 }
 
+void geoff_mouse_scroll_callback( GLFWwindow* window, double x, double y )
+{
+	Array< int > array = Array_obj< int >::__new();
+	array->push(0);
+	array->push((int)x);
+	array->push((int)y);
+	
+	geoff_app->platform->eventManager->sendEventInt( ::String("PointerScroll"), array );
+}
+
 
 void geoff_key_callback( GLFWwindow* window, int key, int scancode, int action, int mods )
 {	
@@ -103,7 +113,8 @@ int main( void )
 	}
 
 	glfwSetFramebufferSizeCallback( window, geoff_callback_framebuffer_size );
-	glfwSetMouseButtonCallback( window, geoff_mouse_button_callback );	
+	glfwSetMouseButtonCallback( window, geoff_mouse_button_callback );
+	glfwSetScrollCallback( window, geoff_mouse_scroll_callback );	
 	glfwSetCursorPosCallback( window, geoff_mouse_move_callback );	
 	glfwSetKeyCallback( window, geoff_key_callback );
 	glfwMakeContextCurrent(window);

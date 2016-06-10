@@ -37,6 +37,7 @@ class AppEngine extends NormanApp
 		super.onStartupComplete();
 		
 		var fb : GameObject = SpriteFactory.createRenderTexture( 200, 200, "render" );
+		fb.add( new UIListener() );
 		fb.transform.x = 200;
 		//fb.transform.rotationDegrees = 45;
 		core.view.root.transform.addChild( fb.transform );

@@ -18,13 +18,23 @@ class Vector2
 	
 	public function toString() : String 
 	{
-		return "($x,$y)";
+		return "("+x+","+y+")";
 	}
 	
 	public function setTo(x:Float, y:Float) : Void
 	{
 		this.x = x;
 		this.y = y;
+	}
+	
+	public function distanceSquared() : Float 
+	{
+		return (x * x) + (y * y);
+	}
+	
+	public function distance() : Float 
+	{
+		return Math.sqrt( distanceSquared() );
 	}
 	
 }

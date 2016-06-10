@@ -23,6 +23,7 @@ class AppDelegate
 	public function onPointerDown( pointerId : Int, button : PointerButton, x : Int, y : Int ) : Void {};
 	public function onPointerUp( pointerId : Int, button : PointerButton, x : Int, y : Int ) : Void {};
 	public function onPointerMove( pointerId : Int, x : Int, y : Int ) : Void {};
+	public function onPointerScroll( pointerId : Int, x : Int, y : Int ) : Void {};
 	
 	public function onKeyDown( key : Int, modifiers : Int ) : Void {};
 	public function onKeyUp( key : Int, modifiers : Int ) : Void {};

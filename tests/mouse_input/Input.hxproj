@@ -19,12 +19,12 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="windows&#xA;static_link&#xA;HX_WINDOWS&#xA;ABI=-MD&#xA;geoff_cpp&#xA;no_console" />
+    <option directives="windows&#xA;static_link&#xA;HX_WINDOWS&#xA;ABI=-MD&#xA;geoff_cpp" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="pkg.Main" />
     <option enabledebug="False" />
-    <option additional="" />
+    <option additional="-debug" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

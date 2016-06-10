@@ -2,9 +2,9 @@
 -lib norman
 -cpp bin/windows/build
 -main pkg.Main
+-debug
 -D windows
 -D static_link
 -D HX_WINDOWS
 -D ABI=-MD
 -D geoff_cpp
--D no_console

@@ -10,6 +10,7 @@ package geoff.event;
 	var PointerDown = "PointerDown";
 	var PointerMove = "PointerMove";
 	var PointerUp = "PointerUp";
+	var PointerScroll = "PointerScroll";
 	var KeyDown = "KeyDown";
 	var KeyUp = "KeyUp";
 }
