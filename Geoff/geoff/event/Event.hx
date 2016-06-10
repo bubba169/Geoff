@@ -7,12 +7,19 @@ package geoff.event;
 @:enum abstract EventType(String) to String from String
 {
 	var Resize = "Resize";
+	
+	var Deactivate = "Deactivate";
+	var Activate = "Activate";
+	var ContextCreated = "ContextCreated";
+	
 	var PointerDown = "PointerDown";
 	var PointerMove = "PointerMove";
 	var PointerUp = "PointerUp";
 	var PointerScroll = "PointerScroll";
+	
 	var KeyDown = "KeyDown";
 	var KeyUp = "KeyUp";
+	
 }
 
 class Event 

@@ -10,6 +10,7 @@ import uk.co.mojaworks.norman.NormanApp;
 import uk.co.mojaworks.norman.data.NormanConfigData;
 import uk.co.mojaworks.norman.factory.GameObject;
 import uk.co.mojaworks.norman.factory.SpriteFactory;
+import uk.co.mojaworks.norman.factory.UIFactory;
 
 /**
  * ...
@@ -36,15 +37,12 @@ class AppEngine extends NormanApp
 	{
 		super.onStartupComplete();
 		
-		var fb : GameObject = SpriteFactory.createRenderTexture( 200, 200, "render" );
-		fb.add( new UIListener() );
-		fb.transform.x = 200;
-		//fb.transform.rotationDegrees = 45;
-		core.view.root.transform.addChild( fb.transform );
-		
-		var square : GameObject = SpriteFactory.createImageSpriteFromAsset( Assets.getPath("test/bug.png"), "image" );
+		var square : GameObject = SpriteFactory.createFilledSprite( Color.BLUE, 100, 100 );
 		square.transform.rotationDegrees = 45;
-		fb.transform.addChild( square.transform );
+		core.view.root.transform.addChild( square.transform );
+		
+		var fps : GameObject = UIFactory.createFPS();
+		core.view.root.transform.addChild( fps.transform );
 	}
 	
 	

@@ -43,14 +43,5 @@ public class MainActivity extends Activity
 		
         setContentView( glView );
 
-        EditText editBox = new EditText( getApplicationContext() );
-        editBox.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-		editBox.setText("Hello Matron");
-		addContentView(editBox, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-		editBox.setFocusableInTouchMode(true);
-		editBox.requestFocus();
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
     }
 }

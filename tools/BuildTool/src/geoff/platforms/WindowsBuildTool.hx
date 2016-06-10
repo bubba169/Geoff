@@ -123,9 +123,14 @@ class WindowsBuildTool
 	
 	function copyAssets( )
 	{		
+		trace("Looking for assets in " + config.project.haxelib );
+		
 		var libArray : Array<String> = config.project.haxelib;
 		for ( lib in libArray ) {
-			var libdir_assets = new Process( "haxelib", ["path", "geoff"] ).stdout.readLine().toString() + "assets";
+			var libdir_assets = new Process( "haxelib", ["path", lib] ).stdout.readLine().toString() + "assets";
+			
+			trace("Looking for assets in " + libdir_assets );
+			
 			if ( FileSystem.exists( libdir_assets ) && FileSystem.isDirectory( libdir_assets ) )
 			{
 				DirectoryHelper.copyDirectory( libdir_assets + "/", binDirectory + "/project/assets/" );

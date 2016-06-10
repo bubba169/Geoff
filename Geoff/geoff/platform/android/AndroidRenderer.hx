@@ -1,9 +1,13 @@
 package geoff.platform.android;
+import geoff.renderer.FrameBuffer;
+import geoff.renderer.Shader;
 import geoff.renderer.Texture;
 import geoff.utils.Color;
+import haxe.io.Bytes;
 
 import java.nio.IntBuffer;
 import java.nio.FloatBuffer;
+import java.nio.ByteBuffer;
 import java.io.InputStream;
 import java.NativeArray;
 
@@ -23,8 +27,6 @@ import geoff.renderer.RenderBatch;
  */
 class AndroidRenderer implements IRenderContext
 {
-	public var clearColor : Color = Color.RED;
-	
 	var _vertexBuffer : Int;
 	var _indexBuffer : Int;
 	var _w : Int;
@@ -53,7 +55,7 @@ class AndroidRenderer implements IRenderContext
 	
 	
 		
-	public function clear():Void 
+	public function clear( clearColor : Color ):Void 
 	{
 		GLES20.glClearColor( clearColor.r / 255, clearColor.g / 255, clearColor.b / 255, clearColor.a );
 		GLES20.glClear( GLES20.GL_COLOR_BUFFER_BIT );
@@ -61,23 +63,24 @@ class AndroidRenderer implements IRenderContext
 	
 	
 	
-	public function compileShader(vsSource:String, fsSource:String):Int 
+	public function uploadShader( shader : Shader ) : Void 
 	{
 		var status : IntBuffer = IntBuffer.allocate(1);
 		
 		var vs : Int = GLES20.glCreateShader( GLES20.GL_VERTEX_SHADER );
-		GLES20.glShaderSource( vs, vsSource );
+		GLES20.glShaderSource( vs, shader.vertexSource );
 		GLES20.glCompileShader( vs );
 		GLES20.glGetShaderiv( vs, GLES20.GL_COMPILE_STATUS, status );
 		
 		if ( status.equals(0) ) 
 		{
 			GLES20.glDeleteShader( vs );
-			return -1;
+			shader.program = -1;
+			return;
 		}
 		
 		var fs : Int = GLES20.glCreateShader( GLES20.GL_FRAGMENT_SHADER );
-		GLES20.glShaderSource( fs, fsSource );
+		GLES20.glShaderSource( fs, shader.fragmentSource );
 		GLES20.glCompileShader( fs );
 		GLES20.glGetShaderiv( fs, GLES20.GL_COMPILE_STATUS, status );
 		
@@ -85,7 +88,8 @@ class AndroidRenderer implements IRenderContext
 		{
 			GLES20.glDeleteShader( vs );
 			GLES20.glDeleteShader( fs );
-			return -2;
+			shader.program = -2;
+			return;
 		}
 		
 		var program : Int = GLES20.glCreateProgram();
@@ -100,10 +104,17 @@ class AndroidRenderer implements IRenderContext
 		if ( status.equals(0) ) 
 		{
 			GLES20.glDeleteProgram( program );
-			return -5;
+			shader.program = -5;
+			return;
 		}
 		
-		return program;
+		shader.program = program;
+		
+	}
+	
+	public function destroyShader( shader : Shader ) : Void 
+	{
+		GLES20.glDeleteProgram( shader.program );
 	}
 	
 	
@@ -145,7 +156,7 @@ class AndroidRenderer implements IRenderContext
 		{
 			var uTexture : Int = GLES20.glGetUniformLocation( batch.shader.program, "uTexture" + i );
 			GLES20.glActiveTexture( GLES20.GL_TEXTURE0 + i );
-			GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, batch.textures[i].id );
+			GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, batch.textures[i].textureId );
 			GLES20.glUniform1i( uTexture, i );
 		}
 		
@@ -184,28 +195,34 @@ class AndroidRenderer implements IRenderContext
 		
 	}
 	
-	public function pushRenderTarget(target:Texture):Void 
-	{
-		
-	}
-	
-	public function popRenderTarget():Void 
-	{
-		
-	}
-	
 	public function getError():Int 
 	{
 		return GLES20.glGetError();
 		
 	}
 	
-	public function createTexture( path : String ):Texture 
+	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Bytes ) : Texture 
+	{
+		var idBuffer : IntBuffer = IntBuffer.allocate(1);
+		GLES20.glGenTextures( 1, idBuffer );
+		
+		var texture : Texture = new Texture( id );
+		texture.textureId = idBuffer.get(0);
+		texture.width = width;
+		texture.height = height;
+		texture.pixels = pixels;
+		
+		return texture;
+		
+	}
+	
+	public function createTextureFromAsset( path : String ) : Texture  
 	{
 		var texture : Texture = new Texture( path );
+		texture.asset = path;
 		
 		var assetManager : AssetManager = App.current.platform.nativeActivity.getAssets();
-		var is : InputStream = assetManager.open( path );
+		var is : InputStream = assetManager.open( texture.asset );
 		
 		var bitmap : Bitmap = BitmapFactory.decodeStream( is );
 		is.close();
@@ -213,22 +230,85 @@ class AndroidRenderer implements IRenderContext
 		texture.width = bitmap.getWidth();
 		texture.height = bitmap.getHeight();
 		
+		var pixels : ByteBuffer = ByteBuffer.allocate( texture.width * texture.height * 4 );
+		bitmap.setPremultiplied( false );
+		bitmap.copyPixelsToBuffer( pixels );
+		
+		
+		texture.pixels = Bytes.alloc( texture.width * texture.height * 4 );
+		pixels.get( texture.pixels.getData() );
+		
 		var idBuffer : IntBuffer = IntBuffer.allocate(1);
 		GLES20.glGenTextures( 1, idBuffer );
-		texture.id = idBuffer.get(0);
-		
-		GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, texture.id );
-		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE );
-		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE );
-		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR );
-		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR );
-		
-		GLUtils.texImage2D( GLES20.GL_TEXTURE_2D, 0, bitmap, 0 ); 
+		texture.textureId = idBuffer.get(0);
 		
 		bitmap.recycle();
 		
 		return texture;
 		
+	}
+	
+	public function uploadTexture( texture : Texture ) : Void
+	{
+		
+		GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, texture.textureId );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR );
+		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR );
+		GLES20.glTexImage2D( GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, texture.width, texture.height, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, ByteBuffer.wrap( texture.pixels.getData() ) ); 
+		GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, 0 );		
+	}
+	
+	
+	public function destroyTexture( texture : Texture ) : Void
+	{
+		var buffer : IntBuffer = IntBuffer.allocate(1);
+		buffer.put( 0, texture.textureId );
+		GLES20.glDeleteTextures( 1, buffer );
+	}
+	
+	
+	/**
+	 * FrameBuffers
+	 */
+	
+	public function createFrameBuffer( texture : Texture ) : FrameBuffer 
+	{
+		var target : FrameBuffer = new FrameBuffer();
+		target.texture = texture;
+		
+		var buffer : IntBuffer = IntBuffer.allocate( 1 );
+		GLES20.glGenFramebuffers( 1, buffer );
+		
+		target.id = buffer.get(0);
+		
+		GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, target.id );
+		GLES20.glFramebufferTexture2D( GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GLES20.GL_TEXTURE_2D, target.texture.textureId, 0 );
+		GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, 0 );
+		
+		return target;
+	}
+	
+	public function bindFrameBuffer( target : FrameBuffer ) : Void 
+	{
+		if ( target != null ) 
+		{
+			GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, target.id );
+			setupViewport( target.texture.width, target.texture.height, false );
+		}
+		else
+		{
+			GLES20.glBindFramebuffer( GLES20.GL_FRAMEBUFFER, 0 );
+			setupViewport( _w, _h, true );
+		}
+	}
+	
+	public function destroyFrameBuffer( target : FrameBuffer ) : Void 
+	{
+		var buffer : IntBuffer = IntBuffer.allocate( 1 );
+		buffer.put( 0, target.id );
+		GLES20.glDeleteFramebuffers( 1, buffer );
 	}
 	
 	

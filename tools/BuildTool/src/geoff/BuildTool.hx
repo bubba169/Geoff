@@ -119,14 +119,17 @@ class BuildTool
 		{
 			case "android":
 				var builder = new AndroidBuildTool( projectDirectory, flags, config, buildNumber );
-				builder.build();
+				if ( (action & ACTION_CLEAN)> 0 ) builder.clean();
+				if ( (action & ACTION_UPDATE) > 0 ) builder.update();
+				if ( (action & ACTION_BUILD) > 0 ) builder.build();
+				if ( (action & ACTION_RUN) > 0 ) builder.run();		
 				
 			case "windows":
 				var builder = new WindowsBuildTool( projectDirectory, flags, config );
-					if ( (action & ACTION_CLEAN)> 0 ) builder.clean();
-					if ( (action & ACTION_UPDATE) > 0 ) builder.update();
-					if ( (action & ACTION_BUILD) > 0 ) builder.build();
-					if ( (action & ACTION_RUN) > 0 ) builder.run();				
+				if ( (action & ACTION_CLEAN)> 0 ) builder.clean();
+				if ( (action & ACTION_UPDATE) > 0 ) builder.update();
+				if ( (action & ACTION_BUILD) > 0 ) builder.build();
+				if ( (action & ACTION_RUN) > 0 ) builder.run();				
 		}
 	}
 		

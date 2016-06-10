@@ -17,9 +17,6 @@ public class GeoffGLView extends GLSurfaceView
 	public GeoffGLView( Context context )
 	{
 		super( context );
-
-		this.setFocusable(true);
-		this.setFocusableInTouchMode(true);
 	}
 
 	public void init( App app )
