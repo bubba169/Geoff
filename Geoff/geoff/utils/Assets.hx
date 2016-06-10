@@ -1,6 +1,7 @@
 package geoff.utils;
 import haxe.io.BufferInput;
 import haxe.io.Bytes;
+import haxe.io.Path;
 import sys.io.File;
 
 /**
@@ -13,7 +14,8 @@ class Assets
 	public static function getPath( asset : String ) : String
 	{
 		#if windows
-			return "assets/" + asset;
+			trace( StringTools.replace( Path.directory(Sys.executablePath()), "\\", "/") + "/assets/" + asset );
+			return StringTools.replace( Path.directory(Sys.executablePath()), "\\", "/") + "/assets/" + asset;
 		#else	
 			return asset;
 		#end

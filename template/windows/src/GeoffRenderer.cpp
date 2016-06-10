@@ -191,6 +191,7 @@ namespace geoff
 	
 	void GeoffRenderer::createTextureFromAsset( geoff::renderer::Texture texture )
 	{
+
 		unsigned int imageName;
 		ilGenImages( 1, &imageName );
 		ilBindImage( imageName );		

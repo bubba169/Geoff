@@ -15,11 +15,11 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="." />
+    <class path="src" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="" />
+    <option directives="windows&#xA;static_link&#xA;HX_WINDOWS&#xA;ABI=-MD&#xA;geoff_cpp&#xA;no_console" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="pkg.Main" />
@@ -28,7 +28,7 @@
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <!-- example: <library name="..." /> -->
+    <library name="norman" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
