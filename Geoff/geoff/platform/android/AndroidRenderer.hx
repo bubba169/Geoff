@@ -144,8 +144,6 @@ class AndroidRenderer implements IRenderContext
 		GLES20.glBindBuffer( GLES20.GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
 		GLES20.glBufferData( GLES20.GL_ELEMENT_ARRAY_BUFFER, batch.indexes.length * 2, batch.getRawIndexes(), GLES20.GL_STREAM_DRAW );  
 		
-		trace( "Rendering batch with shader", batch.shader.program, GLES20.glIsProgram( batch.shader.program ) );
-		
 		GLES20.glUseProgram( batch.shader.program );
 		
 		var projectionUniform : Int = GLES20.glGetUniformLocation( batch.shader.program, "uProjectionMatrix" );

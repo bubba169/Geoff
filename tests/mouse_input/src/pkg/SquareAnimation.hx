@@ -18,7 +18,6 @@ class SquareAnimation extends Animation
 	override public function update(seconds:Float):Void 
 	{
 		super.update(seconds);
-		
 		gameObject.transform.rotation += seconds * 0.5;
 	}
 	

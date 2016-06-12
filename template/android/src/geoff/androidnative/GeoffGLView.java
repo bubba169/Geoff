@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 import android.view.KeyEvent;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.EditorInfo;
 
 import geoff.App;
 
@@ -16,6 +18,9 @@ public class GeoffGLView extends GLSurfaceView
 	public GeoffGLView( Context context )
 	{
 		super( context );
+
+		this.setFocusable(true);
+		this.setFocusableInTouchMode(true);
 	}
 
 	public void init( )
@@ -25,6 +30,8 @@ public class GeoffGLView extends GLSurfaceView
 		
 		renderer = new GeoffGLRenderer( );
 		setRenderer( renderer );
+
+
 
 	}
 	
@@ -39,12 +46,22 @@ public class GeoffGLView extends GLSurfaceView
 		{
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
-				App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
+				App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
+
+				requestFocus();
+
+				InputMethodManager keyboard = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		    	keyboard.showSoftInput( this, 0 );
+
 				break;
 				
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
 				App.current.platform.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
+
+				//InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    			//keyboard.showSoftInput( this, 0 );
+
 				break;
 				
 			case MotionEvent.ACTION_MOVE:
@@ -54,7 +71,7 @@ public class GeoffGLView extends GLSurfaceView
 				break;
 		}
 		
-		return true;
+		return false;
 	}
 
 	public boolean onKeyDown( int keyCode, KeyEvent event )
@@ -62,6 +79,13 @@ public class GeoffGLView extends GLSurfaceView
 		Log.v( "Hello", "" + keyCode );
 		Log.v( "Hello", "" + event );
 		return false;
+	}
+
+	@Override
+  	public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+    	InputConnection conn = super.onCreateInputConnection(outAttrs);
+   		outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_FULLSCREEN;
+   		return conn;
 	}
 	
 	
