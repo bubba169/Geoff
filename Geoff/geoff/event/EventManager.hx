@@ -63,6 +63,7 @@ class EventManager
 					delegate.onPointerScroll( data[0], data[1], data[2] );
 					
 				case EventType.ContextCreated:
+					App.current.platform.renderer.onContextCreated();
 					delegate.onContextCreated( App.current.platform.renderer );
 			}
 		}

@@ -4,6 +4,7 @@
       android:versionCode="{{VersionCode}}"
       android:versionName="{{Version}}">
 	  <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 
     <application android:label="{{ProjectName}}" android:icon="@drawable/ic_launcher">
         <activity android:name="geoff.androidnative.MainActivity" android:label="{{ProjectName}}" android:screenOrientation="{{Orientation}}" android:windowSoftInputMode="adjustPan" android:launchMode="singleTask">

@@ -19,7 +19,7 @@ class SquareAnimation extends Animation
 	{
 		super.update(seconds);
 		
-		gameObject.transform.rotation += seconds * 6;
+		gameObject.transform.rotation += seconds * 0.5;
 	}
 	
 }

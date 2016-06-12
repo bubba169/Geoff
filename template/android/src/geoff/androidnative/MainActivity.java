@@ -27,8 +27,6 @@ public class MainActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-    	Log.v( "Renderer", "onCreate" );
-
         super.onCreate(savedInstanceState);
 		
 		activity = this;
@@ -38,12 +36,14 @@ public class MainActivity extends Activity
 		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY );
 		
 		// Call the app entry point
-		{{Main}}.main();
+		if ( App.current == null || !App.current.hasInit ) {
+			{{Main}}.main();
+		}
 		
 		App.current.platform.setActivity( this );
 		
         glView = new GeoffGLView(this);
-        glView.init( App.current );
+        glView.init();
 		
         setContentView( glView );
 
@@ -54,8 +54,6 @@ public class MainActivity extends Activity
 	    super.onPause();  // Always call the superclass method first
 	    glView.onPause();
 
-	    Log.v("Renderer", "onPause");
-
 	    App.current.platform.eventManager.sendEvent("Deactivate");
 	}
 
@@ -63,10 +61,12 @@ public class MainActivity extends Activity
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
 	    glView.onResume();
-
-	    Log.v("Renderer", "onResume");
-
 	    App.current.platform.eventManager.sendEvent("Activate");
+	}
+
+	@Override
+	public void onStop() {
+	    super.onStop();  // Always call the superclass method first
 	}
 
 
