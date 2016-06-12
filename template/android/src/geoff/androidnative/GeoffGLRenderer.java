@@ -44,4 +44,19 @@ public class GeoffGLRenderer implements GLSurfaceView.Renderer
 			app.platform.eventManager.sendEvent( "ContextCreated" );
 		}
 	}
+
+	public void onSurfaceDestroyed( GL10 glUnused, EGLConfig config )
+	{
+
+		Log.v("Renderer", "SurfaceDestroyed " + App.current.hasInit );
+
+		if ( !App.current.hasInit )
+		{
+			app.init( );
+		}
+		else
+		{
+			app.platform.eventManager.sendEvent( "ContextDestroyed" );
+		}
+	}
 }

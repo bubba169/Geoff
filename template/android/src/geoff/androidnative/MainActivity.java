@@ -21,10 +21,14 @@ public class MainActivity extends Activity
 
 	public static Activity activity;
 
+	GeoffGLView glView;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+    	Log.v( "Renderer", "onCreate" );
+
         super.onCreate(savedInstanceState);
 		
 		activity = this;
@@ -38,10 +42,32 @@ public class MainActivity extends Activity
 		
 		App.current.platform.setActivity( this );
 		
-        GeoffGLView glView = new GeoffGLView(this);
+        glView = new GeoffGLView(this);
         glView.init( App.current );
 		
         setContentView( glView );
 
     }
+
+    @Override
+	public void onPause() {
+	    super.onPause();  // Always call the superclass method first
+	    glView.onPause();
+
+	    Log.v("Renderer", "onPause");
+
+	    App.current.platform.eventManager.sendEvent("Deactivate");
+	}
+
+	@Override
+	public void onResume() {
+	    super.onResume();  // Always call the superclass method first
+	    glView.onResume();
+
+	    Log.v("Renderer", "onResume");
+
+	    App.current.platform.eventManager.sendEvent("Activate");
+	}
+
+
 }
