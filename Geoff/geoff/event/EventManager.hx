@@ -41,44 +41,45 @@ class EventManager
 	{
 		var event : Event = null;
 		
-		while ( _eventsQueue.length > 0 )
-		{		
-			
-			event = _eventsQueue.shift( );
-			
-			switch( event.type )
-			{
-				case EventType.Resize:
-					trace( event.type, event.data );
-					var data : IntArray = event.data;
-					delegate.resize( data[0], data[1] );
+		#if geoff_java
+			//java.Lib.lock( _eventsQueue, function() {
+		#end
+				while ( _eventsQueue.length > 0 )
+				{		
 					
-				case EventType.PointerDown:
-					trace( event.type, event.data );
-					var data : IntArray = event.data;
-					delegate.onPointerDown( data[0], data[1], data[2], data[3] );
+					event = _eventsQueue.shift( );
 					
-				case EventType.PointerUp:
-					trace( event.type, event.data );
-					var data : IntArray = event.data;
-					delegate.onPointerUp( data[0], data[1], data[2], data[3] );
-					
-				case EventType.PointerMove:
-					trace( event.type, event.data );
-					var data : IntArray = event.data;
-					delegate.onPointerMove( data[0], data[1], data[2] );
-				
-				case EventType.PointerScroll:
-					trace( event.type, event.data );
-					var data : IntArray = event.data;
-					delegate.onPointerScroll( data[0], data[1], data[2] );
-					
-				case EventType.ContextCreated:
-					trace( event.type, event.data );
-					App.current.platform.renderer.onContextCreated();
-					delegate.onContextCreated( App.current.platform.renderer );
-			}
-		}
+					switch( event.type )
+					{
+						case EventType.Resize:
+							var data : IntArray = event.data;
+							delegate.resize( data[0], data[1] );
+							
+						case EventType.PointerDown:
+							var data : IntArray = event.data;
+							delegate.onPointerDown( data[0], data[1], data[2], data[3] );
+							
+						case EventType.PointerUp:
+							var data : IntArray = event.data;
+							delegate.onPointerUp( data[0], data[1], data[2], data[3] );
+							
+						case EventType.PointerMove:
+							var data : IntArray = event.data;
+							delegate.onPointerMove( data[0], data[1], data[2] );
+						
+						case EventType.PointerScroll:
+							var data : IntArray = event.data;
+							delegate.onPointerScroll( data[0], data[1], data[2] );
+							
+						case EventType.ContextCreated:
+							App.current.platform.renderer.onContextCreated();
+							delegate.onContextCreated( App.current.platform.renderer );
+					}
+				}
+		
+		#if geoff_java
+			//});
+		#end
 		
 	}
 	

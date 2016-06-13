@@ -24,7 +24,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="pkg.Main" />
     <option enabledebug="False" />
-    <option additional="-java-lib D:\Development\AndroidSDK\platforms/android-21/android.jar&#xA;-debug " />
+    <option additional="-java-lib D:\Development\AndroidSDK\platforms/android-21/android.jar&#xA;-debug" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

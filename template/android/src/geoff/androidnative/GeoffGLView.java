@@ -49,13 +49,8 @@ public class GeoffGLView extends GLSurfaceView
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
 
-				queueEvent( new Runnable() {
-					public void run()
-					{
-						//Log.v("Renderer", "Pointer Down");
-						App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
-					}
-				});
+				//Log.v("Renderer", "Pointer Down");
+				App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
 				
 
 				//requestFocus();
@@ -68,13 +63,7 @@ public class GeoffGLView extends GLSurfaceView
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
 
-				queueEvent( new Runnable() {
-					public void run()
-					{
-						//Log.v("Renderer", "Pointer Up");
-						App.current.platform.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
-					}
-				});
+				App.current.platform.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
 
 				//InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     			//keyboard.showSoftInput( this, 0 );
@@ -83,16 +72,10 @@ public class GeoffGLView extends GLSurfaceView
 				
 			case MotionEvent.ACTION_MOVE:
 
-				queueEvent( new Runnable() {
-					public void run()
-					{
-						//Log.v("Renderer", "Pointer Move");
-						for ( int i = 0; i < event.getPointerCount(); ++i ) {
-							App.current.platform.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
-						}
-					}
-				});
-				break;
+				//Log.v("Renderer", "Pointer Move");
+				for ( int i = 0; i < event.getPointerCount(); ++i ) {
+					App.current.platform.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
+				}
 		}
 		
 		return true;
