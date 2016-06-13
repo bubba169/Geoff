@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.EditorInfo;
+import java.lang.Runnable;
 
 import geoff.App;
 
@@ -35,29 +36,45 @@ public class GeoffGLView extends GLSurfaceView
 
 	}
 	
-	public boolean onTouchEvent( MotionEvent event )
+	public boolean onTouchEvent( MotionEvent originalEvent )
 	{
 		
 
-		int pointerId = event.getActionIndex();
-		int action = event.getActionMasked();
+		final MotionEvent event = originalEvent;
+		final int pointerId = event.getActionIndex();
+		final int action = event.getActionMasked();
 		
 		switch( action )
 		{
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
-				App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
 
-				requestFocus();
+				queueEvent( new Runnable() {
+					public void run()
+					{
+						//Log.v("Renderer", "Pointer Down");
+						App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
+					}
+				});
+				
 
-				InputMethodManager keyboard = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-		    	keyboard.showSoftInput( this, 0 );
+				//requestFocus();
+
+				//InputMethodManager keyboard = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		    	//keyboard.showSoftInput( this, 0 );
 
 				break;
 				
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
-				App.current.platform.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
+
+				queueEvent( new Runnable() {
+					public void run()
+					{
+						//Log.v("Renderer", "Pointer Up");
+						App.current.platform.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
+					}
+				});
 
 				//InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
     			//keyboard.showSoftInput( this, 0 );
@@ -65,13 +82,20 @@ public class GeoffGLView extends GLSurfaceView
 				break;
 				
 			case MotionEvent.ACTION_MOVE:
-				for ( int i = 0; i < event.getPointerCount(); ++i ) {
-					App.current.platform.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
-				}
+
+				queueEvent( new Runnable() {
+					public void run()
+					{
+						//Log.v("Renderer", "Pointer Move");
+						for ( int i = 0; i < event.getPointerCount(); ++i ) {
+							App.current.platform.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
+						}
+					}
+				});
 				break;
 		}
 		
-		return false;
+		return true;
 	}
 
 	public boolean onKeyDown( int keyCode, KeyEvent event )

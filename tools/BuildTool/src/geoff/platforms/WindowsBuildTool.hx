@@ -66,6 +66,12 @@ class WindowsBuildTool
 		buildHXML += "-D ABI=-MD\n";
 		buildHXML += "-D geoff_cpp\n";
 		
+		var defineArray : Array<String> = config.project.defines;
+		for ( define in defineArray ) 
+		{
+			buildHXML += "-D " + define + "\n";
+		}
+		
 		if ( !isDebugBuild() ) buildHXML += "-D no_console\n";
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		

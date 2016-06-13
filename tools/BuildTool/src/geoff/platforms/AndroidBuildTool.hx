@@ -68,6 +68,12 @@ class AndroidBuildTool
 		buildHXML += "-D geoff_java\n";
 		buildHXML += "-D mobile\n";
 		
+		var defineArray : Array<String> = config.project.defines;
+		for ( define in defineArray ) 
+		{
+			buildHXML += "-D " + define + "\n";
+		}
+		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
 	}

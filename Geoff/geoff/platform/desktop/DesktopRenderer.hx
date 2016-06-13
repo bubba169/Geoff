@@ -33,6 +33,10 @@ class DesktopRenderer implements IRenderContext
 		untyped __cpp__("delete _internalRenderer");
 	}
 
+	public function onContextCreated() : Void 
+	{
+		
+	}
 	
 	public function clear( clearColor : Color ) : Void
 	{

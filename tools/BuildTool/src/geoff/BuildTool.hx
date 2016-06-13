@@ -49,7 +49,20 @@ class BuildTool
 		if ( FileSystem.exists( path ) ) 
 		{
 			var configString = File.getContent( path );
-			return Json.parse( configString );
+			var configObject = Json.parse( configString );
+			
+			// Set up some sensible defaults
+			if ( configObject.defines == null ) 
+			{
+				configObject.defines = [];
+			}
+			
+			if ( configObject.haxelib == null ) 
+			{
+				configObject.haxelib = [];
+			}
+			
+			return configObject;
 		}
 		else
 		{
@@ -60,12 +73,25 @@ class BuildTool
 	
 	function loadConfig( projectDirectory : String ) : Dynamic
 	{
-		var config = { geoffpath: "", global: null, project: null };
+		var config = { geoffpath: "", global: null, project: null };		
 		config.geoffpath = DirectoryHelper.getHaxelibDir("geoff") + "../";
 		config.global = parseConfig( Sys.getEnv("APPDATA") + "/Geoff/geoff.cfg" );
 		config.project = parseConfig( projectDirectory + "project.geoff" );
+		
+		// Check any directly included libs for defines
+		var libArray : Array<String> = config.project.haxelib;
+		for ( lib in libArray )
+		{
+			var libConfig = parseConfig( DirectoryHelper.getHaxelibDir( lib ) + "lib.geoff" );
+			var libDefines : Array<String> = libConfig.defines;
+			for ( define in libDefines ) {
+				config.project.defines.push( define );
+			}
+		}
+		
 		return config;
 	}
+
 	
 	/**
 	 * 
