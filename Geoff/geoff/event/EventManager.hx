@@ -41,45 +41,46 @@ class EventManager
 	{
 		var event : Event = null;
 		
-		#if geoff_java
-			//java.Lib.lock( _eventsQueue, function() {
-		#end
-				while ( _eventsQueue.length > 0 )
-				{		
+		while ( _eventsQueue.length > 0 )
+		{		
+			
+			event = _eventsQueue.shift( );
+			
+			switch( event.type )
+			{
+				case EventType.Resize:
+					var data : IntArray = event.data;
+					delegate.resize( data[0], data[1] );
 					
-					event = _eventsQueue.shift( );
+				case EventType.PointerDown:
+					var data : IntArray = event.data;
+					delegate.onPointerDown( data[0], data[1], data[2], data[3] );
 					
-					switch( event.type )
-					{
-						case EventType.Resize:
-							var data : IntArray = event.data;
-							delegate.resize( data[0], data[1] );
-							
-						case EventType.PointerDown:
-							var data : IntArray = event.data;
-							delegate.onPointerDown( data[0], data[1], data[2], data[3] );
-							
-						case EventType.PointerUp:
-							var data : IntArray = event.data;
-							delegate.onPointerUp( data[0], data[1], data[2], data[3] );
-							
-						case EventType.PointerMove:
-							var data : IntArray = event.data;
-							delegate.onPointerMove( data[0], data[1], data[2] );
-						
-						case EventType.PointerScroll:
-							var data : IntArray = event.data;
-							delegate.onPointerScroll( data[0], data[1], data[2] );
-							
-						case EventType.ContextCreated:
-							App.current.platform.renderer.onContextCreated();
-							delegate.onContextCreated( App.current.platform.renderer );
-					}
-				}
-		
-		#if geoff_java
-			//});
-		#end
+				case EventType.PointerUp:
+					var data : IntArray = event.data;
+					delegate.onPointerUp( data[0], data[1], data[2], data[3] );
+					
+				case EventType.PointerMove:
+					var data : IntArray = event.data;
+					delegate.onPointerMove( data[0], data[1], data[2] );
+				
+				case EventType.PointerScroll:
+					var data : IntArray = event.data;
+					delegate.onPointerScroll( data[0], data[1], data[2] );
+					
+				case EventType.KeyDown:
+					var data : IntArray = event.data;
+					delegate.onKeyDown( data[0], data[1] );
+					
+				case EventType.KeyUp:
+					var data : IntArray = event.data;
+					delegate.onKeyUp( data[0], data[1] );
+					
+				case EventType.ContextCreated:
+					App.current.platform.renderer.onContextCreated();
+					delegate.onContextCreated( App.current.platform.renderer );
+			}
+		}
 		
 	}
 	
