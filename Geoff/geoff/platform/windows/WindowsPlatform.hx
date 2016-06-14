@@ -10,7 +10,7 @@ import haxe.Timer;
 
 @:buildXml("<files id='haxe'><compilerflag value='-I${haxelib:geoff}/../template/windows/include'/></files>")
  
-class WindowsPlatform implements IPlatform
+class WindowsPlatform
 {
 
 	public var name : String = "Windows";

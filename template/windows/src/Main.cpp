@@ -141,7 +141,7 @@ int main( void )
 	
 	geoff_callback_framebuffer_size( window, {{WindowWidth}}, {{WindowHeight}} );
 
-	while (!glfwWindowShouldClose(window))
+	while ( !glfwWindowShouldClose(window) && !geoff_app->platform->shouldExit )
 	{
 		geoff_app->update();
 

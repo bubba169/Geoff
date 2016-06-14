@@ -46,5 +46,6 @@ class AndroidPlatform
 	public function exit() : Void
 	{
 		nativeActivity.finish();
+		System.exit(0);
 	}
 }

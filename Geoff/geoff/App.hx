@@ -70,6 +70,7 @@ class App
 	
 	public function shutdown()
 	{
+		trace("Shutdown");
 		platform.exit();
 	}
 	
