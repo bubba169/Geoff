@@ -68,5 +68,10 @@ class App
 		platform.renderer.destroy();
 	}
 	
+	public function shutdown()
+	{
+		platform.exit();
+	}
+	
 	
 }

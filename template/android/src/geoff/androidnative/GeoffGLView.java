@@ -48,34 +48,19 @@ public class GeoffGLView extends GLSurfaceView
 		{
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
-
-				//Log.v("Renderer", "Pointer Down");
 				App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
-				
-
-				//requestFocus();
-
-				//InputMethodManager keyboard = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-		    	//keyboard.showSoftInput( this, 0 );
-
 				break;
 				
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
-
 				App.current.platform.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
-
-				//InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-    			//keyboard.showSoftInput( this, 0 );
-
 				break;
 				
 			case MotionEvent.ACTION_MOVE:
-
-				//Log.v("Renderer", "Pointer Move");
 				for ( int i = 0; i < event.getPointerCount(); ++i ) {
 					App.current.platform.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
 				}
+				break;
 		}
 		
 		return true;
@@ -83,9 +68,24 @@ public class GeoffGLView extends GLSurfaceView
 
 	public boolean onKeyDown( int keyCode, KeyEvent event )
 	{
-		Log.v( "Hello", "" + keyCode );
-		Log.v( "Hello", "" + event );
-		return false;
+		
+		App.current.platform.eventManager.sendEventInt( "KeyDown", new int[] { keyCode, 0 } );
+
+		return true;
+	}
+
+	public boolean onKeyUp( int keyCode, KeyEvent event )
+	{
+		
+		App.current.platform.eventManager.sendEventInt( "KeyUp", new int[] { keyCode, 0 } );
+
+		int uchar = event.getUnicodeChar();
+		if ( uchar != 0 ) 
+		{
+			App.current.platform.eventManager.sendEventInt( "TextEntry", new int[] { uchar } );
+		}
+				
+		return true;
 	}
 
 	@Override

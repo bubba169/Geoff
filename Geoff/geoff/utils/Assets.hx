@@ -25,7 +25,7 @@ class Assets
 	{
 		// Reads a text file
 		#if android
-			var asset = App.current.platform.nativeActivity.getAssets().open( getPath( asset ) );
+			var asset = App.current.platform.nativeActivity.getAssets().open( asset );
 			var stream = new java.io.InputStreamReader( asset );
 			var buffer = new java.io.BufferedReader( stream );
 			
@@ -45,7 +45,7 @@ class Assets
 			return result;
 			
 		#else
-			return File.getContent( getPath( asset ) );
+			return File.getContent( asset );
 		#end
 	}
 	
@@ -54,7 +54,7 @@ class Assets
 	{
 		// Reads a binary file
 		#if android
-			var buffer = App.current.platform.nativeActivity.getAssets().open( getPath( asset ) );
+			var buffer = App.current.platform.nativeActivity.getAssets().open( asset );
 			var bytes = Bytes.alloc( buffer.available() );
 			
 			buffer.read( bytes.getData() );
@@ -62,7 +62,7 @@ class Assets
 			
 			return bytes;
 		#else
-			return File.getBytes( getPath( asset ) );
+			return File.getBytes( asset );
 		#end
 	}
 	

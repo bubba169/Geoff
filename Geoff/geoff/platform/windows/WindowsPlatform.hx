@@ -10,13 +10,14 @@ import haxe.Timer;
 
 @:buildXml("<files id='haxe'><compilerflag value='-I${haxelib:geoff}/../template/windows/include'/></files>")
  
-class WindowsPlatform
+class WindowsPlatform implements IPlatform
 {
 
 	public var name : String = "Windows";
 	
 	public var renderer : DesktopRenderer;
 	public var eventManager : EventManager;
+	public var shouldExit : Bool = false;
 	
 	public function new()
 	{
@@ -27,6 +28,11 @@ class WindowsPlatform
 	public function getTime() : Float
 	{
 		return Timer.stamp();
+	}
+	
+	public function exit() : Void 
+	{
+		shouldExit = true;
 	}
 	
 }

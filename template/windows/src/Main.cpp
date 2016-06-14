@@ -93,6 +93,15 @@ void geoff_key_callback( GLFWwindow* window, int key, int scancode, int action, 
 
 }
 
+void geoff_char_callback( GLFWwindow* window, unsigned int key )
+{	
+	Array< int > array = Array_obj< int >::__new();
+	array->push(key);
+	
+	geoff_app->platform->eventManager->sendEventInt( ::String("TextEntry"), array );
+
+}
+
 
 /**
  * Main
@@ -117,6 +126,8 @@ int main( void )
 	glfwSetScrollCallback( window, geoff_mouse_scroll_callback );	
 	glfwSetCursorPosCallback( window, geoff_mouse_move_callback );	
 	glfwSetKeyCallback( window, geoff_key_callback );
+	glfwSetCharCallback( window, geoff_char_callback );
+
 	glfwMakeContextCurrent(window);
 	
 	glewInit();

@@ -19,6 +19,7 @@ package geoff.event;
 	
 	var KeyDown = "KeyDown";
 	var KeyUp = "KeyUp";
+	var TextEntry = "TextEntry";
 	
 }
 

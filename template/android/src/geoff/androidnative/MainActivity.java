@@ -15,12 +15,12 @@ import android.util.Log;
 import android.widget.EditText;
 
 import geoff.App;
+import geoff.platform.android.GeoffActivity;
 
-public class MainActivity extends Activity
+public class MainActivity extends GeoffActivity
 {
 
-	public static Activity activity;
-
+	public static GeoffActivity activity;
 	GeoffGLView glView;
 
     /** Called when the activity is first created. */
@@ -68,6 +68,23 @@ public class MainActivity extends Activity
 	@Override
 	public void onStop() {
 	    super.onStop();  // Always call the superclass method first
+	}
+
+
+	@Override 
+	public void showKeyboard()
+	{
+		glView.requestFocus();
+		
+		InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		keyboard.showSoftInput( glView, 0 );
+	}
+
+	@Override
+	public void hideKeyboard()
+	{
+		InputMethodManager keyboard = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		keyboard.hideSoftInputFromWindow( glView.getWindowToken(), 0 );
 	}
 
 

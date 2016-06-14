@@ -76,6 +76,10 @@ class EventManager
 					var data : IntArray = event.data;
 					delegate.onKeyUp( data[0], data[1] );
 					
+				case EventType.TextEntry:
+					var data : IntArray = event.data;
+					delegate.onTextInput( String.fromCharCode( data[0] ) );
+					
 				case EventType.ContextCreated:
 					App.current.platform.renderer.onContextCreated();
 					delegate.onContextCreated( App.current.platform.renderer );
