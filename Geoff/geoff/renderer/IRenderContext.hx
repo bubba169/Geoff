@@ -21,6 +21,9 @@ interface IRenderContext
 	public function bindFrameBuffer( buffer : FrameBuffer ) : Void;
 	public function destroyFrameBuffer( buffer : FrameBuffer ) : Void;
 	
+	public function setBlendMode( sourceFactor : BlendFactor, destinationFactor : BlendFactor ) : Void;
+	public function setBlendModeSeparate( sourceFactor : BlendFactor, destinationFactor : BlendFactor, sourceAlphaFactor : BlendFactor, destAlphaFactor : BlendFactor ) : Void;
+	
 	public function getError() : Int;
 	
 	public function createTextureFromAsset( path : String ) : Texture;

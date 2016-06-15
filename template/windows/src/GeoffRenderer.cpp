@@ -266,6 +266,22 @@ namespace geoff
 
 
 	/**
+	 * Blend modes
+	 */
+
+
+	void GeoffRenderer::setBlendMode( int sourceFactor, int destinationFactor )
+	{
+		glBlendFunc( sourceFactor, destinationFactor );
+	}
+	
+	void GeoffRenderer::setBlendModeSeparate( int sourceFactor, int destinationFactor, int sourceAlphaFactor, int destAlphaFactor )
+	{
+		glBlendFuncSeparate( sourceFactor, destinationFactor, sourceAlphaFactor, destAlphaFactor );
+	}
+
+
+	/**
 	 * Privates
 	 */
 	

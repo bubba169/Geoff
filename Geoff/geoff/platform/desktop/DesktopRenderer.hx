@@ -1,5 +1,6 @@
 package geoff.platform.desktop;
 import geoff.platform.desktop.externs.GeoffRenderer;
+import geoff.renderer.BlendFactor;
 import geoff.renderer.FrameBuffer;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
@@ -139,6 +140,20 @@ class DesktopRenderer implements IRenderContext
 		_internalRenderer.get_ref().destroyTexture( texture );
 	}
 	
+	
+	/**
+	 * Blending
+	 */
+	
+	public function setBlendMode( sourceFactor : BlendFactor, destinationFactor : BlendFactor ) : Void
+	{
+		_internalRenderer.get_ref().setBlendMode( sourceFactor, destinationFactor );
+	}
+	
+	public function setBlendModeSeparate( sourceFactor : BlendFactor, destinationFactor : BlendFactor, sourceAlphaFactor : BlendFactor, destAlphaFactor : BlendFactor ) : Void
+	{
+		_internalRenderer.get_ref().setBlendModeSeparate( sourceFactor, destinationFactor, sourceAlphaFactor, destAlphaFactor );
+	}
 	
 	
 	

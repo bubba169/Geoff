@@ -39,10 +39,15 @@ namespace geoff
 			void bindFrameBuffer( geoff::renderer::FrameBuffer buffer );
 			void destroyFrameBuffer( geoff::renderer::FrameBuffer buffer );
 			
+			void setBlendMode( int sourceFactor, int destinationFactor );
+			void setBlendModeSeparate( int sourceFactor, int destinationFactor, int sourceAlphaFactor, int destAlphaFactor );
+
 			void createTextureFromAsset( geoff::renderer::Texture );
 			void createTexture( geoff::renderer::Texture );
 			void uploadTexture( geoff::renderer::Texture );
 			void destroyTexture( geoff::renderer::Texture );
+
+
 			
 			int getError();
 			

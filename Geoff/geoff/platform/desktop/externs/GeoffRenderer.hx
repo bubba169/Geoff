@@ -29,6 +29,9 @@ extern class GeoffRenderer
 	public function bindFrameBuffer( target : FrameBuffer ) : Void;
 	public function destroyFrameBuffer( target : FrameBuffer ) : Void;
 	
+	public function setBlendMode( sourceFactor : Int, destinationFactor : Int ) : Void;
+	public function setBlendModeSeparate( sourceFactor : Int, destinationFactor : Int, sourceAlphaFactor : Int, destAlphaFactor : Int ) : Void;
+	
 	public function getError() : Int;
 	
 	public function createTextureFromAsset( texture : Texture ) : Void;

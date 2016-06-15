@@ -1,4 +1,5 @@
 package geoff.platform.android;
+import geoff.renderer.BlendFactor;
 import geoff.renderer.FrameBuffer;
 import geoff.renderer.Shader;
 import geoff.renderer.Texture;
@@ -313,6 +314,21 @@ class AndroidRenderer implements IRenderContext
 	public function destroy():Void 
 	{
 		
+	}
+	
+	
+	/**
+	 * Blend modes
+	 */
+	
+	public function setBlendMode( sourceFactor : BlendFactor, destinationFactor : BlendFactor ) : Void
+	{
+		GLES20.glBlendFunc( sourceFactor, destinationFactor );
+	}
+	
+	public function setBlendModeSeparate( sourceFactor : BlendFactor, destinationFactor : BlendFactor, sourceAlphaFactor : BlendFactor, destAlphaFactor : BlendFactor ) : Void
+	{
+		GLES20.glBlendFuncSeparate( sourceFactor, destinationFactor, sourceAlphaFactor, destAlphaFactor );
 	}
 	
 	/**
