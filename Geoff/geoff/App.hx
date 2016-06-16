@@ -44,6 +44,7 @@ class App
 	public function init()
 	{
 		platform.renderer.init();
+		platform.audio.init();
 		delegate.init( platform.renderer );
 		
 		_timeOfLastUpdate = Timer.stamp();
@@ -66,6 +67,7 @@ class App
 	{
 		delegate.destroy( );
 		platform.renderer.destroy();
+		platform.audio.destroy();
 	}
 	
 	public function shutdown()

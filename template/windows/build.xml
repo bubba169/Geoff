@@ -8,10 +8,10 @@
 		<compilerflag value="-Iinclude" />
 		<file name="src/Main.cpp"/>
 		<file name="src/GeoffRenderer.cpp"/>
+		<file name="src/GeoffAudio.cpp"/>
 	</files>
 
-	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">
-		
+	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">		
 		<flag value="/NODEFAULTLIB:LIBCMT" />
 		<lib name="DevIL.lib"/>
 		<lib name="glfw3.lib"/>
@@ -36,6 +36,11 @@
 		<lib name="libsqlite-19.lib"/>
 		<lib name="libregexp-19.lib"/>
 		<lib name="libmysql5-19.lib"/>
+		<lib name="OpenAL32.lib"/>
+		<lib name="libogg.lib"/>
+		<lib name="libvorbis.lib"/>
+		<lib name="libvorbisenc.lib"/>
+		<lib name="libvorbisfile.lib"/>
 		<files id="common"/>
 	</target>
 </xml>
