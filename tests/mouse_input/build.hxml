@@ -1,10 +1,17 @@
 -cp src
 -lib norman
--java bin/android/build
--java-lib D:\Development\AndroidSDK\platforms/android-21/android.jar
--D java-android
 -main pkg.Main
--debug
--D android
--D geoff_java
--D mobile
+-D ios
+-D static_link
+-D HXCPP_IPHONEOS
+-D IPHONE_VER=9.2
+-D ABI=-MD
+-D geoff_cpp
+-D actuate_manual_time
+-D actuate_manual_update
+--each
+-cpp bin/ios/build/armv7s
+-D HXCPP_ARM64
+--next
+-cpp bin/ios/build/arm64
+-D HXCPP_ARMV7s

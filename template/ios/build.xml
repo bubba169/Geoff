@@ -1,0 +1,46 @@
+<xml>
+	
+	<set name="hxcpp_api_level" value="321" />
+	<set name="ABI" value="-MD"/>
+	{{ConsoleSetting}}
+
+	<files id="common">
+		<compilerflag value="-Iinclude" />
+		<file name="src/Main.cpp"/>
+		<file name="src/GeoffRenderer.cpp"/>
+		<file name="src/GeoffAudio.cpp"/>
+	</files>
+
+	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">		
+		<flag value="/NODEFAULTLIB:LIBCMT" />
+		<lib name="DevIL.lib"/>
+		<lib name="glfw3.lib"/>
+		<lib name="glew32s.lib"/>
+		<lib name="gdi32.lib" />
+		<lib name="opengl32.lib" />
+		<lib name="user32.lib" />
+		<lib name="kernel32.lib" />
+		<lib name="advapi32.lib" />
+		<lib name="winmm.lib" />
+		<lib name="imm32.lib"  />
+		<lib name="ole32.lib" />
+		<lib name="oleaut32.lib" />
+		<lib name="version.lib" />
+		<lib name="ws2_32.lib"  />
+		<lib name="wldap32.lib" />
+		<lib name="shell32.lib" />
+		<lib name="comdlg32.lib" />
+		<lib name="libApp.lib"/>
+		<lib name="libstd-19.lib"/>
+		<lib name="libzlib-19.lib"/>
+		<lib name="libsqlite-19.lib"/>
+		<lib name="libregexp-19.lib"/>
+		<lib name="libmysql5-19.lib"/>
+		<lib name="OpenAL32.lib"/>
+		<lib name="libogg.lib"/>
+		<lib name="libvorbis.lib"/>
+		<lib name="libvorbisenc.lib"/>
+		<lib name="libvorbisfile.lib"/>
+		<files id="common"/>
+	</target>
+</xml>
