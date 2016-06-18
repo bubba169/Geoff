@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+#import <geoff/App.h>
+
 @interface GameViewController : GLKViewController
 
 @end

@@ -16,7 +16,7 @@ namespace geoff
 		_projection[15] = 1;
 		_projection[10] = -1;
 		
-		_id = rand() % 1000;
+        _id = 0;//rand() % 1000;
 	}
 	
 	GeoffRenderer::~GeoffRenderer()
@@ -192,21 +192,13 @@ namespace geoff
 	void GeoffRenderer::createTextureFromAsset( geoff::renderer::Texture texture )
 	{
 
-		unsigned int imageName;
-		ilGenImages( 1, &imageName );
-		ilBindImage( imageName );		
-		ilLoadImage( texture->asset.__CStr() );
-		
-		texture->width = ilGetInteger( IL_IMAGE_WIDTH );
-		texture->height = ilGetInteger( IL_IMAGE_HEIGHT );
+        //TODO: Load from image asset
+        
+        texture->width = 1;
+		texture->height = 1;
 		texture->pixels = haxe::io::Bytes_obj::alloc( texture->width * texture->height * 4 );
 		
-		ilCopyPixels( 0, 0, 0, texture->width, texture->height, 1, IL_RGBA, IL_UNSIGNED_BYTE, (unsigned char*)&(texture->pixels->b[0]) );
-		
 		createTexture( texture );
-		
-		ilBindImage(0);
-		ilDeleteImages( 1, &imageName );
 		
 	}
 
@@ -238,7 +230,7 @@ namespace geoff
 
 	void GeoffRenderer::createFrameBuffer( geoff::renderer::FrameBuffer target )
 	{
-		glCreateFramebuffers( 1, (GLuint*)&(target->id));
+		glGenFramebuffers( 1, (GLuint*)&(target->id));
 		glBindFramebuffer( GL_FRAMEBUFFER, target->id );
 		glFramebufferTexture2D( GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, target->texture->textureId, 0 );
 		glBindFramebuffer( GL_FRAMEBUFFER, 0 );

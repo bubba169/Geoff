@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F4054BD91D148A18001031DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4054BD81D148A18001031DD /* main.m */; };
+		F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4054BDB1D148A19001031DD /* AppDelegate.m */; };
+		F4054BDE1D148A19001031DD /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F4054BDD1D148A19001031DD /* Shader.fsh */; };
+		F4054BE01D148A19001031DD /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F4054BDF1D148A19001031DD /* Shader.vsh */; };
+		F4054BE31D148A19001031DD /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4054BE21D148A19001031DD /* GameViewController.mm */; };
+		F4054BE61D148A19001031DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE41D148A19001031DD /* Main.storyboard */; };
+		F4054BE81D148A19001031DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE71D148A19001031DD /* Assets.xcassets */; };
+		F4054BEB1D148A19001031DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE91D148A19001031DD /* LaunchScreen.storyboard */; };
+		F479C8821D15FF8200B454F9 /* GeoffRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F479C8811D15FF8200B454F9 /* GeoffRenderer.cpp */; };
+		F479C8A41D1600A600B454F9 /* libApp-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8831D1600A600B454F9 /* libApp-64.a */; };
+		F479C8A51D1600A600B454F9 /* libApp-sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8841D1600A600B454F9 /* libApp-sim.a */; };
+		F479C8A61D1600A600B454F9 /* libApp-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8851D1600A600B454F9 /* libApp-v7.a */; };
+		F479C8A71D1600A600B454F9 /* libmysql5.iphoneos-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8861D1600A600B454F9 /* libmysql5.iphoneos-64.a */; };
+		F479C8A81D1600A600B454F9 /* libmysql5.iphoneos-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8871D1600A600B454F9 /* libmysql5.iphoneos-v7.a */; };
+		F479C8A91D1600A600B454F9 /* libmysql5.iphoneos-v7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8881D1600A600B454F9 /* libmysql5.iphoneos-v7s.a */; };
+		F479C8AA1D1600A600B454F9 /* libmysql5.iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8891D1600A600B454F9 /* libmysql5.iphoneos.a */; };
+		F479C8AB1D1600A600B454F9 /* libmysql5.iphonesim-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C88A1D1600A600B454F9 /* libmysql5.iphonesim-64.a */; };
+		F479C8AC1D1600A600B454F9 /* libmysql5.iphonesim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C88B1D1600A600B454F9 /* libmysql5.iphonesim.a */; };
+		F479C8AD1D1600A600B454F9 /* libregexp.iphoneos-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C88C1D1600A600B454F9 /* libregexp.iphoneos-64.a */; };
+		F479C8AE1D1600A600B454F9 /* libregexp.iphoneos-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C88D1D1600A600B454F9 /* libregexp.iphoneos-v7.a */; };
+		F479C8AF1D1600A600B454F9 /* libregexp.iphoneos-v7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C88E1D1600A600B454F9 /* libregexp.iphoneos-v7s.a */; };
+		F479C8B01D1600A600B454F9 /* libregexp.iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C88F1D1600A600B454F9 /* libregexp.iphoneos.a */; };
+		F479C8B11D1600A600B454F9 /* libregexp.iphonesim-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8901D1600A600B454F9 /* libregexp.iphonesim-64.a */; };
+		F479C8B21D1600A600B454F9 /* libregexp.iphonesim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8911D1600A600B454F9 /* libregexp.iphonesim.a */; };
+		F479C8B31D1600A600B454F9 /* libsqlite.iphoneos-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8921D1600A600B454F9 /* libsqlite.iphoneos-64.a */; };
+		F479C8B41D1600A600B454F9 /* libsqlite.iphoneos-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8931D1600A600B454F9 /* libsqlite.iphoneos-v7.a */; };
+		F479C8B51D1600A700B454F9 /* libsqlite.iphoneos-v7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8941D1600A600B454F9 /* libsqlite.iphoneos-v7s.a */; };
+		F479C8B61D1600A700B454F9 /* libsqlite.iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8951D1600A600B454F9 /* libsqlite.iphoneos.a */; };
+		F479C8B71D1600A700B454F9 /* libsqlite.iphonesim-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8961D1600A600B454F9 /* libsqlite.iphonesim-64.a */; };
+		F479C8B81D1600A700B454F9 /* libsqlite.iphonesim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8971D1600A600B454F9 /* libsqlite.iphonesim.a */; };
+		F479C8B91D1600A700B454F9 /* libstd.iphoneos-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8981D1600A600B454F9 /* libstd.iphoneos-64.a */; };
+		F479C8BA1D1600A700B454F9 /* libstd.iphoneos-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8991D1600A600B454F9 /* libstd.iphoneos-v7.a */; };
+		F479C8BB1D1600A700B454F9 /* libstd.iphoneos-v7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C89A1D1600A600B454F9 /* libstd.iphoneos-v7s.a */; };
+		F479C8BC1D1600A700B454F9 /* libstd.iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C89B1D1600A600B454F9 /* libstd.iphoneos.a */; };
+		F479C8BD1D1600A700B454F9 /* libstd.iphonesim-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C89C1D1600A600B454F9 /* libstd.iphonesim-64.a */; };
+		F479C8BE1D1600A700B454F9 /* libstd.iphonesim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C89D1D1600A600B454F9 /* libstd.iphonesim.a */; };
+		F479C8BF1D1600A700B454F9 /* libzlib.iphoneos-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C89E1D1600A600B454F9 /* libzlib.iphoneos-64.a */; };
+		F479C8C01D1600A700B454F9 /* libzlib.iphoneos-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C89F1D1600A600B454F9 /* libzlib.iphoneos-v7.a */; };
+		F479C8C11D1600A700B454F9 /* libzlib.iphoneos-v7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8A01D1600A600B454F9 /* libzlib.iphoneos-v7s.a */; };
+		F479C8C21D1600A700B454F9 /* libzlib.iphoneos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8A11D1600A600B454F9 /* libzlib.iphoneos.a */; };
+		F479C8C31D1600A700B454F9 /* libzlib.iphonesim-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8A21D1600A600B454F9 /* libzlib.iphonesim-64.a */; };
+		F479C8C41D1600A700B454F9 /* libzlib.iphonesim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8A31D1600A600B454F9 /* libzlib.iphonesim.a */; };
+		F479C8CA1D160E0100B454F9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8C91D160E0100B454F9 /* GLKit.framework */; };
+		F479C8CC1D160E0F00B454F9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8CB1D160E0F00B454F9 /* OpenGLES.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F4054BD41D148A18001031DD /* {{ProjectName}}.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "{{ProjectName}}.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4054BD81D148A18001031DD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F4054BDA1D148A18001031DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F4054BDB1D148A19001031DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F4054BDD1D148A19001031DD /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		F4054BDF1D148A19001031DD /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		F4054BE11D148A19001031DD /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		F4054BE21D148A19001031DD /* GameViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GameViewController.mm; sourceTree = "<group>"; };
+		F4054BE51D148A19001031DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F4054BE71D148A19001031DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F4054BEA1D148A19001031DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F4054BEC1D148A19001031DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F479C8811D15FF8200B454F9 /* GeoffRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeoffRenderer.cpp; sourceTree = SOURCE_ROOT; };
+		F479C8831D1600A600B454F9 /* libApp-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-64.a"; path = "lib/libApp-64.a"; sourceTree = "<group>"; };
+		F479C8841D1600A600B454F9 /* libApp-sim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-sim.a"; path = "lib/libApp-sim.a"; sourceTree = "<group>"; };
+		F479C8851D1600A600B454F9 /* libApp-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-v7.a"; path = "lib/libApp-v7.a"; sourceTree = "<group>"; };
+		F479C8861D1600A600B454F9 /* libmysql5.iphoneos-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysql5.iphoneos-64.a"; path = "lib/libmysql5.iphoneos-64.a"; sourceTree = "<group>"; };
+		F479C8871D1600A600B454F9 /* libmysql5.iphoneos-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysql5.iphoneos-v7.a"; path = "lib/libmysql5.iphoneos-v7.a"; sourceTree = "<group>"; };
+		F479C8881D1600A600B454F9 /* libmysql5.iphoneos-v7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysql5.iphoneos-v7s.a"; path = "lib/libmysql5.iphoneos-v7s.a"; sourceTree = "<group>"; };
+		F479C8891D1600A600B454F9 /* libmysql5.iphoneos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysql5.iphoneos.a; path = lib/libmysql5.iphoneos.a; sourceTree = "<group>"; };
+		F479C88A1D1600A600B454F9 /* libmysql5.iphonesim-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysql5.iphonesim-64.a"; path = "lib/libmysql5.iphonesim-64.a"; sourceTree = "<group>"; };
+		F479C88B1D1600A600B454F9 /* libmysql5.iphonesim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysql5.iphonesim.a; path = lib/libmysql5.iphonesim.a; sourceTree = "<group>"; };
+		F479C88C1D1600A600B454F9 /* libregexp.iphoneos-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libregexp.iphoneos-64.a"; path = "lib/libregexp.iphoneos-64.a"; sourceTree = "<group>"; };
+		F479C88D1D1600A600B454F9 /* libregexp.iphoneos-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libregexp.iphoneos-v7.a"; path = "lib/libregexp.iphoneos-v7.a"; sourceTree = "<group>"; };
+		F479C88E1D1600A600B454F9 /* libregexp.iphoneos-v7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libregexp.iphoneos-v7s.a"; path = "lib/libregexp.iphoneos-v7s.a"; sourceTree = "<group>"; };
+		F479C88F1D1600A600B454F9 /* libregexp.iphoneos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libregexp.iphoneos.a; path = lib/libregexp.iphoneos.a; sourceTree = "<group>"; };
+		F479C8901D1600A600B454F9 /* libregexp.iphonesim-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libregexp.iphonesim-64.a"; path = "lib/libregexp.iphonesim-64.a"; sourceTree = "<group>"; };
+		F479C8911D1600A600B454F9 /* libregexp.iphonesim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libregexp.iphonesim.a; path = lib/libregexp.iphonesim.a; sourceTree = "<group>"; };
+		F479C8921D1600A600B454F9 /* libsqlite.iphoneos-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsqlite.iphoneos-64.a"; path = "lib/libsqlite.iphoneos-64.a"; sourceTree = "<group>"; };
+		F479C8931D1600A600B454F9 /* libsqlite.iphoneos-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsqlite.iphoneos-v7.a"; path = "lib/libsqlite.iphoneos-v7.a"; sourceTree = "<group>"; };
+		F479C8941D1600A600B454F9 /* libsqlite.iphoneos-v7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsqlite.iphoneos-v7s.a"; path = "lib/libsqlite.iphoneos-v7s.a"; sourceTree = "<group>"; };
+		F479C8951D1600A600B454F9 /* libsqlite.iphoneos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite.iphoneos.a; path = lib/libsqlite.iphoneos.a; sourceTree = "<group>"; };
+		F479C8961D1600A600B454F9 /* libsqlite.iphonesim-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsqlite.iphonesim-64.a"; path = "lib/libsqlite.iphonesim-64.a"; sourceTree = "<group>"; };
+		F479C8971D1600A600B454F9 /* libsqlite.iphonesim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite.iphonesim.a; path = lib/libsqlite.iphonesim.a; sourceTree = "<group>"; };
+		F479C8981D1600A600B454F9 /* libstd.iphoneos-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstd.iphoneos-64.a"; path = "lib/libstd.iphoneos-64.a"; sourceTree = "<group>"; };
+		F479C8991D1600A600B454F9 /* libstd.iphoneos-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstd.iphoneos-v7.a"; path = "lib/libstd.iphoneos-v7.a"; sourceTree = "<group>"; };
+		F479C89A1D1600A600B454F9 /* libstd.iphoneos-v7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstd.iphoneos-v7s.a"; path = "lib/libstd.iphoneos-v7s.a"; sourceTree = "<group>"; };
+		F479C89B1D1600A600B454F9 /* libstd.iphoneos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstd.iphoneos.a; path = lib/libstd.iphoneos.a; sourceTree = "<group>"; };
+		F479C89C1D1600A600B454F9 /* libstd.iphonesim-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstd.iphonesim-64.a"; path = "lib/libstd.iphonesim-64.a"; sourceTree = "<group>"; };
+		F479C89D1D1600A600B454F9 /* libstd.iphonesim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libstd.iphonesim.a; path = lib/libstd.iphonesim.a; sourceTree = "<group>"; };
+		F479C89E1D1600A600B454F9 /* libzlib.iphoneos-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlib.iphoneos-64.a"; path = "lib/libzlib.iphoneos-64.a"; sourceTree = "<group>"; };
+		F479C89F1D1600A600B454F9 /* libzlib.iphoneos-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlib.iphoneos-v7.a"; path = "lib/libzlib.iphoneos-v7.a"; sourceTree = "<group>"; };
+		F479C8A01D1600A600B454F9 /* libzlib.iphoneos-v7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlib.iphoneos-v7s.a"; path = "lib/libzlib.iphoneos-v7s.a"; sourceTree = "<group>"; };
+		F479C8A11D1600A600B454F9 /* libzlib.iphoneos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.iphoneos.a; path = lib/libzlib.iphoneos.a; sourceTree = "<group>"; };
+		F479C8A21D1600A600B454F9 /* libzlib.iphonesim-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzlib.iphonesim-64.a"; path = "lib/libzlib.iphonesim-64.a"; sourceTree = "<group>"; };
+		F479C8A31D1600A600B454F9 /* libzlib.iphonesim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.iphonesim.a; path = lib/libzlib.iphonesim.a; sourceTree = "<group>"; };
+		F479C8C91D160E0100B454F9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		F479C8CB1D160E0F00B454F9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F4054BD11D148A18001031DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F479C8CC1D160E0F00B454F9 /* OpenGLES.framework in Frameworks */,
+				F479C8CA1D160E0100B454F9 /* GLKit.framework in Frameworks */,
+				F479C8A41D1600A600B454F9 /* libApp-64.a in Frameworks */,
+				F479C8A51D1600A600B454F9 /* libApp-sim.a in Frameworks */,
+				F479C8A61D1600A600B454F9 /* libApp-v7.a in Frameworks */,
+				F479C8A71D1600A600B454F9 /* libmysql5.iphoneos-64.a in Frameworks */,
+				F479C8A81D1600A600B454F9 /* libmysql5.iphoneos-v7.a in Frameworks */,
+				F479C8A91D1600A600B454F9 /* libmysql5.iphoneos-v7s.a in Frameworks */,
+				F479C8AA1D1600A600B454F9 /* libmysql5.iphoneos.a in Frameworks */,
+				F479C8AB1D1600A600B454F9 /* libmysql5.iphonesim-64.a in Frameworks */,
+				F479C8AC1D1600A600B454F9 /* libmysql5.iphonesim.a in Frameworks */,
+				F479C8AD1D1600A600B454F9 /* libregexp.iphoneos-64.a in Frameworks */,
+				F479C8AE1D1600A600B454F9 /* libregexp.iphoneos-v7.a in Frameworks */,
+				F479C8AF1D1600A600B454F9 /* libregexp.iphoneos-v7s.a in Frameworks */,
+				F479C8B01D1600A600B454F9 /* libregexp.iphoneos.a in Frameworks */,
+				F479C8B11D1600A600B454F9 /* libregexp.iphonesim-64.a in Frameworks */,
+				F479C8B21D1600A600B454F9 /* libregexp.iphonesim.a in Frameworks */,
+				F479C8B31D1600A600B454F9 /* libsqlite.iphoneos-64.a in Frameworks */,
+				F479C8B41D1600A600B454F9 /* libsqlite.iphoneos-v7.a in Frameworks */,
+				F479C8B51D1600A700B454F9 /* libsqlite.iphoneos-v7s.a in Frameworks */,
+				F479C8B61D1600A700B454F9 /* libsqlite.iphoneos.a in Frameworks */,
+				F479C8B71D1600A700B454F9 /* libsqlite.iphonesim-64.a in Frameworks */,
+				F479C8B81D1600A700B454F9 /* libsqlite.iphonesim.a in Frameworks */,
+				F479C8B91D1600A700B454F9 /* libstd.iphoneos-64.a in Frameworks */,
+				F479C8BA1D1600A700B454F9 /* libstd.iphoneos-v7.a in Frameworks */,
+				F479C8BB1D1600A700B454F9 /* libstd.iphoneos-v7s.a in Frameworks */,
+				F479C8BC1D1600A700B454F9 /* libstd.iphoneos.a in Frameworks */,
+				F479C8BD1D1600A700B454F9 /* libstd.iphonesim-64.a in Frameworks */,
+				F479C8BE1D1600A700B454F9 /* libstd.iphonesim.a in Frameworks */,
+				F479C8BF1D1600A700B454F9 /* libzlib.iphoneos-64.a in Frameworks */,
+				F479C8C01D1600A700B454F9 /* libzlib.iphoneos-v7.a in Frameworks */,
+				F479C8C11D1600A700B454F9 /* libzlib.iphoneos-v7s.a in Frameworks */,
+				F479C8C21D1600A700B454F9 /* libzlib.iphoneos.a in Frameworks */,
+				F479C8C31D1600A700B454F9 /* libzlib.iphonesim-64.a in Frameworks */,
+				F479C8C41D1600A700B454F9 /* libzlib.iphonesim.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F4054BCB1D148A18001031DD = {
+			isa = PBXGroup;
+			children = (
+				F479C8CB1D160E0F00B454F9 /* OpenGLES.framework */,
+				F479C8C91D160E0100B454F9 /* GLKit.framework */,
+				F479C8831D1600A600B454F9 /* libApp-64.a */,
+				F479C8841D1600A600B454F9 /* libApp-sim.a */,
+				F479C8851D1600A600B454F9 /* libApp-v7.a */,
+				F479C8861D1600A600B454F9 /* libmysql5.iphoneos-64.a */,
+				F479C8871D1600A600B454F9 /* libmysql5.iphoneos-v7.a */,
+				F479C8881D1600A600B454F9 /* libmysql5.iphoneos-v7s.a */,
+				F479C8891D1600A600B454F9 /* libmysql5.iphoneos.a */,
+				F479C88A1D1600A600B454F9 /* libmysql5.iphonesim-64.a */,
+				F479C88B1D1600A600B454F9 /* libmysql5.iphonesim.a */,
+				F479C88C1D1600A600B454F9 /* libregexp.iphoneos-64.a */,
+				F479C88D1D1600A600B454F9 /* libregexp.iphoneos-v7.a */,
+				F479C88E1D1600A600B454F9 /* libregexp.iphoneos-v7s.a */,
+				F479C88F1D1600A600B454F9 /* libregexp.iphoneos.a */,
+				F479C8901D1600A600B454F9 /* libregexp.iphonesim-64.a */,
+				F479C8911D1600A600B454F9 /* libregexp.iphonesim.a */,
+				F479C8921D1600A600B454F9 /* libsqlite.iphoneos-64.a */,
+				F479C8931D1600A600B454F9 /* libsqlite.iphoneos-v7.a */,
+				F479C8941D1600A600B454F9 /* libsqlite.iphoneos-v7s.a */,
+				F479C8951D1600A600B454F9 /* libsqlite.iphoneos.a */,
+				F479C8961D1600A600B454F9 /* libsqlite.iphonesim-64.a */,
+				F479C8971D1600A600B454F9 /* libsqlite.iphonesim.a */,
+				F479C8981D1600A600B454F9 /* libstd.iphoneos-64.a */,
+				F479C8991D1600A600B454F9 /* libstd.iphoneos-v7.a */,
+				F479C89A1D1600A600B454F9 /* libstd.iphoneos-v7s.a */,
+				F479C89B1D1600A600B454F9 /* libstd.iphoneos.a */,
+				F479C89C1D1600A600B454F9 /* libstd.iphonesim-64.a */,
+				F479C89D1D1600A600B454F9 /* libstd.iphonesim.a */,
+				F479C89E1D1600A600B454F9 /* libzlib.iphoneos-64.a */,
+				F479C89F1D1600A600B454F9 /* libzlib.iphoneos-v7.a */,
+				F479C8A01D1600A600B454F9 /* libzlib.iphoneos-v7s.a */,
+				F479C8A11D1600A600B454F9 /* libzlib.iphoneos.a */,
+				F479C8A21D1600A600B454F9 /* libzlib.iphonesim-64.a */,
+				F479C8A31D1600A600B454F9 /* libzlib.iphonesim.a */,
+				F4054BD61D148A18001031DD /* GeoffIOSApp */,
+				F4054BD51D148A18001031DD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F4054BD51D148A18001031DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4054BD41D148A18001031DD /* {{ProjectName}}.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F4054BD61D148A18001031DD /* GeoffIOSApp */ = {
+			isa = PBXGroup;
+			children = (
+				F479C8811D15FF8200B454F9 /* GeoffRenderer.cpp */,
+				F4054BDA1D148A18001031DD /* AppDelegate.h */,
+				F4054BDB1D148A19001031DD /* AppDelegate.m */,
+				F4054BDD1D148A19001031DD /* Shader.fsh */,
+				F4054BDF1D148A19001031DD /* Shader.vsh */,
+				F4054BE11D148A19001031DD /* GameViewController.h */,
+				F4054BE21D148A19001031DD /* GameViewController.mm */,
+				F4054BE41D148A19001031DD /* Main.storyboard */,
+				F4054BE71D148A19001031DD /* Assets.xcassets */,
+				F4054BE91D148A19001031DD /* LaunchScreen.storyboard */,
+				F4054BEC1D148A19001031DD /* Info.plist */,
+				F4054BD71D148A18001031DD /* Supporting Files */,
+			);
+			path = GeoffIOSApp;
+			sourceTree = "<group>";
+		};
+		F4054BD71D148A18001031DD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F4054BD81D148A18001031DD /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F4054BD31D148A18001031DD /* GeoffIOSApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4054BEF1D148A19001031DD /* Build configuration list for PBXNativeTarget "GeoffIOSApp" */;
+			buildPhases = (
+				F4054BD01D148A18001031DD /* Sources */,
+				F4054BD11D148A18001031DD /* Frameworks */,
+				F4054BD21D148A18001031DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeoffIOSApp;
+			productName = GeoffIOSApp;
+			productReference = F4054BD41D148A18001031DD /* {{ProjectName}}.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F4054BCC1D148A18001031DD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = MoJaWorks;
+				TargetAttributes = {
+					F4054BD31D148A18001031DD = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = B7A995CECW;
+					};
+				};
+			};
+			buildConfigurationList = F4054BCF1D148A18001031DD /* Build configuration list for PBXProject "GeoffIOSApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F4054BCB1D148A18001031DD;
+			productRefGroup = F4054BD51D148A18001031DD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F4054BD31D148A18001031DD /* GeoffIOSApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F4054BD21D148A18001031DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4054BE61D148A19001031DD /* Main.storyboard in Resources */,
+				F4054BE01D148A19001031DD /* Shader.vsh in Resources */,
+				F4054BE81D148A19001031DD /* Assets.xcassets in Resources */,
+				F4054BEB1D148A19001031DD /* LaunchScreen.storyboard in Resources */,
+				F4054BDE1D148A19001031DD /* Shader.fsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F4054BD01D148A18001031DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F479C8821D15FF8200B454F9 /* GeoffRenderer.cpp in Sources */,
+				F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */,
+				F4054BE31D148A19001031DD /* GameViewController.mm in Sources */,
+				F4054BD91D148A18001031DD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F4054BE41D148A19001031DD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4054BE51D148A19001031DD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F4054BE91D148A19001031DD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4054BEA1D148A19001031DD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F4054BED1D148A19001031DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F4054BEE1D148A19001031DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F4054BF01D148A19001031DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				HEADER_SEARCH_PATHS = (
+					include,
+					"{{HxcppIncludePath}}",
+				);
+				INFOPLIST_FILE = GeoffIOSApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					lib,
+					"$(PROJECT_DIR)/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "{{Package}}";
+				PRODUCT_NAME = "{{ProjectName}}";
+			};
+			name = Debug;
+		};
+		F4054BF11D148A19001031DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				HEADER_SEARCH_PATHS = (
+					include,
+					"{{HxcppIncludePath}}",
+				);
+				INFOPLIST_FILE = GeoffIOSApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = lib;
+				PRODUCT_BUNDLE_IDENTIFIER = "{{Package}}";
+				PRODUCT_NAME = "{{ProjectName}}";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F4054BCF1D148A18001031DD /* Build configuration list for PBXProject "GeoffIOSApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4054BED1D148A19001031DD /* Debug */,
+				F4054BEE1D148A19001031DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4054BEF1D148A19001031DD /* Build configuration list for PBXNativeTarget "GeoffIOSApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4054BF01D148A19001031DD /* Debug */,
+				F4054BF11D148A19001031DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F4054BCC1D148A18001031DD /* Project object */;
+}

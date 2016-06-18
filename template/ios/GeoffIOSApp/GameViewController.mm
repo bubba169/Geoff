@@ -9,10 +9,13 @@
 #import "GameViewController.h"
 #import <OpenGLES/ES2/glext.h>
 
+extern "C" const char *hxRunLibrary();
+extern "C" void hxcpp_set_top_of_stack();
+
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 @interface GameViewController () {
- 
+    geoff::App _app;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -39,6 +42,12 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+    
+    hxcpp_set_top_of_stack();
+    hxRunLibrary();
+    
+    _app = geoff::App_obj::current;
+    _app->init();
 }
 
 - (void)dealloc
@@ -48,6 +57,8 @@
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
+    
+    _app->destroy();
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,7 +104,7 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    
+    _app->update();
 }
 
 @end

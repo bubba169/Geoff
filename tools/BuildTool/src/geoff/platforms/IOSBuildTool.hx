@@ -61,10 +61,9 @@ class IOSBuildTool
 
 		buildHXML += "-D ios\n";
 		buildHXML += "-D static_link\n";
-		buildHXML += "-D HXCPP_IPHONEOS\n";
 		buildHXML += "-D IPHONE_VER=9.2\n";
-		buildHXML += "-D ABI=-MD\n";
 		buildHXML += "-D geoff_cpp\n";
+		buildHXML += "-dce no\n";
 
 		var defineArray : Array<String> = config.project.defines;
 		for ( define in defineArray )
@@ -73,11 +72,16 @@ class IOSBuildTool
 		}
 
 		buildHXML += "--each\n";
-		buildHXML += "-cpp bin/ios/build/armv7s\n";
-		buildHXML += "-D HXCPP_ARM64\n";
-		buildHXML += "--next\n";
 		buildHXML += "-cpp bin/ios/build/arm64\n";
-		buildHXML += "-D HXCPP_ARMV7s\n";
+		buildHXML += "-D HXCPP_ARM64\n";
+
+		buildHXML += "--next\n";
+		buildHXML += "-cpp bin/ios/build/armv7\n";
+		buildHXML += "-D HXCPP_ARMV7\n";
+
+		buildHXML += "--next\n";
+		buildHXML += "-cpp bin/ios/build/sim\n";
+		buildHXML += "-D simulator\n";
 
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 
@@ -89,17 +93,12 @@ class IOSBuildTool
 		var templateConstants =
 		[
 			"Main" => config.project.main,
+			"HxcppIncludePath" => DirectoryHelper.getHaxelibDir("hxcpp") + "/include",
 			"Version" => config.project.version,
 			"ProjectName" => config.project.name,
-			"WindowWidth" => config.project.window.width,
-			"WindowHeight" => config.project.window.height,
-			"ConsoleSetting" => ""
+			"Package" => config.project.packagename,
+			"Orientation" => "sensor"
 		];
-
-		if ( !isDebugBuild() )
-		{
-			templateConstants.set( "ConsoleSetting", "<set name='no_console' value='true'/>" );
-		}
 
 		if ( flags.indexOf( "clean" ) > -1 ) {
 			clean();
@@ -124,9 +123,9 @@ class IOSBuildTool
 		}
 
 		copyLibs( );
-		copyAssets( );
+		//copyAssets( );
 
-		compileCPP( );
+		//compileCPP( );
 
 	}
 
@@ -161,32 +160,38 @@ class IOSBuildTool
 
 	function copyLibs( ) : Void
 	{
-		var filename : String = "lib";
+		FileSystem.createDirectory( binDirectory + "project/lib" );
+
 		var libName : String = config.project.main;
 		if ( libName.indexOf(".") > -1 )
 		{
 			libName = libName.substr( libName.lastIndexOf(".") + 1 );
 		}
-		filename += libName;
+
+		var filename : String;
+
+		filename = "lib" + libName;
+		filename += ".iphoneos-v7";
 		if ( isDebugBuild() ) filename += "-debug";
-		filename += ".lib";
+		filename += ".a";
+		File.copy( binDirectory + "build/armv7/" + filename, binDirectory + "/project/lib/libApp-v7.a" );
 
-		File.copy( binDirectory + "build/" + filename, binDirectory + "/project/lib/libApp.lib" );
+		filename = "lib" + libName;
+		filename += ".iphoneos-64";
+		if ( isDebugBuild() ) filename += "-debug";
+		filename += ".a";
+		File.copy( binDirectory + "build/arm64/" + filename, binDirectory + "/project/lib/libApp-64.a" );
 
-		var hxcppDir : String = new Process( "haxelib", ["path", "hxcpp"] ).stdout.readLine().toString();
-		File.copy( hxcppDir + "lib/Windows/libstd-19.lib", binDirectory + "project/lib/libstd-19.lib" );
-		File.copy( hxcppDir + "lib/Windows/libmysql5-19.lib", binDirectory + "project/lib/libmysql5-19.lib" );
-		File.copy( hxcppDir + "lib/Windows/libregexp-19.lib", binDirectory + "project/lib/libregexp-19.lib" );
-		File.copy( hxcppDir + "lib/Windows/libsqlite-19.lib", binDirectory + "project/lib/libsqlite-19.lib" );
-		File.copy( hxcppDir + "lib/Windows/libzlib-19.lib", binDirectory + "project/lib/libzlib-19.lib" );
+		filename = "lib" + libName;
+		filename += ".iphonesim";
+		if ( isDebugBuild() ) filename += "-debug";
+		filename += ".a";
+		File.copy( binDirectory + "build/sim/" + filename, binDirectory + "/project/lib/libApp-sim.a" );
 
-		DirectoryHelper.copyDirectory( binDirectory + "build/include/", binDirectory + "project/include/" );
-	}
+		var hxcppDir : String = DirectoryHelper.getHaxelibDir("hxcpp");
+		DirectoryHelper.copyDirectory( hxcppDir + "lib/iPhone/", binDirectory + "project/lib/" );
 
-	function compileCPP( ) : Void
-	{
-		Sys.setCwd( binDirectory + "project" );
-		Sys.command( "haxelib", ["run", "hxcpp", "build.xml"] );
+		DirectoryHelper.copyDirectory( binDirectory + "build/armv7/include/", binDirectory + "project/include/" );
 	}
 
 
