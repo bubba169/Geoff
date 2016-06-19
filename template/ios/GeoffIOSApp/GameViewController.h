@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
+#import <OpenGLES/ES2/glext.h>
+
+#import <hxcpp.h>
 
 #import <geoff/App.h>
+#import <geoff/platform/ios/IOSPlatform.h>
+#import <geoff/event/EventManager.h>
 
 @interface GameViewController : GLKViewController
 

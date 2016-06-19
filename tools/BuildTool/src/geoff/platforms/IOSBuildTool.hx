@@ -81,6 +81,7 @@ class IOSBuildTool
 
 		buildHXML += "--next\n";
 		buildHXML += "-cpp bin/ios/build/sim\n";
+		buildHXML += "-D HXCPP_M64\n";
 		buildHXML += "-D simulator\n";
 
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
@@ -183,7 +184,7 @@ class IOSBuildTool
 		File.copy( binDirectory + "build/arm64/" + filename, binDirectory + "/project/lib/libApp-64.a" );
 
 		filename = "lib" + libName;
-		filename += ".iphonesim";
+		filename += ".iphonesim-64";
 		if ( isDebugBuild() ) filename += "-debug";
 		filename += ".a";
 		File.copy( binDirectory + "build/sim/" + filename, binDirectory + "/project/lib/libApp-sim.a" );

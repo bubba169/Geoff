@@ -1,0 +1,20 @@
+-cp src
+-lib norman
+-main pkg.Main
+-D ios
+-D static_link
+-D IPHONE_VER=9.2
+-D geoff_cpp
+-dce no
+-D actuate_manual_time
+-D actuate_manual_update
+--each
+-cpp bin/ios/build/arm64
+-D HXCPP_ARM64
+--next
+-cpp bin/ios/build/armv7
+-D HXCPP_ARMV7
+--next
+-cpp bin/ios/build/sim
+-D HXCPP_M64
+-D simulator

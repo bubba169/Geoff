@@ -7,7 +7,6 @@
 //
 
 #import "GameViewController.h"
-#import <OpenGLES/ES2/glext.h>
 
 extern "C" const char *hxRunLibrary();
 extern "C" void hxcpp_set_top_of_stack();
@@ -48,6 +47,11 @@ extern "C" void hxcpp_set_top_of_stack();
     
     _app = geoff::App_obj::current;
     _app->init();
+    
+    Array< int > array = Array_obj< int >::__new();
+    //array->push(500);
+    //array->push(500);
+    //_app->platform->eventManager->sendEventInt( ::String("Resize"), array );
 }
 
 - (void)dealloc

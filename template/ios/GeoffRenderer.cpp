@@ -142,7 +142,7 @@ namespace geoff
 		int attribCounter = 0;
 		for ( int i = 0; i < batch->shader->attributes->length; ++i )
 		{
-			geoff::renderer::ShaderAttribute attribute = batch->shader->attributes[i];
+			geoff::renderer::ShaderAttribute attribute = batch->shader->attributes->__get((int)0).StaticCast<  ::geoff::renderer::ShaderAttribute >();
 			int vertexAttribute = glGetAttribLocation( batch->shader->program, attribute->name.__CStr() );
 			
 			if ( vertexAttribute != -1 ) {

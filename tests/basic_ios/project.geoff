@@ -1,0 +1,26 @@
+{
+
+	"name":			"Triangle",
+	"packagename":	"uk.co.mrsimonmorris.test",
+	"version":		"0.0.1",
+	"main":			"pkg.Main",
+	"src":
+	[
+		"src"
+	],
+	"haxelib":
+	[
+		"norman"
+	],
+	"window":
+	{
+		"width": "800",
+		"height": "480",
+		"orientation": "landscape"
+	},
+	"android":
+	{
+		"version":	"21"
+	}
+
+}
