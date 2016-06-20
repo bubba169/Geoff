@@ -19,9 +19,10 @@ class AudioSource
 	public var assetId : String;
 	public var originalFormat : AudioSourceFormat;
 	public var format : AudioSourceFormat;
+	public var samples : Bytes;
 	
 	// Used when reading for decoding
-	public var position : Int = 0;
+	public var position : cpp.Int64 = 0;
 	public var rawBytes : Bytes;
 	
 	public function new( id : String, format : AudioSourceFormat ) 

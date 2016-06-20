@@ -5,6 +5,7 @@
 #include <haxe/io/Bytes.h>
 
 #include <al/al.h>
+#include <al/alc.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 #include <vorbis/vorbisenc.h>
@@ -37,6 +38,8 @@ namespace geoff
 		private:
 
 			ov_callbacks _callbacks;
+			ALCdevice* _device;
+			ALCcontext* _context;
 
 	};
 };
