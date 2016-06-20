@@ -9,15 +9,15 @@ import sys.io.File;
 class TemplateHelper
 {
 
-	public static function processTemplates( dir : String, constants : Map<String,String> ) 
+	public static function processTemplates( dir : String, constants : Map<String,String> )
 	{
 		var fileList = FileSystem.readDirectory( dir );
-		for ( file in fileList ) 
+		for ( file in fileList )
 		{
 			if ( !FileSystem.isDirectory( dir + file ) )
 			{
-				var extensions : Array<String> = [ ".txt", ".xml", ".properties", ".java", ".cpp", ".h", ".hx" ];
-				
+				var extensions : Array<String> = [ ".txt", ".xml", ".properties", ".java", ".cpp", ".h", ".hx", ".pbxproj" ];
+
 				var shouldProcess = false;
 				for ( extension in extensions )
 				{
@@ -27,16 +27,16 @@ class TemplateHelper
 						break;
 					}
 				}
-				
+
 				if ( shouldProcess )
 				{
 					var regex = new EReg( "\\{\\{([^\\}]+)\\}\\}", "g" );
 					var raw = File.getContent( dir + file );
-					var processed = regex.map( raw, function( regex ) 
+					var processed = regex.map( raw, function( regex )
 					{
 						return constants.get( regex.matched(1) );
 					});
-					
+
 					File.saveContent( dir + file, processed );
 				}
 			}
@@ -46,5 +46,5 @@ class TemplateHelper
 			}
 		}
 	}
-	
+
 }
