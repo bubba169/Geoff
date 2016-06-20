@@ -31,9 +31,12 @@ class DesktopAudioInterface implements IAudioInterface
 	
 	public function load( file : String ) : AudioSource 
 	{
-		var source : AudioSource = new AudioSource( file );
+		var source : AudioSource = new AudioSource( file, AudioSourceFormat.Ogg );
 		source.assetId = file;
-		source.samples = Assets.getBytes( file );
+		source.rawBytes = Assets.getBytes( file );
+				
+		_internalAudio.get_ref().load( source );
+		
 		return source;
 	}
 	
@@ -71,6 +74,11 @@ class DesktopAudioInterface implements IAudioInterface
 	public function stop( channel : AudioChannel ) : Void 
 	{
 		_internalAudio.get_ref().stop( channel );
+	}
+	
+	public function update( seconds : Float ) : Void 
+	{
+		_internalAudio.get_ref().update( seconds );
 	}
 
 }
