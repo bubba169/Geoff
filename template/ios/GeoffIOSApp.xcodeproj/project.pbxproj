@@ -422,6 +422,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 					"HXCPP_API_LEVEL=330",
+					HXCPP_VISIT_ALLOCS,
 				);
 				HEADER_SEARCH_PATHS = (
 					include,
@@ -445,7 +446,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
-				GCC_PREPROCESSOR_DEFINITIONS = "HXCPP_API_LEVEL=330";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"HXCPP_API_LEVEL=330",
+					HXCPP_VISIT_ALLOCS,
+				);
 				HEADER_SEARCH_PATHS = (
 					include,
 					"{{HxcppIncludePath}}",

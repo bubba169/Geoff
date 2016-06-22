@@ -19,9 +19,6 @@ extern "C" void hxcpp_set_top_of_stack();
 
 @property (strong, nonatomic) EAGLContext *context;
 
-- (void)setupGL;
-- (void)tearDownGL;
-
 @end
 
 @implementation GameViewController
@@ -31,6 +28,12 @@ extern "C" void hxcpp_set_top_of_stack();
     [super viewDidLoad];
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(deviceOrientationDidChangeNotification:)
+     name:UIDeviceOrientationDidChangeNotification
+     object:nil];
 
     if (!self.context) {
         NSLog(@"Failed to create ES context");
@@ -40,7 +43,7 @@ extern "C" void hxcpp_set_top_of_stack();
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
-    [self setupGL];
+    [EAGLContext setCurrentContext:self.context];
     
     hxcpp_set_top_of_stack();
     hxRunLibrary();
@@ -49,14 +52,13 @@ extern "C" void hxcpp_set_top_of_stack();
     _app->init();
     
     Array< int > array = Array_obj< int >::__new();
-    //array->push(500);
-    //array->push(500);
-    //_app->platform->eventManager->sendEventInt( ::String("Resize"), array );
+    array->push(self.view.frame.size.width);
+    array->push(self.view.frame.size.height);
+    _app->platform->eventManager->sendEventInt( ::String("Resize"), array );
 }
 
 - (void)dealloc
-{    
-    [self tearDownGL];
+{
     
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
@@ -72,8 +74,6 @@ extern "C" void hxcpp_set_top_of_stack();
     if ([self isViewLoaded] && ([[self view] window] == nil)) {
         self.view = nil;
         
-        [self tearDownGL];
-        
         if ([EAGLContext currentContext] == self.context) {
             [EAGLContext setCurrentContext:nil];
         }
@@ -87,17 +87,6 @@ extern "C" void hxcpp_set_top_of_stack();
     return YES;
 }
 
-- (void)setupGL
-{
-    [EAGLContext setCurrentContext:self.context];
-    
-}
-
-- (void)tearDownGL
-{
-    [EAGLContext setCurrentContext:self.context];
-    
-}
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
@@ -108,7 +97,18 @@ extern "C" void hxcpp_set_top_of_stack();
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
+    [EAGLContext setCurrentContext:self.context];
     _app->update();
+}
+
+- (void)deviceOrientationDidChangeNotification:(NSNotification*)note
+{
+    CGFloat screenScale = [[UIScreen mainScreen] scale];
+    
+    Array< int > array = Array_obj< int >::__new();
+    array->push(self.view.frame.size.width * screenScale);
+    array->push(self.view.frame.size.height * screenScale);
+    _app->platform->eventManager->sendEventInt( ::String("Resize"), array );
 }
 
 @end

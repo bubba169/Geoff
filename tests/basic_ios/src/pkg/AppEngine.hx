@@ -31,6 +31,8 @@ class AppEngine extends NormanApp
 		config.targetScreenHeight = 720;
 		config.targetScreenWidth = 1280;
 
+		trace( haxe.Timer.stamp() );
+
 		super( config );
 	}
 
@@ -38,15 +40,23 @@ class AppEngine extends NormanApp
 	{
 		super.onStartupComplete();
 
+		core.renderer.clearColor = Color.RED;
+
 		var arr : Array<Int> = [];
 		arr.push( 123 );
 		trace( arr );
 
-		var square : GameObject = SpriteFactory.createFilledSprite( Color.BLUE, 100, 100 );
+		var square : GameObject = SpriteFactory.createFilledSprite( 0xFFFFFF00, 100, 100 );
 		square.transform.x = 300;
 		square.transform.y = 300;
 		square.add( new SquareAnimation() );
 		core.view.root.transform.addChild( square.transform );
+
+		trace( Color.RED );
+		trace( Color.RED.r );
+		trace( Color.RED.g );
+		trace( Color.RED.b );
+		trace( Color.RED.a );
 
 		//var fps : GameObject = UIFactory.createFPS();
 		//core.view.root.transform.addChild( fps.transform );

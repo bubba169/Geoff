@@ -127,7 +127,7 @@ namespace geoff
 		for ( int i = 0; i < batch->textures->length; ++i ) {
 
 			char texName[50];
-			snprintf( texName, 50, "uTexture%i", 1);
+			printf( texName, 50, "uTexture%i", 1);
 			
 			int uTexture = glGetUniformLocation( batch->shader->program, texName );
 			glActiveTexture( GL_TEXTURE0 + i );

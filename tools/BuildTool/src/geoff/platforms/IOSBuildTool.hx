@@ -60,6 +60,7 @@ class IOSBuildTool
 		}
 
 		buildHXML += "-D ios\n";
+		buildHXML += "-D mobile\n";
 		buildHXML += "-D static_link\n";
 		buildHXML += "-D IPHONE_VER=9.2\n";
 		buildHXML += "-D geoff_cpp\n";
@@ -105,6 +106,13 @@ class IOSBuildTool
 			clean();
 		}
 
+		//Compile project to java
+		if ( compileHaxe( ) != 0 )
+		{
+			trace("Haxe Compilation could not be completed!");
+			return;
+		}
+
 		// Make the directory
 		FileSystem.createDirectory( binDirectory + "project" );
 
@@ -115,13 +123,6 @@ class IOSBuildTool
 
 		//Fill in values
 		TemplateHelper.processTemplates( binDirectory + "project/", templateConstants );
-
-		//Compile project to java
-		if ( compileHaxe( ) != 0 )
-		{
-			trace("Haxe Compilation could not be completed!");
-			return;
-		}
 
 		copyLibs( );
 		//copyAssets( );
@@ -192,7 +193,7 @@ class IOSBuildTool
 		var hxcppDir : String = DirectoryHelper.getHaxelibDir("hxcpp");
 		DirectoryHelper.copyDirectory( hxcppDir + "lib/iPhone/", binDirectory + "project/lib/" );
 
-		DirectoryHelper.copyDirectory( binDirectory + "build/armv7/include/", binDirectory + "project/include/" );
+		DirectoryHelper.copyDirectory( binDirectory + "build/sim/include/", binDirectory + "project/include/" );
 	}
 
 

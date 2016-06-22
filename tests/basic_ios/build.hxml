@@ -2,6 +2,7 @@
 -lib norman
 -main pkg.Main
 -D ios
+-D mobile
 -D static_link
 -D IPHONE_VER=9.2
 -D geoff_cpp
