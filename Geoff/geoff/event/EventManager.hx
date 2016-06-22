@@ -27,13 +27,13 @@ class EventManager
 
 	public function sendEvent( event : String )
 	{
-		trace( event );
+		//trace( event );
 		_eventsQueue.push( new Event( event, null ) );
 	}
 
 	public function sendEventInt( event : String, data : IntArray )
 	{
-		trace( event, data );
+		//trace( event, data );
 		_eventsQueue.push( new Event( event, data ) );
 	}
 

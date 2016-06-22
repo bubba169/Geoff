@@ -2,8 +2,10 @@
 #define GEOFF_AUDIO_INCLUDED
 
 #include <hxcpp.h>
+#include <haxe/io/Bytes.h>
 
 #include <al/al.h>
+#include <al/alc.h>
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
 #include <vorbis/vorbisenc.h>
@@ -12,7 +14,12 @@
 #include <geoff/audio/AudioSource.h>
 #include <geoff/audio/AudioChannel.h>
 
-#define BUFFER_SIZE (4096*8);
+#define BUFFER_SIZE 4096;
+#define NUM_BUFFERS 2;
+
+size_t geoff_ogg_read ( void* destination, size_t size, size_t nmemb, void* datasource );
+int geoff_ogg_seek ( void* datasource, ogg_int64_t offset, int whence );
+long geoff_ogg_tell ( void* datasource );
 
 namespace geoff
 {
@@ -22,11 +29,23 @@ namespace geoff
 			GeoffAudio();
 			~GeoffAudio();
 			
+			void load( geoff::audio::AudioSource source );
 			void unload( geoff::audio::AudioSource source );
 			void playOneShot( geoff::audio::AudioChannel channel );
 			void playLooping( geoff::audio::AudioChannel channel );
 			void stop( geoff::audio::AudioChannel channel );
+			void update( float seconds );
 
+		private:
+
+			ov_callbacks _callbacks;
+			ALCdevice* _device;
+			ALCcontext* _context;
+
+			unsigned char _bufferData[NUM_BUFFERS][BUFFER_SIZE];
+			unsigned int _bufferIds[NUM_BUFFERS];
+			unsigned int _source;
+ 
 	};
 };
 
