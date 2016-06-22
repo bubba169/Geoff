@@ -28,7 +28,17 @@ namespace geoff
 		size_t pcm_length = ov_pcm_total( &file, -1 ) * 4;
 		int current_section(0);
 		source->samples = haxe::io::Bytes_obj::alloc( pcm_length );
-		size_t length = ov_read( &file, (char*)&(source->samples->b[0]), pcm_length, 0, 2, 1, &current_section );
+
+		ov_raw_seek( &file, 0 );
+		
+		bool eof = false;
+		int filePos = 0;
+		while ( !eof ) 
+		{
+			int readLength = ov_read( &file, (char*)&(source->samples->b[filePos]), pcm_length, 0, 2, 1, &current_section );
+			filePos += readLength;
+			if ( readLength == 0 ) eof = true;
+		} 
 
 		printf("\nVORBIS INFO. Channels: %i, Rate: %i", file.vi->channels, file.vi->rate );
 
@@ -47,10 +57,10 @@ namespace geoff
 		unsigned int al_source;
 		alGenSources( 1, &al_source );
 		alSourcef( al_source, AL_PITCH, 1 );
-		alSourcef( al_source, AL_GAIN, 0 );
+		alSourcef( al_source, AL_GAIN, 1 );
 		alSource3f( al_source, AL_POSITION, 0, 0, 0 );
 		alSource3f( al_source, AL_VELOCITY, 0, 0, 0 );
-		alSourcei( al_source, AL_LOOPING, AL_FALSE );
+		alSourcei( al_source, AL_LOOPING, AL_TRUE );
 
 		printf("\nSet source properties %i", alGetError() );
 
@@ -66,6 +76,7 @@ namespace geoff
 		printf("\nPlayed %i", alGetError() );
 
 		printf( "\nLoaded OGG %i, length %i", result, pcm_length );
+
 	}
 
 	void GeoffAudio::unload( geoff::audio::AudioSource source )
@@ -101,9 +112,9 @@ namespace geoff
 size_t geoff_ogg_read ( void* destination, size_t size, size_t nmemb, void* datasource )
 {
 
-	printf( "\nReading %i, %i", size, nmemb );
 
 	geoff::audio::AudioSource source = *((geoff::audio::AudioSource*)(datasource));
+	printf( "\nReading %i, %i from %i", size, nmemb, source->position );
 
 	size_t len = size * nmemb;
 	size_t pos = source->position;
