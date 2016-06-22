@@ -14,7 +14,8 @@
 #include <geoff/audio/AudioSource.h>
 #include <geoff/audio/AudioChannel.h>
 
-#define BUFFER_SIZE (4096*8);
+#define BUFFER_SIZE 4096;
+#define NUM_BUFFERS 2;
 
 size_t geoff_ogg_read ( void* destination, size_t size, size_t nmemb, void* datasource );
 int geoff_ogg_seek ( void* datasource, ogg_int64_t offset, int whence );
@@ -41,6 +42,10 @@ namespace geoff
 			ALCdevice* _device;
 			ALCcontext* _context;
 
+			unsigned char _bufferData[NUM_BUFFERS][BUFFER_SIZE];
+			unsigned int _bufferIds[NUM_BUFFERS];
+			unsigned int _source;
+ 
 	};
 };
 
