@@ -61,6 +61,7 @@ class App
 		
 		platform.eventManager.handleEvents( delegate );
 		delegate.update( platform.renderer, _timeSinceLastTick );
+		platform.audio.update( _timeSinceLastTick );
 	}
 	
 	public function destroy()

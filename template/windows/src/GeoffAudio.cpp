@@ -32,11 +32,14 @@ namespace geoff
 
 		// Set up the buffers
 		alGenBuffers( NUM_BUFFERS, _bufferIds );
-		for ( int i = 0; i < NUM_BUFFERS, ++i )
+		memset( &(_bufferData[0]), 0, BUFFER_SIZE );
+		for ( int i = 0; i < NUM_BUFFERS; ++i ) 
 		{
-			// Clear any previous data
-			memset( &(_bufferData[i]), 0, BUFFER_SIZE );
+			alBufferData( _bufferIds[i], AL_FORMAT_STEREO16, (void*)_bufferData, BUFFER_SIZE, 44100 );
+			alSourceQueueBuffers( _source, 1, &(_bufferIds[i]) );
 		}
+
+		alSourcePlay( _source );
 
 	}
 
@@ -139,11 +142,65 @@ namespace geoff
 
 	}
 
-	void GeoffAudio::update( float seconds )
+	void GeoffAudio::update( Array<geoff::audio::AudioChannel> channels )
 	{
-		int format = ( source->channels == 2 ) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
-		alBufferData( buffer, format, (void*)&(source->samples->b[0]), pcm_length, source->rate );
-		alSourceQueueBuffers( al_source, 1, &buffer );
+
+		int processed = 0;
+		alGetSourcei( _source, AL_BUFFERS_PROCESSED, &processed );
+
+		printf( "\nProcessed %i", processed );
+
+		if ( processed > 0 )
+		{
+
+			unsigned int buffer;
+			alSourceUnqueueBuffers( _source, 1, &buffer );
+
+			printf( "\nQueueing buffer %u", buffer );
+
+			memset( &(_bufferData[0]), 0, BUFFER_SIZE );
+
+			for ( int c = 0; c < channels->length; ++c )
+			{
+				for ( int i = 0; i < BUFFER_SIZE / 2; ++i )
+				{
+					if ( channels[c]->looping || channels[c]->position < channels[c]->source->samples->length ) 
+					{
+
+						// Sort out looping around
+						if ( channels[c]->position >= channels[c]->source->samples->length ) channels[c]->position = 0;
+
+						if ( !channels[c]->paused )
+						{
+							// Read some of the challen data into the buffer
+							int16_t* dataPtr = (int16_t*)&(channels[c]->source->samples->b[ channels[c]->position ]);
+							int16_t* bufferPtr = (int16_t*)&(_bufferData[i*2]);
+							int result = ((int)(*bufferPtr)) + (*dataPtr);
+							if ( result > 32767 ) result = 32767;
+							if ( result < -32767 ) result = -32767;
+							*bufferPtr = (int16_t)result;
+							channels[c]->position += 2;
+						}
+					}
+					else
+					{
+						channels[c]->complete = true;
+					}
+				}
+			}
+			
+			//int format = ( source->channels == 2 ) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
+			alBufferData( buffer, AL_FORMAT_STEREO16, (void*)_bufferData, BUFFER_SIZE, 44100 );
+			alSourceQueueBuffers( _source, 1, &buffer );
+
+			int state;
+			alGetSourcei(_source, AL_SOURCE_STATE, &state);
+            if(state != AL_PLAYING)
+                alSourcePlay(_source);
+
+			printf("\nQueued again %i", alGetError() );
+
+		}
 	}
 	
 };

@@ -18,5 +18,5 @@ extern class GeoffAudio
 	public function playOneShot( channel : AudioChannel ) : Void;
 	public function playLooping( channel : AudioChannel ) : Void;
 	public function stop( channel : AudioChannel ) : Void;
-	public function update( seconds : Float ) : Void;
+	public function update( channels : Array<AudioChannel> ) : Void;
 }

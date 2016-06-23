@@ -13,6 +13,7 @@ class DesktopAudioInterface implements IAudioInterface
 {
 
 	public var _internalAudio : cpp.Pointer<GeoffAudio>;
+	public var _activeChannels : Array<AudioChannel>;
 	
 	public function new() 
 	{
@@ -22,6 +23,7 @@ class DesktopAudioInterface implements IAudioInterface
 	public function init() : Void 
 	{
 		untyped __cpp__("_internalAudio = new GeoffAudio()");
+		_activeChannels = [];
 	}
 	
 	public function destroy() 
@@ -50,10 +52,10 @@ class DesktopAudioInterface implements IAudioInterface
 		var channel : AudioChannel = new AudioChannel();
 		channel.source = source;
 		channel.position = 0;
-		channel.size = source.samples.length;
 		channel.looping = false;
 		channel.volume = volume;
-		_internalAudio.get_ref().playOneShot( channel );
+		//_internalAudio.get_ref().playOneShot( channel );
+		_activeChannels.push( channel );
 		
 		return channel;
 	}
@@ -63,10 +65,11 @@ class DesktopAudioInterface implements IAudioInterface
 		var channel : AudioChannel = new AudioChannel();
 		channel.source = source;
 		channel.position = 0;
-		channel.size = source.samples.length;
 		channel.looping = true;
 		channel.volume = volume;
 		_internalAudio.get_ref().playLooping( channel );
+		
+		_activeChannels.push( channel );
 		
 		return channel;
 	}
@@ -78,7 +81,7 @@ class DesktopAudioInterface implements IAudioInterface
 	
 	public function update( seconds : Float ) : Void 
 	{
-		_internalAudio.get_ref().update( seconds );
+		_internalAudio.get_ref().update( _activeChannels );
 	}
 
 }
