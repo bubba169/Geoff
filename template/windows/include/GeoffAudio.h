@@ -11,11 +11,16 @@
 #include <vorbis/vorbisenc.h>
 #include <vorbis/vorbisfile.h>
 
+#include <geoff/App.h>
+#include <geoff/platform/windows/WindowsPlatform.h>
+#include <geoff/event/EventManager.h>
+
 #include <geoff/audio/AudioSource.h>
 #include <geoff/audio/AudioChannel.h>
+#include <geoff/audio/AudioPlayer.h>
 
-#define BUFFER_SIZE 4096;
-#define NUM_BUFFERS 2;
+#define BUFFER_SIZE 4096
+#define NUM_BUFFERS 4
 
 size_t geoff_ogg_read ( void* destination, size_t size, size_t nmemb, void* datasource );
 int geoff_ogg_seek ( void* datasource, ogg_int64_t offset, int whence );
@@ -29,12 +34,9 @@ namespace geoff
 			GeoffAudio();
 			~GeoffAudio();
 			
-			void load( geoff::audio::AudioSource source );
-			void unload( geoff::audio::AudioSource source );
-			void playOneShot( geoff::audio::AudioChannel channel );
-			void playLooping( geoff::audio::AudioChannel channel );
-			void stop( geoff::audio::AudioChannel channel );
-			void update( float seconds );
+			void loadOgg( geoff::audio::AudioSource source );
+			void update( );
+			void bufferData( haxe::io::Bytes data );
 
 		private:
 
@@ -42,7 +44,6 @@ namespace geoff
 			ALCdevice* _device;
 			ALCcontext* _context;
 
-			unsigned char _bufferData[NUM_BUFFERS][BUFFER_SIZE];
 			unsigned int _bufferIds[NUM_BUFFERS];
 			unsigned int _source;
  

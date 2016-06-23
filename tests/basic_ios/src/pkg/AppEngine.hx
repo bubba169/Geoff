@@ -46,7 +46,7 @@ class AppEngine extends NormanApp
 		arr.push( 123 );
 		trace( arr );
 
-		var square : GameObject = SpriteFactory.createFilledSprite( 0xFFFFFF00, 100, 100 );
+		var square : GameObject = SpriteFactory.createFilledSprite( Color.GREEN, 100, 100 );
 		square.transform.x = 300;
 		square.transform.y = 300;
 		square.add( new SquareAnimation() );

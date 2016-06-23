@@ -21,6 +21,8 @@ package geoff.event;
 	var KeyUp = "KeyUp";
 	var TextEntry = "TextEntry";
 	
+	var AudioBufferEmpty = "AudioBufferEmpty";
+	
 }
 
 class Event 

@@ -32,11 +32,15 @@ namespace geoff
 
 		// Set up the buffers
 		alGenBuffers( NUM_BUFFERS, _bufferIds );
-		for ( int i = 0; i < NUM_BUFFERS, ++i )
+		unsigned char bufferData[BUFFER_SIZE];
+		memset( bufferData, 0, BUFFER_SIZE );
+		for ( int i = 0; i < NUM_BUFFERS; ++i ) 
 		{
-			// Clear any previous data
-			memset( &(_bufferData[i]), 0, BUFFER_SIZE );
+			alBufferData( _bufferIds[i], AL_FORMAT_STEREO16, (void*)bufferData, BUFFER_SIZE, 44100 );
+			alSourceQueueBuffers( _source, 1, &(_bufferIds[i]) );
 		}
+
+		alSourcePlay( _source );
 
 	}
 
@@ -52,7 +56,7 @@ namespace geoff
 
 
 
-	void GeoffAudio::load( geoff::audio::AudioSource source )
+	void GeoffAudio::loadOgg( geoff::audio::AudioSource source )
 	{
 
 		// Load the file from memory
@@ -81,69 +85,41 @@ namespace geoff
 
 		return;
 
-		// This crashes the app, do we need it?
-		/*ov_clear( &file );
+	}
 
-		printf("\nStarting %i", alGetError() );
 
-		alListener3f( AL_POSITION, 0, 0, 0 );
-		alListener3f( AL_VELOCITY, 0, 0, 0 );
-		float orientation[6] = {0, 0, -1, 0, 1, 0};
-		alListenerfv( AL_ORIENTATION, orientation );
+	void GeoffAudio::update( )
+	{
 
-		printf("\nSet Listener properties %i", alGetError() );
+		int processed = 0;
+		alGetSourcei( _source, AL_BUFFERS_PROCESSED, &processed );
 
-		unsigned int al_source;
-		alGenSources( 1, &al_source );
-		alSourcef( al_source, AL_PITCH, 1 );
-		alSourcef( al_source, AL_GAIN, 1 );
-		alSource3f( al_source, AL_POSITION, 0, 0, 0 );
-		alSource3f( al_source, AL_VELOCITY, 0, 0, 0 );
-		alSourcei( al_source, AL_LOOPING, AL_TRUE );
+		printf( "\nProcessed %i", processed );
 
-		printf("\nSet source properties %i", alGetError() );
+		if ( processed > 0 )
+		{
+			geoff::App_obj::current->platform->eventManager->sendEvent( ::String("AudioBufferEmpty") );
+		}
 
+	}
+
+	void GeoffAudio::bufferData( haxe::io::Bytes bufferData )
+	{
 		unsigned int buffer;
-		alGenBuffers( 1, &buffer );
+		alSourceUnqueueBuffers( _source, 1, &buffer );
 
-		int format = ( source->channels == 2 ) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
-		alBufferData( buffer, format, (void*)&(source->samples->b[0]), pcm_length, source->rate );
+		printf( "\nQueueing buffer %u", buffer );
 
-		alSourceQueueBuffers( al_source, 1, &buffer );
+		//int format = ( source->channels == 2 ) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
+		alBufferData( buffer, AL_FORMAT_STEREO16, (void*)&(bufferData->b[0]), BUFFER_SIZE, 44100 );
+		alSourceQueueBuffers( _source, 1, &buffer );
 
-		printf("\nBuffered %i", alGetError() );
-		alSourcePlay( al_source );
+		int state;
+		alGetSourcei(_source, AL_SOURCE_STATE, &state);
+        if(state != AL_PLAYING)
+            alSourcePlay(_source);
 
-		printf("\nPlayed %i", alGetError() );
-
-		printf( "\nLoaded OGG %i, length %i", result, pcm_length );*/
-
-	}
-
-	void GeoffAudio::unload( geoff::audio::AudioSource source )
-	{
-	}
-
-	void GeoffAudio::playOneShot( geoff::audio::AudioChannel channel )
-	{
-
-	}
-
-	void GeoffAudio::playLooping( geoff::audio::AudioChannel channel )
-	{
-
-	}
-
-	void GeoffAudio::stop( geoff::audio::AudioChannel channel )
-	{
-
-	}
-
-	void GeoffAudio::update( float seconds )
-	{
-		int format = ( source->channels == 2 ) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
-		alBufferData( buffer, format, (void*)&(source->samples->b[0]), pcm_length, source->rate );
-		alSourceQueueBuffers( al_source, 1, &buffer );
+		printf("\nQueued again %i", alGetError() );
 	}
 	
 };

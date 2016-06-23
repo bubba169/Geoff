@@ -14,7 +14,6 @@ class Assets
 	public static function getPath( asset : String ) : String
 	{
 		#if windows
-			trace( StringTools.replace( Path.directory(Sys.executablePath()), "\\", "/") + "/assets/" + asset );
 			return StringTools.replace( Path.directory(Sys.executablePath()), "\\", "/") + "/assets/" + asset;
 		#else	
 			return asset;

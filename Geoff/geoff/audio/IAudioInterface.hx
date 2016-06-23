@@ -5,10 +5,12 @@ package geoff.audio;
  */
 interface IAudioInterface 
 {
+	
+	var player( default, null ) : AudioPlayer;
+	
 	function init() : Void;
-	function load( file : String ) : AudioSource;
-	function unload( source : AudioSource ) : Void;
-	function playOneShot( source : AudioSource, volume : Float = 1 ) : AudioChannel;
-	function playLooping( source : AudioSource, volume : Float = 1 ) : AudioChannel;
-	function stop( channel : AudioChannel ) : Void;
+	function destroy() : Void;
+	function update() : Void;
+	function loadOgg( source : AudioSource ) : Void;
+	function bufferData( ) : Void;
 }
