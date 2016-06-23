@@ -9,13 +9,9 @@
 /* Begin PBXBuildFile section */
 		F4054BD91D148A18001031DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4054BD81D148A18001031DD /* main.m */; };
 		F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4054BDB1D148A19001031DD /* AppDelegate.m */; };
-		F4054BDE1D148A19001031DD /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = F4054BDD1D148A19001031DD /* Shader.fsh */; };
-		F4054BE01D148A19001031DD /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = F4054BDF1D148A19001031DD /* Shader.vsh */; };
 		F4054BE31D148A19001031DD /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4054BE21D148A19001031DD /* GameViewController.mm */; };
-		F4054BE61D148A19001031DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE41D148A19001031DD /* Main.storyboard */; };
 		F4054BE81D148A19001031DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE71D148A19001031DD /* Assets.xcassets */; };
-		F4054BEB1D148A19001031DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE91D148A19001031DD /* LaunchScreen.storyboard */; };
-		F479C8821D15FF8200B454F9 /* GeoffRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F479C8811D15FF8200B454F9 /* GeoffRenderer.cpp */; };
+		F44059581D1C8555007A0F6A /* GeoffRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F44059571D1C8555007A0F6A /* GeoffRenderer.cpp */; };
 		F479C8A41D1600A600B454F9 /* libApp-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8831D1600A600B454F9 /* libApp-64.a */; };
 		F479C8A51D1600A600B454F9 /* libApp-sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8841D1600A600B454F9 /* libApp-sim.a */; };
 		F479C8A61D1600A600B454F9 /* libApp-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8851D1600A600B454F9 /* libApp-v7.a */; };
@@ -58,15 +54,11 @@
 		F4054BD81D148A18001031DD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F4054BDA1D148A18001031DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4054BDB1D148A19001031DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F4054BDD1D148A19001031DD /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		F4054BDF1D148A19001031DD /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		F4054BE11D148A19001031DD /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		F4054BE21D148A19001031DD /* GameViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GameViewController.mm; sourceTree = "<group>"; };
-		F4054BE51D148A19001031DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4054BE71D148A19001031DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F4054BEA1D148A19001031DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4054BEC1D148A19001031DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F479C8811D15FF8200B454F9 /* GeoffRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeoffRenderer.cpp; sourceTree = SOURCE_ROOT; };
+		F44059571D1C8555007A0F6A /* GeoffRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeoffRenderer.cpp; sourceTree = "<group>"; };
 		F479C8831D1600A600B454F9 /* libApp-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-64.a"; path = "lib/libApp-64.a"; sourceTree = "<group>"; };
 		F479C8841D1600A600B454F9 /* libApp-sim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-sim.a"; path = "lib/libApp-sim.a"; sourceTree = "<group>"; };
 		F479C8851D1600A600B454F9 /* libApp-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-v7.a"; path = "lib/libApp-v7.a"; sourceTree = "<group>"; };
@@ -204,16 +196,12 @@
 		F4054BD61D148A18001031DD /* GeoffIOSApp */ = {
 			isa = PBXGroup;
 			children = (
-				F479C8811D15FF8200B454F9 /* GeoffRenderer.cpp */,
+				F44059571D1C8555007A0F6A /* GeoffRenderer.cpp */,
 				F4054BDA1D148A18001031DD /* AppDelegate.h */,
 				F4054BDB1D148A19001031DD /* AppDelegate.m */,
-				F4054BDD1D148A19001031DD /* Shader.fsh */,
-				F4054BDF1D148A19001031DD /* Shader.vsh */,
 				F4054BE11D148A19001031DD /* GameViewController.h */,
 				F4054BE21D148A19001031DD /* GameViewController.mm */,
-				F4054BE41D148A19001031DD /* Main.storyboard */,
 				F4054BE71D148A19001031DD /* Assets.xcassets */,
-				F4054BE91D148A19001031DD /* LaunchScreen.storyboard */,
 				F4054BEC1D148A19001031DD /* Info.plist */,
 				F4054BD71D148A18001031DD /* Supporting Files */,
 			);
@@ -286,11 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4054BE61D148A19001031DD /* Main.storyboard in Resources */,
-				F4054BE01D148A19001031DD /* Shader.vsh in Resources */,
 				F4054BE81D148A19001031DD /* Assets.xcassets in Resources */,
-				F4054BEB1D148A19001031DD /* LaunchScreen.storyboard in Resources */,
-				F4054BDE1D148A19001031DD /* Shader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F479C8821D15FF8200B454F9 /* GeoffRenderer.cpp in Sources */,
+				F44059581D1C8555007A0F6A /* GeoffRenderer.cpp in Sources */,
 				F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */,
 				F4054BE31D148A19001031DD /* GameViewController.mm in Sources */,
 				F4054BD91D148A18001031DD /* main.m in Sources */,
@@ -309,25 +293,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		F4054BE41D148A19001031DD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4054BE51D148A19001031DD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F4054BE91D148A19001031DD /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4054BEA1D148A19001031DD /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F4054BED1D148A19001031DD /* Debug */ = {
