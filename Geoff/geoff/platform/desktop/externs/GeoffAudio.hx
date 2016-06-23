@@ -1,6 +1,7 @@
 package geoff.platform.desktop.externs;
 import geoff.audio.AudioChannel;
 import geoff.audio.AudioSource;
+import haxe.io.Bytes;
 
 /**
  * ...
@@ -13,10 +14,7 @@ import geoff.audio.AudioSource;
 
 extern class GeoffAudio
 {
-	public function load( source : AudioSource ) : Void;
-	public function unload( source : AudioSource ) : Void;
-	public function playOneShot( channel : AudioChannel ) : Void;
-	public function playLooping( channel : AudioChannel ) : Void;
-	public function stop( channel : AudioChannel ) : Void;
-	public function update( channels : Array<AudioChannel> ) : Void;
+	public function loadOgg( source : AudioSource ) : Void;
+	public function update( ) : Void;
+	public function bufferData( data : Bytes ) : Void;
 }
