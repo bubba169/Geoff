@@ -21,17 +21,13 @@ class App
 	var _timeOfLastUpdate : Float = 0;
 	var _timeSinceLastTick : Float = 0;
 	var _updateTime : Float = 0;
-	
-	public static function main()
-	{
-		trace("Main");
-	}
-	
+		
 	public static function create( delegate : AppDelegate ) : App
-	{
+	{	
 		var app : App = new App( );
 		app.platform = new Platform();
 		app.delegate = delegate;
+		app.eventManager = new EventManager();
 		return app;
 	}
 		

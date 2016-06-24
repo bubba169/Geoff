@@ -94,8 +94,6 @@ namespace geoff
 		int processed = 0;
 		alGetSourcei( _source, AL_BUFFERS_PROCESSED, &processed );
 
-		printf( "\nProcessed %i", processed );
-
 		if ( processed > 0 )
 		{
 			geoff::App_obj::current->eventManager->sendEvent( ::String("AudioBufferEmpty") );
@@ -108,9 +106,6 @@ namespace geoff
 		unsigned int buffer;
 		alSourceUnqueueBuffers( _source, 1, &buffer );
 
-		printf( "\nQueueing buffer %u", buffer );
-
-		//int format = ( source->channels == 2 ) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16;
 		alBufferData( buffer, AL_FORMAT_STEREO16, (void*)&(bufferData->b[0]), BUFFER_SIZE, 44100 );
 		alSourceQueueBuffers( _source, 1, &buffer );
 
@@ -118,8 +113,6 @@ namespace geoff
 		alGetSourcei(_source, AL_SOURCE_STATE, &state);
         if(state != AL_PLAYING)
             alSourcePlay(_source);
-
-		printf("\nQueued again %i", alGetError() );
 	}
 	
 };
@@ -133,7 +126,6 @@ size_t geoff_ogg_read ( void* destination, size_t size, size_t nmemb, void* data
 
 
 	geoff::audio::AudioSource source = *((geoff::audio::AudioSource*)(datasource));
-	printf( "\nReading %i, %i from %i", size, nmemb, source->position );
 
 	size_t len = size * nmemb;
 	size_t pos = source->position;
@@ -164,25 +156,19 @@ int geoff_ogg_seek ( void* datasource, ogg_int64_t offset, int whence )
 
 
 	geoff::audio::AudioSource source = *((geoff::audio::AudioSource*)(datasource));
-	printf( "\nSeeking to %i from %i current %i", (int)offset, whence, source->position );
-	
+		
 	if ( whence == SEEK_SET ) 
 	{
-		printf( "\nSeeking from the top" );
 		source->position = offset;
 	}
 	else if ( whence == SEEK_CUR )
 	{
-		printf( "\nSeeking from current" );
 		source->position += offset;
 	}
 	else if ( whence == SEEK_END )
 	{
-		printf( "\nSeeking from the end" );
 		source->position = source->rawBytes->length - offset;
 	}
-
-	printf( "\nSuccess in seek to %i", source->position );
 
 	return 0;
 }
@@ -190,8 +176,5 @@ int geoff_ogg_seek ( void* datasource, ogg_int64_t offset, int whence )
 long geoff_ogg_tell ( void* datasource )
 {
 	geoff::audio::AudioSource source = *((geoff::audio::AudioSource*)(datasource));
-
-	printf( "\nTell: ", source->position );
-
 	return source->position;
 }

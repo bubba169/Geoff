@@ -58,6 +58,10 @@ class WindowsBuildTool
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
+			buildHXML += "-D HXCPP_DEBUG_LINK\n";
+			buildHXML += "-D HXCPP_STACK_TRACE\n";
+			buildHXML += "-D HXCPP_STACK_LINE\n";
+			buildHXML += "-D HXCPP_CHECK_POINTER\n";
 		}
 		
 		buildHXML += "-D windows\n";
@@ -93,11 +97,18 @@ class WindowsBuildTool
 		
 		if ( !isDebugBuild() )
 		{
-			templateConstants.set( "ConsoleSetting", "<set name='no_console' value='true'/>" );
+			var debugDefines = "<set name='no_console' value='true'/>";
+			debugDefines += "\n<set name='HXCPP_DEBUG_LINK' value='true'/>";
+			debugDefines += "\n<set name='HXCPP_STACK_TRACE' value='true'/>";
+			debugDefines += "\n<set name='HXCPP_STACK_LINE' value='true'/>";
+			debugDefines += "\n<set name='HXCPP_CHECK_POINTER' value='true'/>";
+			
+			templateConstants.set( "ConsoleSetting", debugDefines);
 		}		
 		
 		if ( flags.indexOf( "clean" ) > -1 ) {
 			clean();
+			update();
 		}
 		
 		// Make the directory
@@ -184,7 +195,9 @@ class WindowsBuildTool
 	function compileCPP( ) : Void 
 	{
 		Sys.setCwd( binDirectory + "project" );
-		Sys.command( "haxelib", ["run", "hxcpp", "build.xml"] );
+		var params = ["run", "hxcpp", "build.xml"];
+		if ( isDebugBuild() ) params.push( "-debug" );
+		Sys.command( "haxelib", params );
 	}
 		
 	
