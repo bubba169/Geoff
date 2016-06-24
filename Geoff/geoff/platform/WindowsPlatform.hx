@@ -1,5 +1,6 @@
 package geoff.platform;
 import geoff.event.EventManager;
+import geoff.platform.assets.WindowsAssetLoader;
 import geoff.platform.audio.alcpp.ALCPPAudioInterface;
 import geoff.platform.renderer.glcpp.GLCPPRenderer;
 import haxe.Timer;
@@ -16,6 +17,7 @@ class WindowsPlatform
 
 	public var name : String = "Windows";
 	
+	public var assetLoader : WindowsAssetLoader;
 	public var renderer : GLCPPRenderer;
 	public var audio : ALCPPAudioInterface;
 	public var shouldExit : Bool = false;
@@ -24,6 +26,7 @@ class WindowsPlatform
 	{
 		renderer = new GLCPPRenderer();
 		audio = new ALCPPAudioInterface();
+		assetLoader = new WindowsAssetLoader();
 	}
 	
 	public function getTime() : Float
