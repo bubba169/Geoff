@@ -6,9 +6,9 @@ package geoff;
  */
 
 #if android
-	typedef Platform = geoff.platform.android.AndroidPlatform;
+	typedef Platform = geoff.platform.AndroidPlatform;
 #elseif windows
-	typedef Platform = geoff.platform.windows.WindowsPlatform;
+	typedef Platform = geoff.platform.WindowsPlatform;
 #elseif ios
-	typedef Platform = geoff.platform.ios.IOSPlatform;
+	typedef Platform = geoff.platform.IOSPlatform;
 #end

@@ -1,4 +1,5 @@
 package geoff;
+import geoff.event.EventManager;
 import haxe.Timer;
 
 /**
@@ -11,7 +12,9 @@ class App
 	public static var current : App;
 	
 	public var platform : Platform;
+	public var eventManager : EventManager;
 	public var delegate : AppDelegate;
+	
 	public var fps : Int = 60;
 	public var hasInit : Bool = false;
 	
@@ -60,7 +63,7 @@ class App
 		_timeOfLastUpdate = _updateTime;
 		
 		platform.audio.update( );
-		platform.eventManager.handleEvents( delegate );
+		eventManager.handleEvents( delegate );
 		delegate.update( platform.renderer, _timeSinceLastTick );
 	}
 	

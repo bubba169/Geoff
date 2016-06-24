@@ -61,6 +61,7 @@ class WindowsBuildTool
 		}
 		
 		buildHXML += "-D windows\n";
+		buildHXML += "-D desktop\n";
 		buildHXML += "-D static_link\n";
 		buildHXML += "-D HX_WINDOWS\n";
 		buildHXML += "-D ABI=-MD\n";
@@ -104,6 +105,9 @@ class WindowsBuildTool
 		
 		//Copy template files
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/windows/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/glfw_base/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/al_audio/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/gl_renderer/", binDirectory + "project/" );
 		
 		trace("Processing templates");
 		
