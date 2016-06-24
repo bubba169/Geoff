@@ -1,6 +1,7 @@
 package geoff.platform;
 import geoff.event.EventManager;
 import geoff.platform.renderer.glcpp.GLCPPRenderer;
+import geoff.platform.audio.alcpp.ALCPPAudioInterface;
 import haxe.Timer;
 
 /**
@@ -14,11 +15,12 @@ class IOSPlatform
 	public var name : String = "iOS";
 
 	public var renderer : GLCPPRenderer;
-	public var audio : IOSAudioInterface;
+	public var audio : ALCPPAudioInterface;
 
 	public function new()
 	{
 		renderer = new GLCPPRenderer();
+		audio = new ALCPPAudioInterface();
 	}
 
 	public function getTime() : Float

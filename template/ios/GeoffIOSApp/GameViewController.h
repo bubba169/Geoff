@@ -13,7 +13,6 @@
 #import <hxcpp.h>
 
 #import <geoff/App.h>
-#import <geoff/platform/ios/IOSPlatform.h>
 #import <geoff/event/EventManager.h>
 
 @interface GameViewController : GLKViewController

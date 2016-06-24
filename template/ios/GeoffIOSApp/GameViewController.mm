@@ -54,7 +54,7 @@ extern "C" void hxcpp_set_top_of_stack();
     Array< int > array = Array_obj< int >::__new();
     array->push(self.view.frame.size.width);
     array->push(self.view.frame.size.height);
-    _app->platform->eventManager->sendEventInt( ::String("Resize"), array );
+    _app->eventManager->sendEventInt( ::String("Resize"), array );
 }
 
 - (void)dealloc
@@ -108,7 +108,7 @@ extern "C" void hxcpp_set_top_of_stack();
     Array< int > array = Array_obj< int >::__new();
     array->push(self.view.frame.size.width * screenScale);
     array->push(self.view.frame.size.height * screenScale);
-    _app->platform->eventManager->sendEventInt( ::String("Resize"), array );
+    _app->eventManager->sendEventInt( ::String("Resize"), array );
 }
 
 @end

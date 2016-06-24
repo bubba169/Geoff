@@ -104,6 +104,7 @@ class IOSBuildTool
 
 		if ( flags.indexOf( "clean" ) > -1 ) {
 			clean();
+			update();
 		}
 
 		//Compile project to java
@@ -118,6 +119,8 @@ class IOSBuildTool
 
 		//Copy template files
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/ios/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/gl_renderer/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/al_audio/", binDirectory + "project/" );
 
 		trace("Processing templates");
 

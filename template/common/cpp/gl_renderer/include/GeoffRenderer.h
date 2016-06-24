@@ -3,7 +3,7 @@
 
 #define GLEW_STATIC
 
-#ifdef iphone
+#ifdef IPHONE
 	#include <OpenGLES/ES2/gl.h>
 #else
 	#include <glew/glew.h>

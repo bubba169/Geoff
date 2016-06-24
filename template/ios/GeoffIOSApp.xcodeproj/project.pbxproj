@@ -11,7 +11,11 @@
 		F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4054BDB1D148A19001031DD /* AppDelegate.m */; };
 		F4054BE31D148A19001031DD /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4054BE21D148A19001031DD /* GameViewController.mm */; };
 		F4054BE81D148A19001031DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE71D148A19001031DD /* Assets.xcassets */; };
-		F44059581D1C8555007A0F6A /* GeoffRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F44059571D1C8555007A0F6A /* GeoffRenderer.cpp */; };
+		F460E0F71D1DC39100CDD88B /* GeoffAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F460E0F51D1DC39100CDD88B /* GeoffAudio.cpp */; };
+		F460E0F81D1DC39100CDD88B /* GeoffRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F460E0F61D1DC39100CDD88B /* GeoffRenderer.cpp */; };
+		F460E0FD1D1DCB4000CDD88B /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F460E0FB1D1DCB4000CDD88B /* Ogg.framework */; };
+		F460E0FE1D1DCB4000CDD88B /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F460E0FC1D1DCB4000CDD88B /* Vorbis.framework */; };
+		F460E1001D1DCBF700CDD88B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F460E0FF1D1DCBF700CDD88B /* OpenAL.framework */; };
 		F479C8A41D1600A600B454F9 /* libApp-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8831D1600A600B454F9 /* libApp-64.a */; };
 		F479C8A51D1600A600B454F9 /* libApp-sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8841D1600A600B454F9 /* libApp-sim.a */; };
 		F479C8A61D1600A600B454F9 /* libApp-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8851D1600A600B454F9 /* libApp-v7.a */; };
@@ -58,7 +62,11 @@
 		F4054BE21D148A19001031DD /* GameViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GameViewController.mm; sourceTree = "<group>"; };
 		F4054BE71D148A19001031DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4054BEC1D148A19001031DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F44059571D1C8555007A0F6A /* GeoffRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeoffRenderer.cpp; sourceTree = "<group>"; };
+		F460E0F51D1DC39100CDD88B /* GeoffAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeoffAudio.cpp; path = src/GeoffAudio.cpp; sourceTree = SOURCE_ROOT; };
+		F460E0F61D1DC39100CDD88B /* GeoffRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeoffRenderer.cpp; path = src/GeoffRenderer.cpp; sourceTree = SOURCE_ROOT; };
+		F460E0FB1D1DCB4000CDD88B /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = lib/Ogg.framework; sourceTree = "<group>"; };
+		F460E0FC1D1DCB4000CDD88B /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = lib/Vorbis.framework; sourceTree = "<group>"; };
+		F460E0FF1D1DCBF700CDD88B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		F479C8831D1600A600B454F9 /* libApp-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-64.a"; path = "lib/libApp-64.a"; sourceTree = "<group>"; };
 		F479C8841D1600A600B454F9 /* libApp-sim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-sim.a"; path = "lib/libApp-sim.a"; sourceTree = "<group>"; };
 		F479C8851D1600A600B454F9 /* libApp-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-v7.a"; path = "lib/libApp-v7.a"; sourceTree = "<group>"; };
@@ -101,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F460E1001D1DCBF700CDD88B /* OpenAL.framework in Frameworks */,
 				F479C8CC1D160E0F00B454F9 /* OpenGLES.framework in Frameworks */,
 				F479C8CA1D160E0100B454F9 /* GLKit.framework in Frameworks */,
 				F479C8A41D1600A600B454F9 /* libApp-64.a in Frameworks */,
@@ -109,6 +118,7 @@
 				F479C8A71D1600A600B454F9 /* libmysql5.iphoneos-64.a in Frameworks */,
 				F479C8A81D1600A600B454F9 /* libmysql5.iphoneos-v7.a in Frameworks */,
 				F479C8A91D1600A600B454F9 /* libmysql5.iphoneos-v7s.a in Frameworks */,
+				F460E0FE1D1DCB4000CDD88B /* Vorbis.framework in Frameworks */,
 				F479C8AA1D1600A600B454F9 /* libmysql5.iphoneos.a in Frameworks */,
 				F479C8AB1D1600A600B454F9 /* libmysql5.iphonesim-64.a in Frameworks */,
 				F479C8AC1D1600A600B454F9 /* libmysql5.iphonesim.a in Frameworks */,
@@ -131,6 +141,7 @@
 				F479C8BD1D1600A700B454F9 /* libstd.iphonesim-64.a in Frameworks */,
 				F479C8BE1D1600A700B454F9 /* libstd.iphonesim.a in Frameworks */,
 				F479C8BF1D1600A700B454F9 /* libzlib.iphoneos-64.a in Frameworks */,
+				F460E0FD1D1DCB4000CDD88B /* Ogg.framework in Frameworks */,
 				F479C8C01D1600A700B454F9 /* libzlib.iphoneos-v7.a in Frameworks */,
 				F479C8C11D1600A700B454F9 /* libzlib.iphoneos-v7s.a in Frameworks */,
 				F479C8C21D1600A700B454F9 /* libzlib.iphoneos.a in Frameworks */,
@@ -145,6 +156,9 @@
 		F4054BCB1D148A18001031DD = {
 			isa = PBXGroup;
 			children = (
+				F460E0FF1D1DCBF700CDD88B /* OpenAL.framework */,
+				F460E0FB1D1DCB4000CDD88B /* Ogg.framework */,
+				F460E0FC1D1DCB4000CDD88B /* Vorbis.framework */,
 				F479C8CB1D160E0F00B454F9 /* OpenGLES.framework */,
 				F479C8C91D160E0100B454F9 /* GLKit.framework */,
 				F479C8831D1600A600B454F9 /* libApp-64.a */,
@@ -196,7 +210,8 @@
 		F4054BD61D148A18001031DD /* GeoffIOSApp */ = {
 			isa = PBXGroup;
 			children = (
-				F44059571D1C8555007A0F6A /* GeoffRenderer.cpp */,
+				F460E0F51D1DC39100CDD88B /* GeoffAudio.cpp */,
+				F460E0F61D1DC39100CDD88B /* GeoffRenderer.cpp */,
 				F4054BDA1D148A18001031DD /* AppDelegate.h */,
 				F4054BDB1D148A19001031DD /* AppDelegate.m */,
 				F4054BE11D148A19001031DD /* GameViewController.h */,
@@ -285,8 +300,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F44059581D1C8555007A0F6A /* GeoffRenderer.cpp in Sources */,
+				F460E0F71D1DC39100CDD88B /* GeoffAudio.cpp in Sources */,
 				F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */,
+				F460E0F81D1DC39100CDD88B /* GeoffRenderer.cpp in Sources */,
 				F4054BE31D148A19001031DD /* GameViewController.mm in Sources */,
 				F4054BD91D148A18001031DD /* main.m in Sources */,
 			);
@@ -383,11 +399,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 					"HXCPP_API_LEVEL=330",
 					HXCPP_VISIT_ALLOCS,
+					IPHONE,
 				);
 				HEADER_SEARCH_PATHS = (
 					include,
@@ -411,9 +432,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HXCPP_API_LEVEL=330",
 					HXCPP_VISIT_ALLOCS,
+					IPHONE,
 				);
 				HEADER_SEARCH_PATHS = (
 					include,

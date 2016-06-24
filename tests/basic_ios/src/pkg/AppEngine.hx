@@ -4,7 +4,7 @@ import geoff.event.Key;
 import geoff.event.PointerButton.PointerButton;
 import geoff.renderer.IRenderContext;
 import geoff.renderer.RenderBatch;
-import geoff.utils.Assets;
+import geoff.assets.Assets;
 import geoff.utils.Color;
 import uk.co.mojaworks.norman.NormanApp;
 import uk.co.mojaworks.norman.data.NormanConfigData;
