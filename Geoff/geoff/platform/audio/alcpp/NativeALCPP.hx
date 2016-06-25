@@ -16,7 +16,6 @@ import haxe.io.Bytes;
 
 extern class NativeALCPP
 {
-	public function loadOgg( source : AudioSource ) : Void;
 	public function update( ) : Void;
 	public function bufferData( data : Bytes ) : Void;
 }

@@ -30,11 +30,6 @@ class ALCPPAudioInterface implements IAudioInterface
 	{
 		untyped __cpp__("delete _internalAudio");
 	}
-	
-	public function loadOgg( source : AudioSource ) : Void 
-	{
-		_internalAudio.get_ref().loadOgg( source );
-	}
 		
 	public function update() : Void 
 	{
@@ -56,14 +51,7 @@ class ALCPPAudioInterface implements IAudioInterface
 		source.assetId = file;
 		source.rawBytes = Assets.getBytes( file );
 			
-		if ( source.originalFormat == AudioSourceFormat.Ogg )
-		{
-			App.current.platform.audio.loadOgg( source );
-		}
-		else if ( source.originalFormat == AudioSourceFormat.Wav )
-		{
-			// TODO: Just copy the bytes minus the header
-		}
+		App.current.platform.assetLoader.loadAudio( source );
 		
 		mixer.addSource( source );
 		

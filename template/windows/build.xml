@@ -9,6 +9,7 @@
 		<file name="src/Main.cpp"/>
 		<file name="src/GeoffRenderer.cpp"/>
 		<file name="src/GeoffAudio.cpp"/>
+		<file name="src/ogg_decoder.cpp"/>
 	</files>
 
 	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">		

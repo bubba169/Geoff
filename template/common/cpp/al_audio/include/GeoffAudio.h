@@ -32,7 +32,6 @@ namespace geoff
 			GeoffAudio();
 			~GeoffAudio();
 			
-			void loadOgg( geoff::audio::AudioSource source );
 			void update( );
 			void bufferData( haxe::io::Bytes data );
 

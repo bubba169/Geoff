@@ -120,6 +120,7 @@ class WindowsBuildTool
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/al_audio/", binDirectory + "project/" );
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/gl_renderer/", binDirectory + "project/" );
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/il_imageloader/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/ogg_decoder/", binDirectory + "project/" );
 		
 		trace("Processing templates");
 		
