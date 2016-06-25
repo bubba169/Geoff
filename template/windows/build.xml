@@ -13,6 +13,8 @@
 
 	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">		
 		<flag value="/NODEFAULTLIB:LIBCMT" />
+		<flag value="/NODEFAULTLIB:MSVCRTD" />
+		<flag value="/NODEFAULTLIB:libcmtd" />
 		<lib name="DevIL.lib"/>
 		<lib name="glfw3.lib"/>
 		<lib name="glew32s.lib"/>
@@ -39,7 +41,6 @@
 		<lib name="OpenAL32.lib"/>
 		<lib name="libogg.lib"/>
 		<lib name="libvorbis.lib"/>
-		<lib name="libvorbisenc.lib"/>
 		<lib name="libvorbisfile.lib"/>
 		<files id="common"/>
 	</target>

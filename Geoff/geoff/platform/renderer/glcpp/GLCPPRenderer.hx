@@ -117,9 +117,8 @@ class GLCPPRenderer implements IRenderContext
 		var texture : Texture = new Texture( path );
 		texture.asset = path;
 		
-		//TODO: Decode texture using asset loader and pass that to createTextureFromPixels
+		App.current.platform.assetLoader.loadTexture( texture );
 		
-		//_internalRenderer.get_ref().createTextureFromAsset( texture );
 		return texture;
 	}
 
