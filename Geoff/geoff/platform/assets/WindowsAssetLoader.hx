@@ -6,6 +6,8 @@ import geoff.platform.assets.audio.CPPOggLoader;
 import geoff.platform.assets.images.ILCPPImageLoader;
 import geoff.renderer.Texture;
 import haxe.io.Bytes;
+import motion.easing.Bounce.BounceEaseIn;
+import sys.FileSystem;
 import sys.io.File;
 
 /**
@@ -41,6 +43,11 @@ class WindowsAssetLoader implements IAssetLoader
 	public function getBytes( asset : String ) : Bytes 
 	{
 		return File.getBytes( asset );
+	}
+	
+	public function assetExists( asset : String ) : Bool
+	{
+		return FileSystem.exists( asset );
 	}
 	
 }

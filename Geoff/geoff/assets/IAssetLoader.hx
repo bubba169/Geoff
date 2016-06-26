@@ -12,4 +12,5 @@ interface IAssetLoader
 	public function loadAudio( source : AudioSource ) : Void; 
 	public function getText( path : String ) : String;
 	public function getBytes( path : String ) : Bytes;
+	public function assetExists( asset : String ) : Bool;
 }

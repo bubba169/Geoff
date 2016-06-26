@@ -20,6 +20,13 @@ class Assets
 		#end
 	}
 	
+	
+	public static function exists( asset : String ) : Bool
+	{
+		return App.current.platform.assetLoader.assetExists( asset );
+	}
+	
+	
 	public static function getText( asset : String ) : String
 	{
 		// Reads a text file
