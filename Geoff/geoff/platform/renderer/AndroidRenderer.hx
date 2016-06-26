@@ -219,29 +219,12 @@ class AndroidRenderer implements IRenderContext
 		var texture : Texture = new Texture( path );
 		texture.asset = path;
 		
-		var assetManager : AssetManager = App.current.platform.nativeActivity.getAssets();
-		var is : InputStream = assetManager.open( texture.asset );
-		
-		var bitmap : Bitmap = BitmapFactory.decodeStream( is );
-		is.close();
-		
-		texture.width = bitmap.getWidth();
-		texture.height = bitmap.getHeight();
-		
-		var pixels : ByteBuffer = ByteBuffer.allocate( texture.width * texture.height * 4 );
-		bitmap.setPremultiplied( false );
-		bitmap.copyPixelsToBuffer( pixels );
-		pixels.rewind();
-		
-		texture.pixels = Bytes.alloc( pixels.remaining() );
-		
-		pixels.get( texture.pixels.getData(), 0, pixels.remaining() );
+		App.current.platform.assetLoader.loadTexture( texture );
 		
 		var idBuffer : IntBuffer = IntBuffer.allocate(1);
 		GLES20.glGenTextures( 1, idBuffer );
 		texture.textureId = idBuffer.get(0);
 		
-		bitmap.recycle();
 		
 		return texture;
 		

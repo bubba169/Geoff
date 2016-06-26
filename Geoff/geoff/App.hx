@@ -58,7 +58,7 @@ class App
 		_timeSinceLastTick = _updateTime - _timeOfLastUpdate;
 		_timeOfLastUpdate = _updateTime;
 		
-		platform.audio.update( );
+		platform.audio.update( _timeSinceLastTick );
 		eventManager.handleEvents( delegate );
 		delegate.update( platform.renderer, _timeSinceLastTick );
 	}

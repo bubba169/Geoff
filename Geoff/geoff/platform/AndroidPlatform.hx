@@ -1,6 +1,8 @@
 package geoff.platform;
 import geoff.event.EventManager;
 import geoff.platform.android.GeoffActivity;
+import geoff.platform.assets.AndroidAssetLoader;
+import geoff.platform.audio.AndroidAudioInterface;
 import geoff.platform.renderer.AndroidRenderer;
 import java.lang.System;
 
@@ -13,6 +15,7 @@ class AndroidPlatform
 {
 	public var name : String = "Android";
 	
+	public var assetLoader : AndroidAssetLoader;
 	public var renderer : AndroidRenderer;
 	public var audio : AndroidAudioInterface;
 	public var nativeActivity : GeoffActivity;
@@ -20,7 +23,8 @@ class AndroidPlatform
 	public function new()
 	{
 		renderer = new AndroidRenderer();
-		eventManager = new EventManager();
+		audio = new AndroidAudioInterface();
+		assetLoader = new AndroidAssetLoader();
 	}
 	
 	public function setActivity( activity : GeoffActivity ) : Void

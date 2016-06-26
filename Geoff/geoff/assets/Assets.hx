@@ -23,46 +23,14 @@ class Assets
 	public static function getText( asset : String ) : String
 	{
 		// Reads a text file
-		#if android
-			var asset = App.current.platform.nativeActivity.getAssets().open( asset );
-			var stream = new java.io.InputStreamReader( asset );
-			var buffer = new java.io.BufferedReader( stream );
-			
-			var result : String = "";
-			var line : String = buffer.readLine();
-			while ( line != null ) 
-			{
-				result += line;
-				line = buffer.readLine();
-				if ( line != null ) result += "\n";
-			}
-			
-			buffer.close();
-			stream.close();
-			asset.close();
-			
-			return result;
-			
-		#else
-			return File.getContent( asset );
-		#end
+		return App.current.platform.assetLoader.getText( asset );
 	}
 	
 	
 	public static function getBytes( asset : String ) : Bytes
 	{
 		// Reads a binary file
-		#if android
-			var buffer = App.current.platform.nativeActivity.getAssets().open( asset );
-			var bytes = Bytes.alloc( buffer.available() );
-			
-			buffer.read( bytes.getData() );
-			buffer.close();
-			
-			return bytes;
-		#else
-			return File.getBytes( asset );
-		#end
+		return App.current.platform.assetLoader.getBytes( asset );
 	}
 	
 }

@@ -55,14 +55,14 @@ public class MainActivity extends GeoffActivity
 	    super.onPause();  // Always call the superclass method first
 	    glView.onPause();
 
-	    App.current.platform.eventManager.sendEvent("Deactivate");
+	    App.current.eventManager.sendEvent("Deactivate");
 	}
 
 	@Override
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
 	    glView.onResume();
-	    App.current.platform.eventManager.sendEvent("Activate");
+	    App.current.eventManager.sendEvent("Activate");
 	}
 
 	@Override

@@ -122,6 +122,16 @@ class AudioMixer
 		return _bytesCache;
 		
 	}
+	
+	public function update( seconds : Float ) : Void 
+	{
+		var i : Int = _activeChannels.length;
+		while ( i >= 0 )
+		{
+			if ( _activeChannels[i].complete ) _activeChannels.remove( _activeChannels[i] );
+			i--;
+		}
+	}
 
 	
 }

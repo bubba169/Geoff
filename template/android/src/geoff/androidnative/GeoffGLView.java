@@ -48,17 +48,17 @@ public class GeoffGLView extends GLSurfaceView
 		{
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
-				App.current.platform.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
+				App.current.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
 				break;
 				
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
-				App.current.platform.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
+				App.current.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
 				break;
 				
 			case MotionEvent.ACTION_MOVE:
 				for ( int i = 0; i < event.getPointerCount(); ++i ) {
-					App.current.platform.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
+					App.current.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
 				}
 				break;
 		}
@@ -69,7 +69,7 @@ public class GeoffGLView extends GLSurfaceView
 	public boolean onKeyDown( int keyCode, KeyEvent event )
 	{
 		
-		App.current.platform.eventManager.sendEventInt( "KeyDown", new int[] { keyCode, 0 } );
+		App.current.eventManager.sendEventInt( "KeyDown", new int[] { keyCode, 0 } );
 
 		return true;
 	}
@@ -77,12 +77,12 @@ public class GeoffGLView extends GLSurfaceView
 	public boolean onKeyUp( int keyCode, KeyEvent event )
 	{
 		
-		App.current.platform.eventManager.sendEventInt( "KeyUp", new int[] { keyCode, 0 } );
+		App.current.eventManager.sendEventInt( "KeyUp", new int[] { keyCode, 0 } );
 
 		int uchar = event.getUnicodeChar();
 		if ( uchar != 0 ) 
 		{
-			App.current.platform.eventManager.sendEventInt( "TextEntry", new int[] { uchar } );
+			App.current.eventManager.sendEventInt( "TextEntry", new int[] { uchar } );
 		}
 				
 		return true;
