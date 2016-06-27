@@ -1,7 +1,7 @@
 package geoff.platform;
 import geoff.event.EventManager;
-import geoff.platform.renderer.glcpp.GLCPPRenderer;
-import geoff.platform.audio.alcpp.ALCPPAudioInterface;
+import geoff.platform.renderer.GLCPPRenderer;
+import geoff.platform.audio.ALCPPAudioInterface;
 import haxe.Timer;
 
 /**

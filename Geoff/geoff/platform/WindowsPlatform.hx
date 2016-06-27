@@ -1,8 +1,8 @@
 package geoff.platform;
 import geoff.event.EventManager;
 import geoff.platform.assets.WindowsAssetLoader;
-import geoff.platform.audio.alcpp.ALCPPAudioInterface;
-import geoff.platform.renderer.glcpp.GLCPPRenderer;
+import geoff.platform.audio.ALCPPAudioInterface;
+import geoff.platform.renderer.GLCPPRenderer;
 import haxe.Timer;
 
 /**

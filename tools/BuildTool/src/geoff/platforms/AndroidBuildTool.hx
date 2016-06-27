@@ -57,6 +57,7 @@ class AndroidBuildTool
 		
 		buildHXML += "-java bin/android/build\n";
 		buildHXML += "-java-lib " + config.global.android.sdkpath + "platforms/android-" + config.project.android.version + "/android.jar\n";
+		buildHXML += "-java-lib " + config.geoffpath + "template/android/libs/vorbis-java-1.0.0-beta.jar\n";
 		buildHXML += "-D java-android\n";
 		buildHXML += "-main " + config.project.main + "\n";
 		
