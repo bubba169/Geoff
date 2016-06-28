@@ -1,13 +1,17 @@
 package geoff.audio;
-import geoff.audio.AudioSource.AudioSourceFormat;
-import geoff.assets.Assets;
-import geoff.utils.MathUtils;
 import haxe.io.Bytes;
 
 /**
  * ...
  * @author Simon
  */
+
+#if geoff_cpp
+	typedef AudioInt16 = cpp.Int16;
+#elseif geoff_java
+	typedef AudioInt16 = java.StdTypes.Int16;
+#end
+ 
 class AudioMixer
 {
 	
@@ -80,7 +84,7 @@ class AudioMixer
 		// Provide [Size] of mixed sound data in a byte array
 		_bytesCache.fill( 0, _bytesCache.length, 0 );
 		
-		var workingValue : Int;
+		trace("Buffering data");
 		
 		for ( channel in _activeChannels )
 		{
@@ -95,15 +99,15 @@ class AudioMixer
 				{
 					if ( !channel.paused )
 					{
-						// Couldn't find another way to do this. Kept getting corrupted using haxe types.
-						#if geoff_cpp
-						untyped __cpp__("int16_t* dataPtr = (int16_t*)&(channel->source->samples->b[ channel->position ])");
-						untyped __cpp__("int16_t* bufferPtr = (int16_t*)&(_bytesCache->b[i*2])");
-						untyped __cpp__("int result = ((int)(*bufferPtr)) + (*dataPtr)");
-						untyped __cpp__("if ( result > 32767 ) result = 32767");
-						untyped __cpp__("if ( result < -32767 ) result = -32767");
-						untyped __cpp__("*bufferPtr = (int16_t)result");
-						#end
+						
+						var dataVal : AudioInt16 = channel.source.samples.getUInt16( channel.position );
+						var bufferVal : AudioInt16 = _bytesCache.getUInt16( i * 2 );
+						
+						var result : Int = cast( dataVal, Int ) + cast( bufferVal, Int );
+						if ( result > 32767 ) result = 32767;
+						if ( result < -32767 ) result = -32767;
+						_bytesCache.setUInt16( i * 2, cast result );
+						
 						
 						channel.position += 2;
 					}
@@ -125,7 +129,7 @@ class AudioMixer
 	
 	public function update( seconds : Float ) : Void 
 	{
-		var i : Int = _activeChannels.length;
+		var i : Int = _activeChannels.length - 1;
 		while ( i >= 0 )
 		{
 			if ( _activeChannels[i].complete ) _activeChannels.remove( _activeChannels[i] );

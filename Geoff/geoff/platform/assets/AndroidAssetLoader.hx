@@ -10,7 +10,11 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import java.io.InputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+
+import com.jcraft.oggdecoder.OggDecoder;
+import com.jcraft.oggdecoder.OggData;
 
 /**
  * ...
@@ -56,6 +60,16 @@ class AndroidAssetLoader implements IAssetLoader
 	
 	public function loadAudio(source:AudioSource):Void 
 	{
+		var is : ByteArrayInputStream = new ByteArrayInputStream( source.rawBytes.getData() );
+		
+		var decoder : OggDecoder = new OggDecoder();
+		var data : OggData = decoder.getData( is );
+		
+		source.channels = data.channels;
+		source.rate = data.rate;
+		
+		source.samples = Bytes.alloc( data.data.remaining() );
+		data.data.get( source.samples.getData() );	
 		
 	}
 	
@@ -108,7 +122,6 @@ class AndroidAssetLoader implements IAssetLoader
 		} 
 		catch ( ex : IOException ) 
 		{
-			trace("File does not exist");
 			available = false;
 		}
 		

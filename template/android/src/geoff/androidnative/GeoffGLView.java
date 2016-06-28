@@ -38,7 +38,6 @@ public class GeoffGLView extends GLSurfaceView
 	
 	public boolean onTouchEvent( MotionEvent originalEvent )
 	{
-		
 
 		final MotionEvent event = originalEvent;
 		final int pointerId = event.getActionIndex();
@@ -69,6 +68,14 @@ public class GeoffGLView extends GLSurfaceView
 	public boolean onKeyDown( int keyCode, KeyEvent event )
 	{
 		
+		if ( 
+			keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
+			keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
+			keyCode == KeyEvent.KEYCODE_VOLUME_MUTE
+		){
+			return false;
+		}
+
 		App.current.eventManager.sendEventInt( "KeyDown", new int[] { keyCode, 0 } );
 
 		return true;
@@ -76,6 +83,14 @@ public class GeoffGLView extends GLSurfaceView
 
 	public boolean onKeyUp( int keyCode, KeyEvent event )
 	{
+
+		if ( 
+			keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
+			keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
+			keyCode == KeyEvent.KEYCODE_VOLUME_MUTE
+		){
+			return false;
+		}
 		
 		App.current.eventManager.sendEventInt( "KeyUp", new int[] { keyCode, 0 } );
 

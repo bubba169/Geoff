@@ -13,6 +13,7 @@ class AudioInterface
 	function init() : Void
 	{
 		// Platform specific
+		mixer = new AudioMixer();
 	}
 	
 	function destroy() : Void
