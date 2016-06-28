@@ -5,12 +5,6 @@ import haxe.io.Bytes;
  * ...
  * @author Simon
  */
-
-#if geoff_cpp
-	typedef AudioInt16 = cpp.Int16;
-#elseif geoff_java
-	typedef AudioInt16 = java.StdTypes.Int16;
-#end
  
 class AudioMixer
 {
@@ -84,7 +78,9 @@ class AudioMixer
 		// Provide [Size] of mixed sound data in a byte array
 		_bytesCache.fill( 0, _bytesCache.length, 0 );
 		
-		trace("Buffering data");
+		var dataVal : Int = 0;
+		var bufferVal : Int = 0;
+		var result : Int = 0;
 		
 		for ( channel in _activeChannels )
 		{
@@ -100,15 +96,19 @@ class AudioMixer
 					if ( !channel.paused )
 					{
 						
-						var dataVal : AudioInt16 = channel.source.samples.getUInt16( channel.position );
-						var bufferVal : AudioInt16 = _bytesCache.getUInt16( i * 2 );
+						dataVal = channel.source.samples.getUInt16( channel.position );
+						bufferVal = _bytesCache.getUInt16( i * 2 );
 						
-						var result : Int = cast( dataVal, Int ) + cast( bufferVal, Int );
+						// Convert UInt to Int16
+						if ( dataVal > 32767 ) dataVal = -65535 + dataVal;
+						if ( bufferVal > 32767 ) bufferVal = -65535 + bufferVal;
+						
+						result = dataVal + bufferVal;
+						
 						if ( result > 32767 ) result = 32767;
 						if ( result < -32767 ) result = -32767;
+						
 						_bytesCache.setUInt16( i * 2, cast result );
-						
-						
 						channel.position += 2;
 					}
 				}
@@ -119,9 +119,6 @@ class AudioMixer
 				
 			}
 		}
-		
-		
-		//trace("Raw values", _bytesCache.getUInt16( 0 ), _bytesCache.getUInt16( 2 ), _bytesCache.getUInt16( 4 ), _bytesCache.getUInt16( 6 ) );
 		
 		return _bytesCache;
 		
