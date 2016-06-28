@@ -5,6 +5,7 @@ import geoff.audio.AudioSource;
 import geoff.platform.assets.audio.CPPOggLoader;
 import geoff.platform.assets.images.ILCPPImageLoader;
 import geoff.renderer.Texture;
+import haxe.Json;
 import haxe.io.Bytes;
 import motion.easing.Bounce.BounceEaseIn;
 import sys.FileSystem;
@@ -25,6 +26,11 @@ class WindowsAssetLoader implements IAssetLoader
 	public function loadTexture( texture : Texture ) : Void 
 	{
 		ILCPPImageLoader.loadTexture( texture );
+		
+		if ( assetExists( texture.asset + ".map" ) )
+		{
+			texture.map = Json.parse( getText( texture.asset + ".map" ) );
+		}
 	}
 		
 	public function loadAudio( source : AudioSource ) : Void 

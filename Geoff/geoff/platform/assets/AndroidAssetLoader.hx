@@ -1,4 +1,5 @@
 package geoff.platform.assets;
+import haxe.Json;
 import haxe.io.Bytes;
 import geoff.assets.IAssetLoader;
 import geoff.audio.AudioSource;
@@ -9,6 +10,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import java.io.InputStream;
+import java.io.IOException;
 
 /**
  * ...
@@ -21,9 +23,7 @@ class AndroidAssetLoader implements IAssetLoader
 	{
 		
 	}
-	
-	
-	/* INTERFACE geoff.assets.IAssetLoader */
+
 	
 	public function loadTexture(texture:Texture):Void 
 	{
@@ -45,7 +45,14 @@ class AndroidAssetLoader implements IAssetLoader
 		
 		pixels.get( texture.pixels.getData(), 0, pixels.remaining() );
 		bitmap.recycle();
+		
+		
+		if ( assetExists( texture.asset + ".map" ) )
+		{
+			texture.map = Json.parse( getText( texture.asset + ".map" ) );
+		}
 	}
+	
 	
 	public function loadAudio(source:AudioSource):Void 
 	{
@@ -86,6 +93,26 @@ class AndroidAssetLoader implements IAssetLoader
 		buffer.close();
 		
 		return bytes;
+	}
+	
+
+	public function assetExists( asset : String ) : Bool 
+	{
+		var assetManager : AssetManager = App.current.platform.nativeActivity.getResources().getAssets();
+		var available : Bool = true;
+
+		try 
+		{
+			var is : InputStream = assetManager.open( asset );
+			is.close();
+		} 
+		catch ( ex : IOException ) 
+		{
+			trace("File does not exist");
+			available = false;
+		}
+		
+		return available;
 	}
 	
 }
