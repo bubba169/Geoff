@@ -9,8 +9,6 @@
 #ifndef GeoffAssetLoader_h
 #define GeoffAssetLoader_h
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <haxe/io/Bytes.h>
 #import <geoff/renderer/Texture.h>
 

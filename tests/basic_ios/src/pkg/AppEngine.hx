@@ -46,20 +46,12 @@ class AppEngine extends NormanApp
 		arr.push( 123 );
 		trace( arr );
 
-		var square : GameObject = SpriteFactory.createFilledSprite( Color.GREEN, 100, 100 );
+		var square : GameObject = SpriteFactory.createImageSpriteFromAsset( "test/bug.png" );
 		square.transform.x = 300;
 		square.transform.y = 300;
 		square.add( new SquareAnimation() );
 		core.view.root.transform.addChild( square.transform );
 
-		trace( Color.RED );
-		trace( Color.RED.r );
-		trace( Color.RED.g );
-		trace( Color.RED.b );
-		trace( Color.RED.a );
-
-		//var fps : GameObject = UIFactory.createFPS();
-		//core.view.root.transform.addChild( fps.transform );
 	}
 
 

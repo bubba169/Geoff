@@ -3,6 +3,7 @@ package geoff.platform.assets;
 import geoff.assets.IAssetLoader;
 import geoff.audio.AudioSource;
 import geoff.platform.assets.audio.CPPOggLoader;
+import geoff.platform.assets.images.IOSImageLoader;
 import geoff.renderer.Texture;
 import haxe.Json;
 import haxe.io.Bytes;
@@ -21,7 +22,7 @@ class IOSAssetLoader implements IAssetLoader
 
 	public function loadTexture( texture : Texture ) : Void
 	{
-
+		IOSImageLoader.loadTexture( texture );
 	}
 
 	public function loadAudio( source : AudioSource ) : Void
