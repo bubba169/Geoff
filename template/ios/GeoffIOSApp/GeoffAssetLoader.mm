@@ -10,5 +10,6 @@
 
 void geoff_load_texture( geoff::renderer::Texture )
 {
-    
+    UIImage* image = [UIImage imageNamed:@"assets.bundle/test/bug.png"];
+    NSLog(@"%f, %f", image.size.width, image.size.height );
 }

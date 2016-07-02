@@ -11,6 +11,9 @@
 		F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4054BDB1D148A19001031DD /* AppDelegate.m */; };
 		F4054BE31D148A19001031DD /* GameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4054BE21D148A19001031DD /* GameViewController.mm */; };
 		F4054BE81D148A19001031DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4054BE71D148A19001031DD /* Assets.xcassets */; };
+		F4600D431D27BAAA00CDD88B /* GeoffAssetLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4600D421D27BAAA00CDD88B /* GeoffAssetLoader.mm */; };
+		F4600D491D27BAB100CDD88B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4600D451D27BAB100CDD88B /* LaunchScreen.storyboard */; };
+		F4600D4A1D27BAB100CDD88B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4600D471D27BAB100CDD88B /* Main.storyboard */; };
 		F460E0F71D1DC39100CDD88B /* GeoffAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F460E0F51D1DC39100CDD88B /* GeoffAudio.cpp */; };
 		F460E0F81D1DC39100CDD88B /* GeoffRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F460E0F61D1DC39100CDD88B /* GeoffRenderer.cpp */; };
 		F460E0FD1D1DCB4000CDD88B /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F460E0FB1D1DCB4000CDD88B /* Ogg.framework */; };
@@ -64,6 +67,10 @@
 		F4054BE21D148A19001031DD /* GameViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GameViewController.mm; sourceTree = "<group>"; };
 		F4054BE71D148A19001031DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4054BEC1D148A19001031DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4600D421D27BAAA00CDD88B /* GeoffAssetLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GeoffAssetLoader.mm; sourceTree = "<group>"; };
+		F4600D461D27BAB100CDD88B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F4600D481D27BAB100CDD88B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		F4600D4B1D27BAC000CDD88B /* GeoffAssetLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GeoffAssetLoader.h; path = include/GeoffAssetLoader.h; sourceTree = SOURCE_ROOT; };
 		F460E0F51D1DC39100CDD88B /* GeoffAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeoffAudio.cpp; path = src/GeoffAudio.cpp; sourceTree = SOURCE_ROOT; };
 		F460E0F61D1DC39100CDD88B /* GeoffRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeoffRenderer.cpp; path = src/GeoffRenderer.cpp; sourceTree = SOURCE_ROOT; };
 		F460E0FB1D1DCB4000CDD88B /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = lib/Ogg.framework; sourceTree = "<group>"; };
@@ -215,6 +222,9 @@
 		F4054BD61D148A18001031DD /* GeoffIOSApp */ = {
 			isa = PBXGroup;
 			children = (
+				F4600D441D27BAB100CDD88B /* Base.lproj */,
+				F4600D421D27BAAA00CDD88B /* GeoffAssetLoader.mm */,
+				F4600D4B1D27BAC000CDD88B /* GeoffAssetLoader.h */,
 				F460E1031D27A8B900CDD88B /* ogg_decoder.cpp */,
 				F460E0F51D1DC39100CDD88B /* GeoffAudio.cpp */,
 				F460E0F61D1DC39100CDD88B /* GeoffRenderer.cpp */,
@@ -235,6 +245,15 @@
 				F4054BD81D148A18001031DD /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F4600D441D27BAB100CDD88B /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				F4600D451D27BAB100CDD88B /* LaunchScreen.storyboard */,
+				F4600D471D27BAB100CDD88B /* Main.storyboard */,
+			);
+			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,8 +314,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4600D491D27BAB100CDD88B /* LaunchScreen.storyboard in Resources */,
 				F460E1061D27AC1D00CDD88B /* assets.bundle in Resources */,
 				F4054BE81D148A19001031DD /* Assets.xcassets in Resources */,
+				F4600D4A1D27BAB100CDD88B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +331,7 @@
 				F460E0F71D1DC39100CDD88B /* GeoffAudio.cpp in Sources */,
 				F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */,
 				F460E0F81D1DC39100CDD88B /* GeoffRenderer.cpp in Sources */,
+				F4600D431D27BAAA00CDD88B /* GeoffAssetLoader.mm in Sources */,
 				F4054BE31D148A19001031DD /* GameViewController.mm in Sources */,
 				F460E1041D27A8B900CDD88B /* ogg_decoder.cpp in Sources */,
 				F4054BD91D148A18001031DD /* main.m in Sources */,
@@ -317,6 +339,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F4600D451D27BAB100CDD88B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4600D461D27BAB100CDD88B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F4600D471D27BAB100CDD88B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4600D481D27BAB100CDD88B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F4054BED1D148A19001031DD /* Debug */ = {
