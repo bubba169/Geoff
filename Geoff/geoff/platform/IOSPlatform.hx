@@ -2,6 +2,7 @@ package geoff.platform;
 import geoff.event.EventManager;
 import geoff.platform.renderer.GLCPPRenderer;
 import geoff.platform.audio.ALCPPAudioInterface;
+import geoff.platform.assets.IOSAssetLoader;
 import haxe.Timer;
 
 /**
@@ -16,6 +17,7 @@ class IOSPlatform
 
 	public var renderer : GLCPPRenderer;
 	public var audio : ALCPPAudioInterface;
+	public var assetLoader : IOSAssetLoader;
 
 	public function new()
 	{

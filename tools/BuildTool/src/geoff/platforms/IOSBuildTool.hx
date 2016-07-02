@@ -121,6 +121,8 @@ class IOSBuildTool
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/ios/", binDirectory + "project/" );
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/gl_renderer/", binDirectory + "project/" );
 		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/al_audio/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/il_imageloader/", binDirectory + "project/" );
+		DirectoryHelper.copyDirectory( config.geoffpath + "template/common/cpp/ogg_decoder/", binDirectory + "project/" );
 
 		trace("Processing templates");
 
@@ -128,7 +130,7 @@ class IOSBuildTool
 		TemplateHelper.processTemplates( binDirectory + "project/", templateConstants );
 
 		copyLibs( );
-		//copyAssets( );
+		copyAssets( );
 
 		//compileCPP( );
 
@@ -153,13 +155,13 @@ class IOSBuildTool
 
 			if ( FileSystem.exists( libdir_assets ) && FileSystem.isDirectory( libdir_assets ) )
 			{
-				DirectoryHelper.copyDirectory( libdir_assets + "/", binDirectory + "/project/assets/" );
+				DirectoryHelper.copyDirectory( libdir_assets + "/", binDirectory + "/project/assets.bundle/" );
 			}
 		}
 
 		if ( FileSystem.exists( projectDirectory + "assets" ) )
 		{
-			DirectoryHelper.copyDirectory( projectDirectory + "assets/", binDirectory + "/project/assets/" );
+			DirectoryHelper.copyDirectory( projectDirectory + "assets/", binDirectory + "/project/assets.bundle/" );
 		}
 	}
 

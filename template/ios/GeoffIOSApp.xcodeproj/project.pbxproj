@@ -16,6 +16,8 @@
 		F460E0FD1D1DCB4000CDD88B /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F460E0FB1D1DCB4000CDD88B /* Ogg.framework */; };
 		F460E0FE1D1DCB4000CDD88B /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F460E0FC1D1DCB4000CDD88B /* Vorbis.framework */; };
 		F460E1001D1DCBF700CDD88B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F460E0FF1D1DCBF700CDD88B /* OpenAL.framework */; };
+		F460E1041D27A8B900CDD88B /* ogg_decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F460E1031D27A8B900CDD88B /* ogg_decoder.cpp */; };
+		F460E1061D27AC1D00CDD88B /* assets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F460E1051D27AC1D00CDD88B /* assets.bundle */; };
 		F479C8A41D1600A600B454F9 /* libApp-64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8831D1600A600B454F9 /* libApp-64.a */; };
 		F479C8A51D1600A600B454F9 /* libApp-sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8841D1600A600B454F9 /* libApp-sim.a */; };
 		F479C8A61D1600A600B454F9 /* libApp-v7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F479C8851D1600A600B454F9 /* libApp-v7.a */; };
@@ -67,6 +69,8 @@
 		F460E0FB1D1DCB4000CDD88B /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = lib/Ogg.framework; sourceTree = "<group>"; };
 		F460E0FC1D1DCB4000CDD88B /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = lib/Vorbis.framework; sourceTree = "<group>"; };
 		F460E0FF1D1DCBF700CDD88B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		F460E1031D27A8B900CDD88B /* ogg_decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ogg_decoder.cpp; path = src/ogg_decoder.cpp; sourceTree = SOURCE_ROOT; };
+		F460E1051D27AC1D00CDD88B /* assets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = assets.bundle; sourceTree = "<group>"; };
 		F479C8831D1600A600B454F9 /* libApp-64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-64.a"; path = "lib/libApp-64.a"; sourceTree = "<group>"; };
 		F479C8841D1600A600B454F9 /* libApp-sim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-sim.a"; path = "lib/libApp-sim.a"; sourceTree = "<group>"; };
 		F479C8851D1600A600B454F9 /* libApp-v7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libApp-v7.a"; path = "lib/libApp-v7.a"; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 		F4054BCB1D148A18001031DD = {
 			isa = PBXGroup;
 			children = (
+				F460E1051D27AC1D00CDD88B /* assets.bundle */,
 				F460E0FF1D1DCBF700CDD88B /* OpenAL.framework */,
 				F460E0FB1D1DCB4000CDD88B /* Ogg.framework */,
 				F460E0FC1D1DCB4000CDD88B /* Vorbis.framework */,
@@ -210,6 +215,7 @@
 		F4054BD61D148A18001031DD /* GeoffIOSApp */ = {
 			isa = PBXGroup;
 			children = (
+				F460E1031D27A8B900CDD88B /* ogg_decoder.cpp */,
 				F460E0F51D1DC39100CDD88B /* GeoffAudio.cpp */,
 				F460E0F61D1DC39100CDD88B /* GeoffRenderer.cpp */,
 				F4054BDA1D148A18001031DD /* AppDelegate.h */,
@@ -289,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F460E1061D27AC1D00CDD88B /* assets.bundle in Resources */,
 				F4054BE81D148A19001031DD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +311,7 @@
 				F4054BDC1D148A19001031DD /* AppDelegate.m in Sources */,
 				F460E0F81D1DC39100CDD88B /* GeoffRenderer.cpp in Sources */,
 				F4054BE31D148A19001031DD /* GameViewController.mm in Sources */,
+				F460E1041D27A8B900CDD88B /* ogg_decoder.cpp in Sources */,
 				F4054BD91D148A18001031DD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
