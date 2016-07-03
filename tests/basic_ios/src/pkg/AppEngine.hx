@@ -1,5 +1,6 @@
 package pkg;
 
+import geoff.App;
 import geoff.event.Key;
 import geoff.event.PointerButton.PointerButton;
 import geoff.renderer.IRenderContext;
@@ -51,6 +52,9 @@ class AppEngine extends NormanApp
 		square.transform.y = 300;
 		square.add( new SquareAnimation() );
 		core.view.root.transform.addChild( square.transform );
+
+		App.current.platform.audio.loadAsset( "loop", Assets.getPath( "test/loop.ogg" ) );
+		App.current.platform.audio.playLooping( "loop" );
 
 		trace( Assets.getText( Assets.getPath( "test/hello.txt" )));
 
