@@ -46,11 +46,13 @@ class AppEngine extends NormanApp
 		arr.push( 123 );
 		trace( arr );
 
-		var square : GameObject = SpriteFactory.createImageSpriteFromAsset( "test/bug.png" );
+		var square : GameObject = SpriteFactory.createImageSpriteFromAsset( Assets.getPath("test/bug.png") );
 		square.transform.x = 300;
 		square.transform.y = 300;
 		square.add( new SquareAnimation() );
 		core.view.root.transform.addChild( square.transform );
+
+		trace( Assets.getText( Assets.getPath( "test/hello.txt" )));
 
 	}
 
