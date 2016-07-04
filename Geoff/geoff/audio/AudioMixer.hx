@@ -103,11 +103,13 @@ class AudioMixer
 						if ( dataVal > 32767 ) dataVal = -65535 + dataVal;
 						if ( bufferVal > 32767 ) bufferVal = -65535 + bufferVal;
 						
-						result = dataVal + bufferVal;
+						// Adjust volume
+						dataVal = Std.int( dataVal * channel.volume );
 						
+						// Mix it in
+						result = dataVal + bufferVal;
 						if ( result > 32767 ) result = 32767;
 						if ( result < -32767 ) result = -32767;
-						
 						_bytesCache.setUInt16( i * 2, cast result );
 						channel.position += 2;
 					}
