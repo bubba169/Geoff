@@ -53,8 +53,8 @@ class AppEngine extends NormanApp
 		square.add( new SquareAnimation() );
 		core.view.root.transform.addChild( square.transform );
 
-		App.current.platform.audio.loadAsset( "loop", Assets.getPath( "test/loop.ogg" ) );
-		App.current.platform.audio.playLooping( "loop" );
+		core.audio.loadAsset( "loop", Assets.getPath( "test/loop.ogg" ) );
+		core.audio.playLooping( "loop" );
 
 		trace( Assets.getText( Assets.getPath( "test/hello.txt" )));
 

@@ -17,7 +17,7 @@
 #include <geoff/audio/AudioSource.h>
 #include <geoff/audio/AudioChannel.h>
 
-#define BUFFER_SIZE 4096
+#define BUFFER_SIZE 8192
 #define NUM_BUFFERS 4
 
 size_t geoff_ogg_read ( void* destination, size_t size, size_t nmemb, void* datasource );
