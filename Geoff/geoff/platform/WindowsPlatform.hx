@@ -4,6 +4,8 @@ import geoff.platform.assets.WindowsAssetLoader;
 import geoff.platform.audio.ALCPPAudioInterface;
 import geoff.platform.renderer.GLCPPRenderer;
 import haxe.Timer;
+import sys.FileSystem;
+import sys.io.File;
 
 /**
  * ...
@@ -21,12 +23,16 @@ class WindowsPlatform
 	public var renderer : GLCPPRenderer;
 	public var audio : ALCPPAudioInterface;
 	public var shouldExit : Bool = false;
+	public var storageDirectory : String;
 	
 	public function new()
 	{
 		renderer = new GLCPPRenderer();
 		audio = new ALCPPAudioInterface();
 		assetLoader = new WindowsAssetLoader();
+		
+		storageDirectory = "C:" + Sys.getEnv("HOMEPATH") + "/AppData/Roaming/" + Project.company + "/" + Project.name + "/";
+		if ( !FileSystem.isDirectory( storageDirectory ) ) FileSystem.createDirectory( storageDirectory );		
 	}
 	
 	public function getTime() : Float

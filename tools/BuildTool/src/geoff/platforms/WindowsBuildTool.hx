@@ -55,6 +55,7 @@ class WindowsBuildTool
 		
 		buildHXML += "-cpp bin/windows/build\n";
 		buildHXML += "-main " + config.project.main + "\n";
+		buildHXML += "-resource project.geoff@project\n";
 		
 		if ( isDebugBuild() ) {
 			buildHXML += "-debug\n";
