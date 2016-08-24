@@ -37,4 +37,11 @@ class Vector2
 		return Math.sqrt( distanceSquared() );
 	}
 	
+	public function normalise() : Vector2 
+	{
+		var c : Float = Math.abs(x) + Math.abs(y);
+		if ( c == 0 ) return new Vector2();
+		return new Vector2( x / c, y / c );
+	}
+	
 }
