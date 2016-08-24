@@ -26,7 +26,7 @@ class WindowsBuildTool
 	}
 	
 	
-	public function clean()
+	public function clean() : Int
 	{
 		if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
 			
@@ -36,10 +36,12 @@ class WindowsBuildTool
 			trace("Cleaning " + binDirectory );
 			DirectoryHelper.removeDirectory( binDirectory );
 		}
+		
+		return 0;
 	}
 	
 	
-	public function update( )
+	public function update( ) : Int
 	{
 		
 		var buildHXML = "";
@@ -81,10 +83,11 @@ class WindowsBuildTool
 		if ( !isDebugBuild() ) buildHXML += "-D no_console\n";
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
+		return 0;
 	}
 	
 	
-	public function build( ) : Void
+	public function build( ) : Int
 	{
 		var templateConstants = 
 		[
@@ -132,13 +135,18 @@ class WindowsBuildTool
 		if ( compileHaxe( ) != 0 ) 
 		{
 			trace("Haxe Compilation could not be completed!");
-			return;
+			return -1;
 		}
 		
 		copyLibs( );
 		copyAssets( );
 		
-		compileCPP( );
+		if ( compileCPP( ) != 0 ) {
+			trace("CPP Compilation could not be completed!");
+			return -1;
+		};
+		
+		return 0;
 		
 	}
 	
@@ -195,12 +203,12 @@ class WindowsBuildTool
 		DirectoryHelper.copyDirectory( binDirectory + "build/include/", binDirectory + "project/include/" );
 	}
 	
-	function compileCPP( ) : Void 
+	function compileCPP( ) : Int 
 	{
 		Sys.setCwd( binDirectory + "project" );
 		var params = ["run", "hxcpp", "build.xml"];
 		if ( isDebugBuild() ) params.push( "-debug" );
-		Sys.command( "haxelib", params );
+		return Sys.command( "haxelib", params );
 	}
 		
 	

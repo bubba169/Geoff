@@ -32,7 +32,8 @@ class BuildTool
 	static function main()
 	{
 		var tool = new BuildTool();
-		tool.build();
+		var returnCode = tool.build();
+		Sys.exit( returnCode );
 	}
 
 	/**
@@ -112,7 +113,7 @@ class BuildTool
 		return Std.string(version);
 	}
 
-	public function build()
+	public function build() : Int
 	{
 
 		Sys.stdout().writeString("\n\nGeoff build tool. Version 0.0.1");
@@ -120,7 +121,7 @@ class BuildTool
 		if ( !actions.exists( Sys.args()[0] ) )
 		{
 			trace( "Please specify an action!");
-			return;
+			return -1;
 		}
 
 		var projectDirectory = Sys.args()[ Sys.args().length - 1 ];
@@ -161,11 +162,16 @@ class BuildTool
 
 		if ( builder != null )
 		{
-			if ( (action & ACTION_CLEAN)> 0 ) builder.clean();
-			if ( (action & ACTION_UPDATE) > 0 ) builder.update();
-			if ( (action & ACTION_BUILD) > 0 ) builder.build();
-			if ( (action & ACTION_RUN) > 0 ) builder.run();
+			var error : Int = 0;
+			if ( (action & ACTION_CLEAN) > 0 ) error = builder.clean();
+			if ( error == 0 && ((action & ACTION_UPDATE) > 0) ) error = builder.update();
+			if ( error == 0 && ((action & ACTION_BUILD) > 0) ) error = builder.build();
+			if ( error == 0 && ((action & ACTION_RUN) > 0) ) error = builder.run();
+			
+			return error;
 		}
+		
+		return 0;
 
 	}
 
