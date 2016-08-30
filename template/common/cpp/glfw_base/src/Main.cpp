@@ -1,15 +1,15 @@
 #define GLEW_STATIC
 
+#ifdef _WIN32
+	#include <geoff/platform/WindowsPlatform.h>
+	#include <Windows.h>
+#endif
+
 #include <glew/glew.h>
 #include <glfw/glfw3.h>
 #include <geoff/App.h>
 #include <geoff/event/EventManager.h>
 #include <IL/il.h>
-
-#ifdef _WIN32
-	#include <geoff/platform/WindowsPlatform.h>
-	#include <Windows.h>
-#endif
 
 extern "C" const char *hxRunLibrary();
 extern "C" void hxcpp_set_top_of_stack();
