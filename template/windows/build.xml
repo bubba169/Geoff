@@ -16,7 +16,6 @@
 		<flag value="/NODEFAULTLIB:LIBCMT" />
 		<flag value="/NODEFAULTLIB:MSVCRTD" />
 		<flag value="/NODEFAULTLIB:libcmtd" />
-		<lib name="DevIL.lib"/>
 		<lib name="glfw3.lib"/>
 		<lib name="glew32s.lib"/>
 		<lib name="gdi32.lib" />

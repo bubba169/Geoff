@@ -3,11 +3,10 @@ package geoff.platform.assets;
 import geoff.assets.IAssetLoader;
 import geoff.audio.AudioSource;
 import geoff.platform.assets.audio.CPPOggLoader;
-import geoff.platform.assets.images.ILCPPImageLoader;
+import geoff.platform.assets.images.STBImageLoader;
 import geoff.renderer.Texture;
 import haxe.Json;
 import haxe.io.Bytes;
-import motion.easing.Bounce.BounceEaseIn;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -25,7 +24,7 @@ class WindowsAssetLoader implements IAssetLoader
 
 	public function loadTexture( texture : Texture ) : Void 
 	{
-		ILCPPImageLoader.loadTexture( texture );
+		STBImageLoader.loadTexture( texture );
 		
 		if ( assetExists( texture.asset + ".map" ) )
 		{

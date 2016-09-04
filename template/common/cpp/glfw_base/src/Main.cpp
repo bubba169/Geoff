@@ -9,7 +9,10 @@
 #include <glfw/glfw3.h>
 #include <geoff/App.h>
 #include <geoff/event/EventManager.h>
-#include <IL/il.h>
+#include <geoff/event/EventManager.h>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
 
 extern "C" const char *hxRunLibrary();
 extern "C" void hxcpp_set_top_of_stack();
@@ -131,7 +134,6 @@ int main( void )
 	glfwMakeContextCurrent(window);
 	
 	glewInit();
-	ilInit();
 	
 	hxcpp_set_top_of_stack();
 	hxRunLibrary();
