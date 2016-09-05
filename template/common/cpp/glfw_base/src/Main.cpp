@@ -3,6 +3,8 @@
 #ifdef _WIN32
 	#include <geoff/platform/WindowsPlatform.h>
 	#include <Windows.h>
+#elif __APPLE__
+    #include <geoff/platform/MacPlatform.h>
 #endif
 
 #include <glew/glew.h>
@@ -141,7 +143,9 @@ int main( void )
 	geoff_app = geoff::App_obj::current;
 	geoff_app->init();
 	
-	geoff_callback_framebuffer_size( window, {{WindowWidth}}, {{WindowHeight}} );
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+	geoff_callback_framebuffer_size( window, width, height );
 
 	while ( !glfwWindowShouldClose(window) && !geoff_app->platform->shouldExit )
 	{

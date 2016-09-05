@@ -5,7 +5,7 @@ package geoff.event;
  * @author Simon
  */
 
-#if windows
+#if desktop
 	typedef Key = geoff.platform.keymap.DesktopKeyMap;
 #elseif android
 	typedef Key = geoff.platform.keymap.AndroidKeyMap;

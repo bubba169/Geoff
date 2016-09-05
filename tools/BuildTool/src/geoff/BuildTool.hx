@@ -4,6 +4,7 @@ import geoff.helpers.DirectoryHelper;
 import geoff.platforms.AndroidBuildTool;
 import geoff.platforms.WindowsBuildTool;
 import geoff.platforms.IOSBuildTool;
+import geoff.platforms.MacBuildTool;
 import haxe.Json;
 import sys.FileSystem;
 import sys.io.File;
@@ -158,6 +159,9 @@ class BuildTool
 			case "ios":
 				builder = new IOSBuildTool( projectDirectory, flags, config );
 
+			case "mac":
+				builder = new MacBuildTool( projectDirectory, flags, config );
+
 		}
 
 		if ( builder != null )
@@ -167,10 +171,10 @@ class BuildTool
 			if ( error == 0 && ((action & ACTION_UPDATE) > 0) ) error = builder.update();
 			if ( error == 0 && ((action & ACTION_BUILD) > 0) ) error = builder.build();
 			if ( error == 0 && ((action & ACTION_RUN) > 0) ) error = builder.run();
-			
+
 			return error;
 		}
-		
+
 		return 0;
 
 	}

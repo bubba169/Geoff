@@ -1,0 +1,35 @@
+<xml>
+	
+	<set name="hxcpp_api_level" value="330" />
+	
+	{{ConsoleSetting}}
+
+	<files id="common">
+		<compilerflag value="-Iinclude" />
+		<file name="src/Main.cpp"/>
+		<file name="src/GeoffRenderer.cpp"/>
+		<file name="src/GeoffAudio.cpp"/>
+		<file name="src/ogg_decoder.cpp"/>
+	</files>
+
+	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">
+        <flag value="-m64"/>
+        <vflag name="-framework" value="OpenGL"/>
+        <vflag name="-framework" value="OpenAL"/>
+        <vflag name="-framework" value="Cocoa"/>
+        <vflag name="-framework" value="IOKit"/>
+        <vflag name="-framework" value="CoreVideo"/>
+		<lib name="lib/libglfw3.a"/>
+		<lib name="lib/libGLEW.a"/>
+        <lib name="lib/libogg.a"/>
+        <lib name="lib/libvorbis.a"/>
+        <lib name="lib/libvorbisfile.a"/>
+		<lib name="lib/libApp.a"/>
+		<lib name="lib/libstd.a"/>
+		<lib name="lib/libzlib.a"/>
+		<lib name="lib/libsqlite.a"/>
+		<lib name="lib/libregexp.a"/>
+		<lib name="lib/libmysql5.a"/>
+		<files id="common"/>
+	</target>
+</xml>
