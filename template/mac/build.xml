@@ -14,11 +14,14 @@
 
 	<target id="default" output="{{ProjectName}}" tool="linker" toolid="exe">
         <flag value="-m64"/>
+        
         <vflag name="-framework" value="OpenGL"/>
         <vflag name="-framework" value="OpenAL"/>
         <vflag name="-framework" value="Cocoa"/>
         <vflag name="-framework" value="IOKit"/>
         <vflag name="-framework" value="CoreVideo"/>
+        <vflag name="-framework" value="Security"/>
+        
 		<lib name="lib/libglfw3.a"/>
 		<lib name="lib/libGLEW.a"/>
         <lib name="lib/libogg.a"/>
