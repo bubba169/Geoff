@@ -32,8 +32,26 @@ public class GeoffGLView extends GLSurfaceView
 		renderer = new GeoffGLRenderer( );
 		setRenderer( renderer );
 
+		runGameLoop();
 
+	}
 
+	public void runGameLoop()
+	{
+		(new Thread() 
+		{
+
+			@Override public void run() 
+			{
+				// Indefinite update loop
+				while ( true )
+				{
+					if ( renderer.hasInit ) Log.v("Test", "Update Loop");//App.current.update();
+				}
+
+			}
+
+		}).start();
 	}
 	
 	public boolean onTouchEvent( MotionEvent originalEvent )

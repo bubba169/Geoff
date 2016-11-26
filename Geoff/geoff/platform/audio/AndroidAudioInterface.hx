@@ -36,7 +36,7 @@ class AndroidAudioInterface extends AudioInterface
 	
 	override public function update( seconds : Float ):Void 
 	{
-		trace( _track.getPlaybackHeadPosition(), _track.getPlayState(), AudioTrack.PLAYSTATE_PLAYING );
+		//trace( _track.getPlaybackHeadPosition(), _track.getPlayState(), AudioTrack.PLAYSTATE_PLAYING );
 		
 		super.update( seconds );
 		bufferData();

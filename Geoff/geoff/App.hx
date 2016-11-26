@@ -11,6 +11,8 @@ class App
 
 	public static var current : App;
 	
+	public var appId : Int;
+	
 	public var platform : Platform;
 	public var eventManager : EventManager;
 	public var delegate : AppDelegate;
@@ -38,6 +40,7 @@ class App
 	public function new( ) 
 	{
 		current = this;
+		appId = Math.floor(Math.random() * 1000);
 	}
 	
 	public function init()
@@ -54,13 +57,26 @@ class App
 	
 	public function update()
 	{
+		//trace("update from " + appId );
 		_updateTime = platform.getTime();
 		_timeSinceLastTick = _updateTime - _timeOfLastUpdate;
 		_timeOfLastUpdate = _updateTime;
 		
 		platform.audio.update( _timeSinceLastTick );
 		eventManager.handleEvents( delegate );
-		delegate.update( platform.renderer, _timeSinceLastTick );
+		delegate.update( _timeSinceLastTick );
+		
+		// The other platforms are not threaded yet
+		#if !android
+			render();
+		#end
+	}
+	
+	public function render()
+	{
+		//trace("render from " + appId);
+		update();
+		delegate.render( platform.renderer );
 	}
 	
 	public function destroy()
