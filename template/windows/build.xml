@@ -1,6 +1,6 @@
 <xml>
 	
-	<set name="hxcpp_api_level" value="321" />
+	<set name="hxcpp_api_level" value="330" />
 	<set name="ABI" value="-MD"/>
 	{{ConsoleSetting}}
 

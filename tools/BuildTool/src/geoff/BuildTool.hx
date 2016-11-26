@@ -34,6 +34,12 @@ class BuildTool
 	{
 		var tool = new BuildTool();
 		var returnCode = tool.build();
+		
+		if ( returnCode != 0 ) 
+		{
+			trace( "Build failed with error code " + returnCode );
+		}
+		
 		Sys.exit( returnCode );
 	}
 

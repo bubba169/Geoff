@@ -14,7 +14,7 @@ class Assets
 	public static function getPath( asset : String ) : String
 	{
 		#if desktop
-			return StringTools.replace( Path.directory(Sys.executablePath()), "\\", "/") + "/assets/" + asset;
+			return StringTools.replace( Path.directory(Sys.programPath()), "\\", "/") + "/assets/" + asset;
 		#elseif ios
 			return "assets.bundle/" + asset;
 		#else

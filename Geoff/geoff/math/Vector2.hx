@@ -51,4 +51,9 @@ class Vector2
 		return new Vector2( x, y );
 	}
 	
+	public static function distanceBetween( a : Vector2, b : Vector2 ) : Float
+	{
+		return Math.sqrt(((a.x - b.x) * (a.x - b.x)) + ((a.y - b.y) * (a.y - b.y)));
+	}
+	
 }

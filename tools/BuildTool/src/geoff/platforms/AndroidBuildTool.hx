@@ -19,7 +19,7 @@ class AndroidBuildTool
 
 	
 	public function new( dir : String, flags : Array<String>, config : Dynamic, versionCode : String )
-	{
+	{		
 		this.projectDirectory = dir;
 		this.flags = flags;
 		this.config = config;
@@ -28,7 +28,7 @@ class AndroidBuildTool
 	}
 	
 	
-	public function clean()
+	public function clean() : Int
 	{
 		if ( FileSystem.exists( projectDirectory + "build.hxml" ) ) FileSystem.deleteFile( projectDirectory + "build.hxml" );
 			
@@ -38,10 +38,12 @@ class AndroidBuildTool
 			trace("Cleaning " + binDirectory );
 			DirectoryHelper.removeDirectory( binDirectory );
 		}
+		
+		return 0;
 	}
 	
 	
-	public function update( )
+	public function update( ) : Int
 	{
 		
 		var buildHXML = "";
@@ -77,10 +79,11 @@ class AndroidBuildTool
 		
 		File.saveContent(  projectDirectory + "build.hxml", buildHXML );
 		
+		return 0;
 	}
 	
 	
-	public function build( ) : Void
+	public function build( ) : Int
 	{
 		var templateConstants = 
 		[
@@ -103,6 +106,17 @@ class AndroidBuildTool
 			templateConstants.set( "Orientation", "sensorPortrait" );
 		}	
 		
+		trace("Looking for key", config.project.android.key );
+		
+		if ( config.project.android.key != null )
+		{
+			trace("Using release key");
+			templateConstants.set( "AndroidKeyFile", config.project.android.key.file );
+			templateConstants.set( "AndroidKeyPassword", config.project.android.key.keypass );
+			templateConstants.set( "AndroidKeyAlias", config.project.android.key.alias );
+			templateConstants.set( "AndroidKeyAliasPassword", config.project.android.key.aliaspass );
+		}
+		
 		if ( flags.indexOf( "clean" ) > -1 ) {
 			clean();
 		}
@@ -122,13 +136,15 @@ class AndroidBuildTool
 		if ( compileHaxe( ) != 0 )
 		{
 			trace("Haxe Compilation could not be completed!");
-			return;
+			return -1;
 		}
 		
 		copyLibs( );
 		copyAssets( );
 		
 		compileAndroid( );
+		
+		return 0;
 		
 	}
 	
@@ -158,6 +174,11 @@ class AndroidBuildTool
 		if ( FileSystem.exists( projectDirectory + "assets" ) )
 		{
 			DirectoryHelper.copyDirectory( projectDirectory + "assets/", binDirectory + "/project/assets/" );
+		}
+		
+		if ( config.project.android.key != null && FileSystem.exists( projectDirectory + "cert/" + config.project.android.key.file ) )
+		{
+			File.copy( projectDirectory + "cert/" + config.project.android.key.file, binDirectory + "/project/" + config.project.android.key.file );
 		}
 	}
 	
@@ -195,8 +216,9 @@ class AndroidBuildTool
 		return flags.indexOf("debug") > -1;
 	}
 	
-	public function run( )
+	public function run( ) : Int
 	{
+		return 0;
 	}
 
 }
