@@ -34,6 +34,8 @@ public class GeoffGLView extends GLSurfaceView
 
 		runGameLoop();
 
+		Log.v("Thread", "Thread is running");
+
 	}
 
 	public void runGameLoop()
@@ -46,7 +48,10 @@ public class GeoffGLView extends GLSurfaceView
 				// Indefinite update loop
 				while ( true )
 				{
-					if ( renderer.hasInit ) Log.v("Test", "Update Loop");//App.current.update();
+					if ( renderer.hasInit && !renderer.isRendering && !renderer.hasFrameWaiting ) {
+						App.current.update();
+						renderer.hasFrameWaiting = true;
+					} 
 				}
 
 			}

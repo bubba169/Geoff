@@ -12,6 +12,7 @@ class App
 	public static var current : App;
 	
 	public var appId : Int;
+	public var isFirstUpdate : Bool = true;
 	
 	public var platform : Platform;
 	public var eventManager : EventManager;
@@ -57,7 +58,7 @@ class App
 	
 	public function update()
 	{
-		//trace("update from " + appId );
+		trace("update");
 		_updateTime = platform.getTime();
 		_timeSinceLastTick = _updateTime - _timeOfLastUpdate;
 		_timeOfLastUpdate = _updateTime;
@@ -74,8 +75,7 @@ class App
 	
 	public function render()
 	{
-		//trace("render from " + appId);
-		update();
+		trace("render");
 		delegate.render( platform.renderer );
 	}
 	

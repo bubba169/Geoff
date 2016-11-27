@@ -11,7 +11,9 @@ import android.util.Log;
 
 public class GeoffGLRenderer implements GLSurfaceView.Renderer
 {
-	public boolean hasInit = false;
+	public volatile boolean hasInit = false;
+	public volatile boolean isRendering = false;
+	public volatile boolean hasFrameWaiting = false;
 
 	public GeoffGLRenderer( )
 	{
@@ -19,7 +21,12 @@ public class GeoffGLRenderer implements GLSurfaceView.Renderer
 
 	public void onDrawFrame( GL10 glUnused )
 	{
-		App.current.render( );
+		if ( hasInit && !isRendering && hasFrameWaiting ) {
+			isRendering = true;
+			App.current.render( );
+			isRendering = false;
+			hasFrameWaiting = false;
+		}
 	}
 
 	public void onSurfaceChanged( GL10 glUnused, int width, int height )
