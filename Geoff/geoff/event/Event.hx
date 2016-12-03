@@ -25,6 +25,12 @@ package geoff.event;
 	
 }
 
+@:enum abstract EventStage(String) to String from String
+{
+	var Update = "Update";
+	var Render = "Render";	
+}
+
 class Event 
 {
 	public var type : String;

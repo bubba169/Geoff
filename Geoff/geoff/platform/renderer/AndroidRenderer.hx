@@ -1,26 +1,20 @@
 package geoff.platform.renderer;
+import android.opengl.GLES20;
 import geoff.renderer.BlendFactor;
 import geoff.renderer.FrameBuffer;
+import geoff.renderer.IRenderContext;
+import geoff.renderer.RenderBatch;
 import geoff.renderer.Shader;
 import geoff.renderer.Texture;
 import geoff.utils.Color;
 import haxe.io.Bytes;
-
-import java.nio.IntBuffer;
-import java.nio.FloatBuffer;
-import java.nio.ByteBuffer;
-import java.io.InputStream;
 import java.NativeArray;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
-import android.opengl.GLES20;
-import android.opengl.GLUtils;
-import android.app.Activity;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
-import geoff.renderer.IRenderContext;
-import geoff.renderer.RenderBatch;
+
 
 /**
  * ...
@@ -49,7 +43,6 @@ class AndroidRenderer implements IRenderContext
 	public function onContextCreated() : Void 
 	{
 		
-		trace( "restoring buffers" );
 		var result : NativeArray<Int> = new NativeArray<Int>(2);
 		GLES20.glGenBuffers( 2, result, 0 );
 		
@@ -138,7 +131,6 @@ class AndroidRenderer implements IRenderContext
 	
 	public function renderBatch(batch:RenderBatch):Void 
 	{
-				
 		GLES20.glBindBuffer( GLES20.GL_ARRAY_BUFFER, _vertexBuffer );
 		GLES20.glBufferData( GLES20.GL_ARRAY_BUFFER, batch.vertices.length * 4, batch.getRawVertices(), GLES20.GL_STREAM_DRAW );  
 		
@@ -190,7 +182,6 @@ class AndroidRenderer implements IRenderContext
 	
 	public function endRender():Void 
 	{
-		
 	}
 	
 	public function getError():Int 
@@ -201,11 +192,7 @@ class AndroidRenderer implements IRenderContext
 	
 	public function createTextureFromPixels( id : String, width : Int, height : Int, pixels : Bytes ) : Texture 
 	{
-		var idBuffer : IntBuffer = IntBuffer.allocate(1);
-		GLES20.glGenTextures( 1, idBuffer );
-		
 		var texture : Texture = new Texture( id );
-		texture.textureId = idBuffer.get(0);
 		texture.width = width;
 		texture.height = height;
 		texture.pixels = pixels;
@@ -220,18 +207,17 @@ class AndroidRenderer implements IRenderContext
 		texture.asset = path;
 		
 		App.current.platform.assetLoader.loadTexture( texture );
-		
-		var idBuffer : IntBuffer = IntBuffer.allocate(1);
-		GLES20.glGenTextures( 1, idBuffer );
-		texture.textureId = idBuffer.get(0);
-		
-		
 		return texture;
 		
 	}
 	
 	public function uploadTexture( texture : Texture ) : Void
 	{
+		if ( texture.textureId == 0 ) {
+			var idBuffer : IntBuffer = IntBuffer.allocate(1);
+			GLES20.glGenTextures( 1, idBuffer );
+			texture.textureId = idBuffer.get(0);
+		}
 		
 		GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, texture.textureId );
 		GLES20.glTexParameteri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE );
@@ -320,7 +306,6 @@ class AndroidRenderer implements IRenderContext
 	
 	public function setupViewport( width : Int, height : Int, flipY : Bool ) : Void 
 	{
-		
 		GLES20.glViewport( 0, 0, width, height );
 		
 		var sx : Float = 1.0 / width;

@@ -64,7 +64,7 @@ class App
 		_timeOfLastUpdate = _updateTime;
 		
 		platform.audio.update( _timeSinceLastTick );
-		eventManager.handleEvents( delegate );
+		eventManager.handleUpdateEvents( delegate );
 		delegate.update( _timeSinceLastTick );
 		
 		// The other platforms are not threaded yet
@@ -76,6 +76,7 @@ class App
 	public function render()
 	{
 		trace("render");
+		eventManager.handleRenderEvents( delegate );
 		delegate.render( platform.renderer );
 	}
 	

@@ -32,7 +32,7 @@ public class GeoffGLRenderer implements GLSurfaceView.Renderer
 	public void onSurfaceChanged( GL10 glUnused, int width, int height )
 	{
 		GLES20.glViewport(0, 0, width, height);
-		App.current.eventManager.sendEventInt( "Resize", new int[]{ width, height} );
+		App.current.eventManager.sendEventInt( "Resize", new int[]{ width, height}, "Update" );
 	}
 
 	public void onSurfaceCreated( GL10 glUnused, EGLConfig config )
@@ -43,12 +43,12 @@ public class GeoffGLRenderer implements GLSurfaceView.Renderer
 		}
 		
 		hasInit = true;
-		App.current.eventManager.sendEvent( "ContextCreated" );
+		App.current.eventManager.sendEvent( "ContextCreated", "Render" );
 	}
 
 	public void onSurfaceDestroyed( GL10 glUnused, EGLConfig config )
 	{
-		App.current.eventManager.sendEvent( "ContextDestroyed" );
+		App.current.eventManager.sendEvent( "ContextDestroyed", "Render" );
 	}
 
 }

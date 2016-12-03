@@ -1,7 +1,6 @@
 package geoff.event;
 import geoff.AppDelegate;
 import geoff.event.Event;
-import geoff.event.Event.EventType;
 import geoff.event.EventManager.IntArray;
 
 /**
@@ -18,33 +17,45 @@ import geoff.event.EventManager.IntArray;
 class EventManager
 {
 
-	private var _eventsQueue : Array<Event>;
+	private var _updateEventsQueue : Array<Event>;
+	private var _renderEventsQueue : Array<Event>;
 
 	public function new()
 	{
-		_eventsQueue = new Array<Event>();
+		_updateEventsQueue = new Array<Event>();
+		_renderEventsQueue = new Array<Event>();
 	}
 
-	public function sendEvent( event : String )
+	public function sendEvent( event : String, stage : EventStage = EventStage.Update )
 	{
-		//trace( event );
-		_eventsQueue.push( new Event( event, null ) );
+		switch( stage ) {
+			case Update:
+				_updateEventsQueue.push( new Event( event, null ) );
+			case Render:
+				_renderEventsQueue.push( new Event( event, null ) );
+				
+		}
 	}
 
-	public function sendEventInt( event : String, data : IntArray )
+	public function sendEventInt( event : String, data : IntArray, stage : EventStage = EventStage.Update )
 	{
-		//trace( event, data );
-		_eventsQueue.push( new Event( event, data ) );
+		switch( stage ) {
+			case Update:
+				_updateEventsQueue.push( new Event( event, data ) );
+			case Render:
+				_renderEventsQueue.push( new Event( event, data ) );
+				
+		}
 	}
 
-	public function handleEvents( delegate : AppDelegate ) : Void
+	public function handleUpdateEvents( delegate : AppDelegate ) : Void
 	{
 		var event : Event = null;
 
-		while ( _eventsQueue.length > 0 )
+		while ( _updateEventsQueue.length > 0 )
 		{
 
-			event = _eventsQueue.shift( );
+			event = _updateEventsQueue.shift( );
 
 			switch( event.type )
 			{
@@ -80,9 +91,9 @@ class EventManager
 					var data : IntArray = event.data;
 					delegate.onTextInput( String.fromCharCode( data[0] ) );
 
-				case EventType.ContextCreated:
+				/*case EventType.ContextCreated:
 					App.current.platform.renderer.onContextCreated();
-					delegate.onContextCreated( App.current.platform.renderer );
+					delegate.onContextCreated( App.current.platform.renderer );*/
 					
 				case EventType.AudioBufferEmpty:
 					App.current.platform.audio.bufferData();
@@ -90,5 +101,25 @@ class EventManager
 		}
 
 	}
+	
+	public function handleRenderEvents( delegate : AppDelegate ) : Void
+	{
+		var event : Event = null;
+
+		while ( _renderEventsQueue.length > 0 )
+		{
+
+			event = _renderEventsQueue.shift( );
+
+			switch( event.type )
+			{
+				case EventType.ContextCreated:
+					App.current.platform.renderer.onContextCreated();
+					delegate.onContextCreated( App.current.platform.renderer );
+			}
+		}
+
+	}
+
 
 }

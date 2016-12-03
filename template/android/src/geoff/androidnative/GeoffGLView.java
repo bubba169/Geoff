@@ -70,17 +70,17 @@ public class GeoffGLView extends GLSurfaceView
 		{
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_POINTER_DOWN:
-				App.current.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} );
+				App.current.eventManager.sendEventInt( "PointerDown", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )}, "Update" );
 				break;
 				
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_POINTER_UP:
-				App.current.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )} ); 
+				App.current.eventManager.sendEventInt( "PointerUp", new int[] {pointerId, 0, (int)event.getX( pointerId ), (int)event.getY( pointerId )}, "Update" ); 
 				break;
 				
 			case MotionEvent.ACTION_MOVE:
 				for ( int i = 0; i < event.getPointerCount(); ++i ) {
-					App.current.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )} );
+					App.current.eventManager.sendEventInt( "PointerMove", new int[] { event.getPointerId( i ), (int)event.getX( i ), (int)event.getY( i )}, "Update" );
 				}
 				break;
 		}
@@ -99,7 +99,7 @@ public class GeoffGLView extends GLSurfaceView
 			return false;
 		}
 
-		App.current.eventManager.sendEventInt( "KeyDown", new int[] { keyCode, 0 } );
+		App.current.eventManager.sendEventInt( "KeyDown", new int[] { keyCode, 0 }, "Update" );
 
 		return true;
 	}
@@ -115,12 +115,12 @@ public class GeoffGLView extends GLSurfaceView
 			return false;
 		}
 		
-		App.current.eventManager.sendEventInt( "KeyUp", new int[] { keyCode, 0 } );
+		App.current.eventManager.sendEventInt( "KeyUp", new int[] { keyCode, 0 }, "Update" );
 
 		int uchar = event.getUnicodeChar();
 		if ( uchar != 0 ) 
 		{
-			App.current.eventManager.sendEventInt( "TextEntry", new int[] { uchar } );
+			App.current.eventManager.sendEventInt( "TextEntry", new int[] { uchar }, "Update" );
 		}
 				
 		return true;
